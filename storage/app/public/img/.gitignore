@@ -1,0 +1,13 @@
+*
+!*.jpg
+
+!*.png
+!*.ico
+
+!.gitignore
+
+!*avatar/
+!*blog/
+!*team/
+
+
