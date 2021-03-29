@@ -15,6 +15,13 @@ class CreateOfficesTable extends Migration
     {
         Schema::create('offices', function (Blueprint $table) {
             $table->id();
+            $table->string('title',500);
+            $table->string('street',500);
+            $table->string('postcode',20);
+            $table->string('city',255);
+            $table->string('country',255);
+            $table->string('phone',50);
+            $table->string('email',255);
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ class CreatePostAutoValidatesTable extends Migration
     {
         Schema::create('post_auto_validates', function (Blueprint $table) {
             $table->id();
+            $table->boolean('post_auto_validate');
             $table->timestamps();
         });
     }

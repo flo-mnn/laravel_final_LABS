@@ -31,6 +31,11 @@
 
 </head>
 <body>
+	<style>
+		.overlay {
+			background-image: url("{{asset('/storage/img/overlay.png')}}");
+		}
+	</style>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader">

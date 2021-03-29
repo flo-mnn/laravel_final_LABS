@@ -15,6 +15,7 @@ class CreateNavlinksTable extends Migration
     {
         Schema::create('navlinks', function (Blueprint $table) {
             $table->id();
+            $table->string('link',255);
             $table->timestamps();
         });
     }

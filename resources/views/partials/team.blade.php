@@ -1,6 +1,6 @@
 <!-- Team Section -->
 <div class="team-section spad">
-    <div class="overlay" style="background-image:url('{{asset('/storage/img/overlay.png')}}');">
+    <div class="overlay">
 
     </div>
     <div class="container">
