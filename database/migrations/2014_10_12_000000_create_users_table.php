@@ -21,11 +21,11 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             // added
-            $table->string('src');
-            $table->string('description');
-            $table->unsignedBigInteger('role_id');
+            $table->string('src',1000);
+            $table->string('description',1000);
+            $table->unsignedBigInteger('role_id')->default(4);
             $table->foreign('role_id')->references('id')->on('roles');
-            $table->boolean('validated');
+            $table->boolean('validated')->default(false);
             $table->timestamps();
         });
     }

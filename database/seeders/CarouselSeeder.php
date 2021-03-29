@@ -16,11 +16,9 @@ class CarouselSeeder extends Seeder
     {
         DB::table('carousels')->insert([
             [
-                'subtitle'=>'Get your freebie template now!',
                 'src'=>'01.jpg',
             ],
             [
-                'subtitle'=>'Get your freebie template now!',
                 'src'=>'02.jpg',
             ],
         ]);

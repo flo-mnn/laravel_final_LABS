@@ -16,6 +16,9 @@ class TitleSeeder extends Seeder
     {
         DB::table('titles')->insert([
             [
+                'title'=>'Get your freebie template now!'
+            ],
+            [
                 'title'=>'Get in the lab and discover the world'
             ],
             [

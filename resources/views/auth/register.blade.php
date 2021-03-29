@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<?php 
+use App\Models\JobTitle; 
+$job_titles=JobTitle::all();  
+?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,9 +12,22 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
+                        <div class="form-group row">
+                            <label for="src" class="col-md-4 col-form-label text-md-right">{{ __('Picture') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="src" type="file" class="form-control @error('src') is-invalid @enderror" name="src">
+
+                                @error('src')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -18,6 +35,23 @@
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="job_title_id" class="col-md-4 col-form-label text-md-right">{{ __('Your function/job title') }}</label>
+
+                            <div class="col-md-6">
+                                <select multiple class="form-control @error('job_title_id') is-invalid @enderror" name="job_title_id[]"  required autocomplete="job_title_id">
+                                    @foreach ($job_titles as $job_title)
+                                    <option value="{{$job_title->id}}">{{$job_title->job_title}}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('job_title_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -32,6 +66,19 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" required>{{ old('description') }}</textarea>
+
+                                @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -51,6 +53,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'src' => ['required', 'image'],
+            'description' => ['required', 'string','max:1000'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,10 +68,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        Storage::put('public/img/team/',$data['src']);
+        $user = User::create([
+            'src' => $data['src']->hashname(),
             'name' => $data['name'],
             'email' => $data['email'],
+            'description'=>$data['description'],
             'password' => Hash::make($data['password']),
         ]);
+        if ($user->id == 1) {
+            $user->role_id = 1;
+            $user->validated = true;
+        } else {
+            $user->role_id = 4;
+            $user->validated = false;
+        }
+            
+        foreach ($data['job_title_id'] as $item) {
+            $user->job_titles()->attach($item); 
+        } 
+
+        $user->save();
+
+        return $user;
     }
+
 }

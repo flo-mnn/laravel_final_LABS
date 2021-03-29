@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             TitleSeeder::class,
             VideoSeeder::class,
+            JobTitleUserSeeder::class,
+            TagPostSeeder::class,
             
         ]);
         // \App\Models\User::factory(10)->create();
