@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class NavlinkSeeder extends Seeder
 {
@@ -13,6 +14,19 @@ class NavlinkSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('navlinks')->insert([
+            [
+                'link'=>'home'
+            ],
+            [
+                'link'=>'services'
+            ],
+            [
+                'link'=>'blog'
+            ],
+            [
+                'link'=>'contact'
+            ],
+        ]);
     }
 }

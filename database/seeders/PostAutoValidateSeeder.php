@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PostAutoValidateSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class PostAutoValidateSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('post_auto_validates')->insert([
+            'post_auto_validate'=>true,
+        ]);
     }
 }

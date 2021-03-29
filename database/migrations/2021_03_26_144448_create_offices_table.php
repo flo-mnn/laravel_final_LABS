@@ -17,10 +17,11 @@ class CreateOfficesTable extends Migration
             $table->id();
             $table->string('title',500);
             $table->string('street',500);
+            $table->string('number',20);
             $table->string('postcode',20);
             $table->string('city',255);
-            $table->string('country',255);
-            $table->string('phone',50);
+            $table->string('country',255)->nullable();
+            $table->string('phone',50)->nullable();
             $table->string('email',255);
             $table->timestamps();
         });

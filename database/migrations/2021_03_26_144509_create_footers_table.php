@@ -18,7 +18,7 @@ class CreateFootersTable extends Migration
             $table->string('copyright',255);
             $table->string('designed_by',255);
             $table->string('designer',255);
-            $table->string('src');
+            $table->string('href');
             $table->timestamps();
         });
     }

@@ -13,6 +13,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            JobTitleSeeder::class,
+            RoleSeeder::class,
+            UserSeeder::class,
+            // CommentUserSeeder::class,
+            PostAutoValidateSeeder::class,
+            TagSeeder::class,
+            CategorySeeder::class,
+            PostSeeder::class,
+            CommentSeeder::class,
+            CarouselSeeder::class,
+            SubjectSeeder::class,
+            ContactSeeder::class,
+            FooterSeeder::class,
+            ImagesSeeder::class,
+            MapSeeder::class,
+            NavlinkSeeder::class,
+            OfficeSeeder::class,
+            ServiceSeeder::class,
+            TestimonialSeeder::class,
+            TitleSeeder::class,
+            VideoSeeder::class,
+            
+        ]);
         // \App\Models\User::factory(10)->create();
     }
 }

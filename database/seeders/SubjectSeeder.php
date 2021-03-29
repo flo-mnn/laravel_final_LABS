@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SubjectSeeder extends Seeder
 {
@@ -13,6 +14,16 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('subjects')->insert([
+            [
+                'subject'=>'Question'
+            ],
+            [
+                'subject'=>'Advice'
+            ],
+            [
+                'subject'=>'Prices'
+            ],
+        ]);
     }
 }
