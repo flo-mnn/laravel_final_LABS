@@ -46,13 +46,13 @@ class ServiceSeeder extends Seeder
                 'created_at'=>now(),
             ],
             [
-                'icon'=>"flaticon-036-search",
+                'icon'=>"flaticon-026-search",
                 'title'=>"Documented",
                 'text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..',
                 'created_at'=>now(),
             ],
             [
-                'icon'=>"flaticon-018-laptop",
+                'icon'=>"flaticon-018-laptop-1",
                 'title'=>"Responsive",
                 'text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..',
                 'created_at'=>now(),

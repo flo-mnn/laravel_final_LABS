@@ -1,5 +1,5 @@
 <!-- Team Section -->
-<div class="team-section spad">
+<div class="team-section spad" id="team">
     <div class="overlay">
 
     </div>

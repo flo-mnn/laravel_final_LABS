@@ -16131,7 +16131,6 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
 }
 
-.test-sass {
-  background-color: aqua;
-  color: red;
+html {
+  scroll-behavior: smooth;
 }

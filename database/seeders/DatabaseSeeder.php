@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             VideoSeeder::class,
             JobTitleUserSeeder::class,
             TagPostSeeder::class,
-            
+            AboutSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }

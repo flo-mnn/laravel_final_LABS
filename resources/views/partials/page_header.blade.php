@@ -3,10 +3,10 @@
     <div class="overlay"></div>
     <div class="container text-right">
         <div class="page-info">
-            <h2>Services</h2>
+            <h2 class="text-capitalize">{{$header_current}}</h2>
             <div class="page-links">
-                <a href="#">Home</a>
-                <span>Services</span>
+                <a href="/" class="text-capitalize">{{$navlinks[0]->link}}</a>
+                <span class="text-capitalize">{{$header_current}}</span>
             </div>
         </div>
     </div>
