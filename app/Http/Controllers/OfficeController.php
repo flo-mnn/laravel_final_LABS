@@ -14,7 +14,9 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.offices',[
+            'offices'=>Office::all(),
+        ]);
     }
 
     /**

@@ -14,7 +14,9 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.subject',[
+            'subjects'=>Subject::all(),
+        ]);
     }
 
     /**

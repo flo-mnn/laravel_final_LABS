@@ -16,9 +16,9 @@ class CreateFootersTable extends Migration
         Schema::create('footers', function (Blueprint $table) {
             $table->id();
             $table->string('copyright',255);
-            $table->string('designed_by',255);
-            $table->string('designer',255);
-            $table->string('href');
+            $table->string('designed_by',255)->nullable();
+            $table->string('designer',255)->nullable();
+            $table->string('href',3000)->nullable();
             $table->timestamps();
         });
     }

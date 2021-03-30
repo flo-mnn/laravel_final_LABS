@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\CommentUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Mockery\Undefined;
 
 class CommentController extends Controller
 {
@@ -14,7 +17,9 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.comments',[
+            'comments'=>Comment::all(),
+        ]);
     }
 
     /**
@@ -35,7 +40,32 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'comment'=>'required|max:1500'
+        ]);
+
+        $comment = new Comment();
+        // to add d-none in form:
+        $comment->post_id = $request->post_id;
+        $comment->comment = $request->comment;
+        if (Auth::check()) {
+            $comment->user_id = Auth::id();
+        } else {
+            $alreadyCommented = CommentUser::where('email',$request->email)->get();
+            if ($alreadyCommented) {
+                $comment_user_id = CommentUser::find($alreadyCommented[0]->id);
+                $comment->comment_user_id = $comment_user_id->id;
+            } else {
+                $comment_user = new CommentUser();
+                $comment_user->name = $request->name;
+                $comment_user->email = $request->email;
+                $comment_user->save();
+                $comment->comment_user_id = $comment_user->id;
+            }
+        }
+        $comment->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -80,6 +110,6 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
     }
 }

@@ -14,7 +14,9 @@ class CommentUserController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.comment_users',[
+            'comment_users'=>CommentUser::all(),
+        ]);
     }
 
     /**

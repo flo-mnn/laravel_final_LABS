@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobTitle;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class JobTitleController extends Controller
@@ -14,7 +15,9 @@ class JobTitleController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.job_title',[
+            'job_titles'=>JobTitle::all(),
+        ]);
     }
 
     /**
@@ -35,7 +38,15 @@ class JobTitleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'job_title'=>'required|max:255'
+        ]);
+
+        $job_title = new JobTitle();
+        $job_title = $request->job_title;
+        $job_title->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -69,7 +80,14 @@ class JobTitleController extends Controller
      */
     public function update(Request $request, JobTitle $jobTitle)
     {
-        //
+        $validate = $request->validate([
+            'job_title'=>'required|max:255'
+        ]);
+
+        $jobTitle = $request->job_title;
+        $jobTitle->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -80,6 +98,18 @@ class JobTitleController extends Controller
      */
     public function destroy(JobTitle $jobTitle)
     {
-        //
+        $usersImpacted = $jobTitle->users();
+        // 
+        // foreach ($usersImpacted as $user) {
+        //     $user->job_titles()->detach($jobTitle->id);
+        // }
+        // $jobTitle->delete();
+
+        // or ?
+        $jobTitle->delete();
+        foreach ($usersImpacted as $user) {
+            $user->job_titles()->sync(JobTitle::all());
+        }
+
     }
 }

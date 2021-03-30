@@ -14,7 +14,9 @@ class FooterController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.footers',[
+            'footers'=>Footer::first(),
+        ]);
     }
 
     /**
@@ -69,7 +71,19 @@ class FooterController extends Controller
      */
     public function update(Request $request, Footer $footer)
     {
-        //
+        $validate = $request->validate([
+            'copyright'=>'required|max:255',
+            'designed_by'=>'max:255',
+            'designer'=>'max:255',
+            'href'=>'max:3000',
+        ]);
+        $footer->copyright = $request->copyright;
+        $footer->designed_by = $request->designed_by;
+        $footer->designer = $request->designer;
+        $footer->href = $request->href;
+        $footer->save();
+
+        return redirect()->back();
     }
 
     /**

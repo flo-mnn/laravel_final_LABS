@@ -14,7 +14,9 @@ class TitleController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.title',[
+            'titles'=>Title::all(),
+        ]);
     }
 
     /**

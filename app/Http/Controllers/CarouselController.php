@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Carousel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CarouselController extends Controller
 {
@@ -14,7 +15,9 @@ class CarouselController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.carousels',[
+            'carousels'=>Carousel::all(),
+        ]);
     }
 
     /**
@@ -35,7 +38,16 @@ class CarouselController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'src'=> 'required|image'
+        ]);
+
+        $carousel = new Carousel();
+        Storage::put('public/img/carousel/',$request->file('src'));
+        $carousel->src = $request->file('src')->hashName();
+        $carousel->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -57,7 +69,7 @@ class CarouselController extends Controller
      */
     public function edit(Carousel $carousel)
     {
-        //
+        return view('admin.edit.carousels',compact('carousel'));
     }
 
     /**
@@ -69,7 +81,16 @@ class CarouselController extends Controller
      */
     public function update(Request $request, Carousel $carousel)
     {
-        //
+        $validate = $request->validate([
+            'src'=> 'required|image'
+        ]);
+
+        Storage::delete('public/img/carousel/'.$carousel->src);
+        Storage::put('public/img/carousel/',$request->file('src'));
+        $carousel->src = $request->file('src')->hashName();
+        $carousel->save();
+
+        return redirect()->route('carousels.index');
     }
 
     /**
@@ -80,6 +101,7 @@ class CarouselController extends Controller
      */
     public function destroy(Carousel $carousel)
     {
-        //
+        Storage::delete('public/img/carousel/'.$carousel->src);
+        $carousel->delete();
     }
 }

@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->text('content');
             $table->boolean('validated');
             $table->string('src');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });

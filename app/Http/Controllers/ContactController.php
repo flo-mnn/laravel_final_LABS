@@ -14,7 +14,9 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.contacts',[
+            'contacts'=>Contact::first(),
+        ]);
     }
 
     /**
@@ -69,7 +71,15 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        // title not necessary
+        $validate= $request->validate([
+            'text'=> 'required|max:1000'
+        ]);
+
+        $contact->text = $request->text;
+        $contact->save();
+
+        return redirect()->back();
     }
 
     /**

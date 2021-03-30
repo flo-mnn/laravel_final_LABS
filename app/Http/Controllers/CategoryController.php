@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.categories',[
+            'categories'=>Category::all(),
+        ]);
     }
 
     /**
@@ -35,7 +38,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'category'=>'required|max:255'
+        ]);
+
+        $category = new Category();
+        $category->category = $request->category;
+        $category->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -69,7 +80,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validate = $request->validate([
+            'category'=>'required|max:255'
+        ]);
+
+        $category->category = $request->category;
+        $category->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -80,6 +98,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        // associated posts ? Null?
+        foreach (Post::where('category_id',$category->id)->get() as $post) {
+            $post->category_id = null;
+        }
+        $category->delete();
     }
 }

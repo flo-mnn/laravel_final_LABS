@@ -14,7 +14,9 @@ class EmailController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.emails',[
+            'emails'=>Email::all(),
+        ]);
     }
 
     /**
@@ -35,7 +37,13 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name'=>'required|max:255',
+            'email'=>'required|email|max:255',
+            'message'=>'required|max:2000'
+        ]);
+        // send email here ?
+        // subject foreign key
     }
 
     /**

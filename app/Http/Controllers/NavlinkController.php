@@ -14,7 +14,9 @@ class NavlinkController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.navlinks',[
+            'navlinks'=>Navlink::all(),
+        ]);
     }
 
     /**
