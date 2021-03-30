@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TestimonialController extends Controller
 {
@@ -37,7 +38,22 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name'=>'required|max:255',
+            'job_title'=>'required|max:255',
+            'src'=>'required|image|max:6000',
+            'text'=>'required|max:1000',
+        ]);
+
+        $testimonial = new Testimonial();
+        $testimonial->name = $request->name;
+        $testimonial->job_title = $request->job_title;
+        Storage::put('public/img/testimonial/', $request->file('src'));
+        $testimonial->src = $request->file('src')->hashName();
+        $testimonial->text = $request->text;
+        $testimonial->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -59,7 +75,7 @@ class TestimonialController extends Controller
      */
     public function edit(Testimonial $testimonial)
     {
-        //
+        return view('admin.edit.testimonials', compact('testimonial'));
     }
 
     /**
@@ -71,7 +87,22 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, Testimonial $testimonial)
     {
-        //
+        $validate = $request->validate([
+            'name'=>'required|max:255',
+            'job_title'=>'required|max:255',
+            'src'=>'required|image|max:6000',
+            'text'=>'required|max:1000',
+        ]);
+
+        $testimonial->name = $request->name;
+        $testimonial->job_title = $request->job_title;
+        Storage::delete('public/img/testimonial/'.$testimonial->src);
+        Storage::put('public/img/testimonial/', $request->file('src'));
+        $testimonial->src = $request->file('src')->hashName();
+        $testimonial->text = $request->text;
+        $testimonial->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -82,6 +113,7 @@ class TestimonialController extends Controller
      */
     public function destroy(Testimonial $testimonial)
     {
-        //
+        Storage::delete('public/img/testimonial/'.$testimonial->src);
+        $testimonial->delete();
     }
 }

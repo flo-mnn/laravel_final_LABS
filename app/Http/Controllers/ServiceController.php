@@ -37,7 +37,19 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'icon'=>'required|max:100',
+            'title'=>'required|max:500',
+            'text'=>'required|max:1000',
+        ]);
+
+        $service = new Service();
+        $service->icon = $request->icon;
+        $service->title = $request->title;
+        $service->text = $request->text;
+        $service->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -59,7 +71,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view('admin.edit.services', compact('service'));
     }
 
     /**
@@ -71,7 +83,18 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $validate = $request->validate([
+            'icon'=>'required|max:100',
+            'title'=>'required|max:500',
+            'text'=>'required|max:1000',
+        ]);
+
+        $service->icon = $request->icon;
+        $service->title = $request->title;
+        $service->text = $request->text;
+        $service->save();
+
+        return redirect()->route('services.index');
     }
 
     /**
@@ -82,6 +105,6 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
     }
 }

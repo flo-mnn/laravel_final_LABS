@@ -15,7 +15,7 @@ class OfficeController extends Controller
     public function index()
     {
         return view('admin.offices',[
-            'offices'=>Office::all(),
+            'offices'=>Office::first(),
         ]);
     }
 
@@ -71,7 +71,31 @@ class OfficeController extends Controller
      */
     public function update(Request $request, Office $office)
     {
-        //
+        $validate = $request->validate([
+            'street'=>'required|max:500',
+            'number'=>'required|max:20',
+            'postcode'=>'required|max:20',
+            'city'=>'required|max:255',
+            'country'=>'max:255',
+            'phone'=>'max:50',
+            'email'=>'required|email|max:255',
+        ]);
+        // no need to change title here
+        $office->street = $request->street;
+        $office->number = $request->number;
+        $office->postcode = $request->postcode;
+        $office->city = $request->city;
+        if($request->country){
+            $office->country = $request->country;
+        }
+        if($request->phone){
+            $office->phone = $request->phone;
+        }
+        $office->email = $request->email;
+        $office->save();
+
+        return redirect()->back();
+
     }
 
     /**

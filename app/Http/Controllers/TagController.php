@@ -37,7 +37,15 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'tag'=>'required|max:255'
+        ]);
+
+        $tag = new Tag();
+        $tag->tag = $request->tag;
+        $tag->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -71,7 +79,14 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $validate = $request->validate([
+            'tag'=>'required|max:255'
+        ]);
+
+        $tag->tag = $request->tag;
+        $tag->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -82,6 +97,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        // careful with many to many, check with cascade ou autre!
     }
 }

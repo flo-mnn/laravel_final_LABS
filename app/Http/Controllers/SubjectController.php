@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Email;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,14 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'subject'=>'required|max:255'
+        ]);
+        $subject = new Subject();
+        $subject->subject = $request->subject;
+        $subject->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -71,7 +79,13 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        //
+        $validate = $request->validate([
+            'subject'=>'required|max:255'
+        ]);
+        $subject->subject = $request->subject;
+        $subject->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -82,6 +96,11 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        $emailsImpacted = Email::where('subject_id',$subject->id)->get();
+        foreach ($emailsImpacted as $email) {
+            $email->subject_id = null;
+            $email->save();
+        }
+        $subject->delete();
     }
 }

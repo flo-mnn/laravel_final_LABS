@@ -17,7 +17,7 @@ class CreateEmailsTable extends Migration
             $table->id();
             $table->string('name',255);
             $table->string('email',255);
-            $table->unsignedBigInteger('subject_id');
+            $table->unsignedBigInteger('subject_id')->nullable();
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->string('message',2000);
             $table->timestamps();

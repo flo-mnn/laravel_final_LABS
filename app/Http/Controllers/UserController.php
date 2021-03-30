@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JobTitle;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class JobTitleController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,7 @@ class JobTitleController extends Controller
      */
     public function index()
     {
-        return view('admin.job_title',[
-            'job_titles'=>JobTitle::all(),
-        ]);
+        //
     }
 
     /**
@@ -38,24 +35,16 @@ class JobTitleController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'job_title'=>'required|max:255'
-        ]);
-
-        $job_title = new JobTitle();
-        $job_title = $request->job_title;
-        $job_title->save();
-
-        return redirect()->back();
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobTitle  $jobTitle
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(JobTitle $jobTitle)
+    public function show(User $user)
     {
         //
     }
@@ -63,10 +52,10 @@ class JobTitleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobTitle  $jobTitle
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobTitle $jobTitle)
+    public function edit(User $user)
     {
         //
     }
@@ -75,34 +64,22 @@ class JobTitleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\JobTitle  $jobTitle
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JobTitle $jobTitle)
+    public function update(Request $request, User $user)
     {
-        $validate = $request->validate([
-            'job_title'=>'required|max:255'
-        ]);
-
-        $jobTitle = $request->job_title;
-        $jobTitle->save();
-
-        return redirect()->back();
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\JobTitle  $jobTitle
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobTitle $jobTitle)
+    public function destroy(User $user)
     {
-        $usersImpacted = $jobTitle->users(); 
-        foreach ($usersImpacted as $user) {
-            $user->job_titles()->detach($jobTitle->id);
-        }
-        $jobTitle->delete();
-
+        //
     }
 }

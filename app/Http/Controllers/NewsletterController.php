@@ -37,7 +37,16 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //SEND EMAIL
+        $validate = $request->validate([
+            'email'=>'required|email|unique:newsletters|max:255'
+        ]);
+
+        $newsletter = new Newsletter();
+        $newsletter->email = $request->email;
+        $newsletter->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -82,6 +91,6 @@ class NewsletterController extends Controller
      */
     public function destroy(Newsletter $newsletter)
     {
-        //
+        $newsletter->delete();
     }
 }

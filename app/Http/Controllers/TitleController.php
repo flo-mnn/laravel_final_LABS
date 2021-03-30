@@ -71,7 +71,13 @@ class TitleController extends Controller
      */
     public function update(Request $request, Title $title)
     {
-        //
+        $validate = $request->validate([
+            'title'=>'required|max:500'
+        ]);
+        $title->title = $request->title;
+        $title->save();
+
+        return redirect()->back();
     }
 
     /**

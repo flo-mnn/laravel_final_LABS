@@ -15,7 +15,7 @@ class MapController extends Controller
     public function index()
     {
         return view('admin.maps',[
-            'maps'=>Map::all(),
+            'maps'=>Map::first(),
         ]);
     }
 
@@ -71,7 +71,14 @@ class MapController extends Controller
      */
     public function update(Request $request, Map $map)
     {
-        //
+        $validate = $request->validate([
+            'address'=>'required|max:1000'
+        ]);
+        // addapt for full address later!
+        $map->address = $request->address;
+        $map->save();
+
+        return redirect()->back();
     }
 
     /**

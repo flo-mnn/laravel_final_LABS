@@ -71,7 +71,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $validate = $request->validate([
+            'role'=>'required|max:255'
+        ]);
+        $role->role = $request->role;
+        $role->save();
+
+        return redirect()->back();
     }
 
     /**

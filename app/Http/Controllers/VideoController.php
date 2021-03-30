@@ -15,7 +15,7 @@ class VideoController extends Controller
     public function index()
     {
         return view('admin.video',[
-            'videos'=>Video::all(),
+            'videos'=>Video::first(),
         ]);
     }
 
@@ -71,7 +71,14 @@ class VideoController extends Controller
      */
     public function update(Request $request, Video $video)
     {
-        //
+        $validate = $request->validate([
+            'href'=>'required|URL|max:6000'
+        ]);
+        //maybe add picture update, later if time
+        $video->href = $request->href;
+        $video->save();
+
+        
     }
 
     /**

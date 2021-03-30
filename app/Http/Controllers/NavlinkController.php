@@ -71,7 +71,13 @@ class NavlinkController extends Controller
      */
     public function update(Request $request, Navlink $navlink)
     {
-        //
+        $validate = $request->validate([
+            'link'=>'required|max:255'
+        ]);
+        $navlink->link = $request->link();
+        $navlink->save();
+
+        return redirect()->back();
     }
 
     /**

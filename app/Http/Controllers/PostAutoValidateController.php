@@ -69,7 +69,10 @@ class PostAutoValidateController extends Controller
      */
     public function update(Request $request, PostAutoValidate $postAutoValidate)
     {
-        //
+        $postAutoValidate->post_auto_validate = $request->post_auto_validate;
+        $postAutoValidate->save();
+
+        return redirect()->back();
     }
 
     /**
