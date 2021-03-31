@@ -15,7 +15,7 @@ class FooterSeeder extends Seeder
     public function run()
     {
         DB::table('footers')->insert([
-            'copyright'=>"2017 All rights reserved.",
+            'copyright'=>"2017 All rights reserved",
             'designed_by'=>"Designed by",
             'designer'=> "Colorlib",
             'href'=> "https://colorlib.com",

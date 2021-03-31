@@ -28,7 +28,7 @@
             </div>
             <!-- feature item -->
             <div class="col-md-4 col-sm-4 features">
-                @foreach ($services->sortByDesc('created_at')->take(6)->take(-3) as $service)
+                @foreach ($services->sortByDesc('created_at')->take(6)->skip(3) as $service)
                 <div class="icon-box light">
                     <div class="icon">
                         <i class="{{$service->icon}}"></i>

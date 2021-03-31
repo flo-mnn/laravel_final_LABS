@@ -11,25 +11,31 @@
             <!-- single member -->
             <div class="col-sm-4">
                 <div class="member">
-                    <img src="{{asset('/storage/img/team/1.jpg')}}" alt="">
-                    <h2>Christinne Williams</h2>
-                    <h3>Project Manager</h3>
+                    <img src="/storage/img/team/{{$members[0]->src}}" alt="">
+                    <h2>{{$members[0]->name}}</h2>
+                    @foreach ($members[0]->job_titles as $job_title)
+                    <h3>{{$job_title->job_title}}</h3>
+                    @endforeach
                 </div>
             </div>
             <!-- single member -->
             <div class="col-sm-4">
                 <div class="member">
-                    <img src="{{asset('/storage/img/team/2.jpg')}}" alt="">
-                    <h2>Christinne Williams</h2>
-                    <h3>Junior developer</h3>
+                    <img src="/storage/img/team/{{$ceo->src}}" alt="">
+                    <h2>{{$ceo->name}}</h2>
+                    @foreach ($ceo->job_titles as $job_title)
+                    <h3>{{$job_title->job_title}}</h3>
+                    @endforeach
                 </div>
             </div>
             <!-- single member -->
             <div class="col-sm-4">
                 <div class="member">
-                    <img src="{{asset('/storage/img/team/3.jpg')}}" alt="">
-                    <h2>Christinne Williams</h2>
-                    <h3>Digital designer</h3>
+                    <img src="/storage/img/team/{{$members[1]->src}}" alt="">
+                    <h2>{{$members[1]->name}}</h2>
+                    @foreach ($members[1]->job_titles as $job_title)
+                    <h3>{{$job_title->job_title}}</h3>
+                    @endforeach
                 </div>
             </div>
         </div>

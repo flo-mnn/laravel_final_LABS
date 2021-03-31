@@ -1,6 +1,7 @@
 @extends('templates.blog')
-@section('blog-content')    
-@for ($i = 0; $i < 3; $i++)
-    @include('partials.post_item')
-@endfor
+@section('blog-content')
+{{-- use show --}}
+@foreach ($posts as $post)
+@include('partials.post_item')
+@endforeach
 @endsection

@@ -1,6 +1,12 @@
 @extends('templates.blog')
 @section('blog-content')    
-@for ($i = 0; $i < 3; $i++)
-    @include('partials.post_item')
-@endfor
+@if ($posts->isNotEmpty())
+    @foreach ($posts as $post)
+        @include('partials.post_item')
+    @endforeach
+@else
+    <div>
+        <h3 class="text-muted">no post found</h3>
+    </div>
+@endif
 @endsection

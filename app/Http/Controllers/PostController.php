@@ -124,5 +124,6 @@ class PostController extends Controller
         Storage::delete('public/img/blog/'.$post->src);
         $post->delete();
         // check if deleting in pivot table (onDelete('cascade')??) check
+        // soft delete required by client ??? !!! check it out
     }
 }

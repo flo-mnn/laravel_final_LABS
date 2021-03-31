@@ -5,16 +5,18 @@
     <div class="post-thumbnail">
         <img src="{{asset('/storage/img/blog/blog-1.jpg')}}" alt="">
         <div class="post-date">
-            <h2>03</h2>
-            <h3>Nov 2017</h3>
+            <h2>{{$post->created_at->format('d')}}</h2>
+            <h3>{{$post->created_at->format('M')}} {{$post->created_at->format('Y')}}</h3>
         </div>
     </div>
     <div class="post-content">
-        <h2 class="post-title">Just a simple blog post</h2>
+        <h2 class="post-title">{{$post->title}}</h2>
         <div class="post-meta">
-            <a href="">Loredana Papp</a>
-            <a href="">Design, Inspiration</a>
-            <a href="">2 Comments</a>
+            <a href="">{{$post->users->name}}</a>
+            <a href=""> @foreach ($post->tags as $tag)
+                <span class="text-capitalize">{{$tag->tag}}{{$loop->iteration == count($post->tags) ? null : ', '}}</span>
+            @endforeach</a>
+            <a href="">{{count($post->comments)}} {{count($post->comments) >=2 ? 'Commments' : 'Comment'}}</a>
         </div>
         @foreach ($post_ps as $p)
             <p>{{$p}}</p>
@@ -23,35 +25,29 @@
     <!-- Post Author -->
     <div class="author">
         <div class="avatar">
+            {{-- to modify --}}
             <img src="{{asset('/storage/img/avatar/03.jpg')}}" alt="">
         </div>
         <div class="author-info">
-            <h2>Lore Williams, <span>Author</span></h2>
-            <p>Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique. </p>
+            <h2>{{$post->users->name}}, <span>Author</span></h2>
+            <p>{{$post->users->description}}</p>
         </div>
     </div>
     <!-- Post Comments -->
     <div class="comments">
-        <h2>Comments (2)</h2>
+        <h2>Comments ({{count($post->comments)}})</h2>
         <ul class="comment-list">
+            @foreach ($post->comments->sortByDesc('created_at') as $comment)
             <li>
                 <div class="avatar">
                     <img src="{{asset('/storage/img/avatar/01.jpg')}}" alt="">
                 </div>
                 <div class="commetn-text">
-                    <h3>Michael Smith | 03 nov, 2017 | Reply</h3>
-                    <p>Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique. </p>
+                    <h3>{{$comment->users->name}} | {{$comment->created_at->format('d M Y')}}</h3>
+                    <p>{{$comment->comment}} </p>
                 </div>
             </li>
-            <li>
-                <div class="avatar">
-                    <img src="{{asset('/storage/img/avatar/02.jpg')}}" alt="">
-                </div>
-                <div class="commetn-text">
-                    <h3>Michael Smith | 03 nov, 2017 | Reply</h3>
-                    <p>Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique. </p>
-                </div>
-            </li>
+            @endforeach
         </ul>
     </div>
     <!-- Commert Form -->

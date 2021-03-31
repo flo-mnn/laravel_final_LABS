@@ -39,6 +39,10 @@ class JobTitleUserSeeder extends Seeder
                 'user_id'=>3,
                 'job_title_id'=>6,
             ],
+            [
+                'user_id'=>4,
+                'job_title_id'=>6,
+            ],
         ]);
     }
 }

@@ -58,6 +58,29 @@ use Illuminate\Support\Facades\Route;
 
 // main site pages (Home, Services, Blog, Blog-post, Contact)
 Route::get('/', function () {
+    // find ceo among users
+    foreach (User::all() as $user) {
+        foreach ($user->job_titles as $job_title) {
+            if ($job_title->id == 1) {
+                $ceo = $user;
+            }
+        }
+    };
+    // find two random members
+    $collection = User::all();
+    
+    $noCeos = $collection->reject(function ($value, $key) {
+        foreach (User::all() as $user) {
+            foreach ($user->job_titles as $job_title) {
+                if ($job_title->id == 1) {
+                    $boss = $user;
+                }
+            }
+        };
+        return $value->id == $boss->id;
+    });
+
+
     return view('home',[
         'abouts'=>About::all(),
         'carousels'=>Carousel::all(),
@@ -80,6 +103,8 @@ Route::get('/', function () {
         'testimonials'=>Testimonial::all(),
         'titles'=>Title::all(),
         'users'=>User::all(),
+        'ceo'=>$ceo,
+        'members'=>$noCeos->shuffle()->take(2),
         'videos'=>Video::first(),
     ]);
 });

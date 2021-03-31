@@ -39,7 +39,7 @@
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader">
-			<img src="{{asset('/storage/img/logo.png')}}" alt="">
+			<img src="/storage/img/{{$images[0]->src}}" alt="" width="111">
 			<h2>Loading.....</h2>
 		</div>
 	</div>

@@ -19,37 +19,37 @@ class TestimonialSeeder extends Seeder
                 'name'=>"John Smith",
                 'job_title'=>"UX Designer",
                 'text'=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Nulla sit amet luctus dolor. Etiam finibus consequa.",
-                'src'=>'/avatar/01.jpg',
+                'src'=>'01.jpg',
             ],
             [
                 'name'=>"Johanna Smith",
                 'job_title'=>"Web Dev",
                 'text'=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Nulla sit amet luctus dolor. Etiam finibus consequa.",
-                'src'=>'/avatar/01.jpg',
+                'src'=>'02.jpg',
             ],
             [
                 'name'=>"Lou Mary",
                 'job_title'=>"CEO Company",
                 'text'=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Nulla sit amet luctus dolor. Etiam finibus consequa.",
-                'src'=>'/avatar/01.jpg',
+                'src'=>'03.jpg',
             ],
             [
                 'name'=>"John Smith",
                 'job_title'=>"UX Designer",
                 'text'=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Nulla sit amet luctus dolor. Etiam finibus consequa.",
-                'src'=>'/avatar/01.jpg',
+                'src'=>'01.jpg',
             ],
             [
                 'name'=>"Johanna Smith",
                 'job_title'=>"Web Dev",
                 'text'=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Nulla sit amet luctus dolor. Etiam finibus consequa.",
-                'src'=>'/avatar/01.jpg',
+                'src'=>'02.jpg',
             ],
             [
                 'name'=>"Lou Mary",
                 'job_title'=>"CEO Company",
                 'text'=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Nulla sit amet luctus dolor. Etiam finibus consequa.",
-                'src'=>'/avatar/01.jpg',
+                'src'=>'03.jpg',
             ],
         ]);
     }

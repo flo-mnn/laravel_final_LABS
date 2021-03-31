@@ -15,7 +15,7 @@ class MapSeeder extends Seeder
     public function run()
     {
         DB::table('maps')->insert([
-            'address'=>'Brussels',
+            'address'=>'rue neuve 1 Bruxelles',
         ]);
     }
 }
