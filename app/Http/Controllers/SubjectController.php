@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('isWebmaster');
+    }
     /**
      * Display a listing of the resource.
      *
