@@ -10,6 +10,10 @@ use Mockery\Undefined;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isAdmin')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

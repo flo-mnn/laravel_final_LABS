@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show');
+        $this->middleware('isWriter')->except('show','edit','update');
+        $this->middleware('isRealWriter')->only('edit','update');
+    }
     /**
      * Display a listing of the resource.
      *
