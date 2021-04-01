@@ -3,7 +3,7 @@
     <div class="hero-content">
         <div class="hero-center">
             <img src="/storage/img/{{$images[0]->src}}" alt="">
-            <p>{{$titles[0]->title}}</p>
+            <p>{{$title_carousel->title}}</p>
         </div>
     </div>
     <!-- slider -->

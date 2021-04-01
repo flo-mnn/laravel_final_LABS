@@ -19,22 +19,22 @@ class TitleSeeder extends Seeder
                 'title'=>'Get your freebie template now!'
             ],
             [
-                'title'=>'Get in the lab and discover the world'
+                'title'=>'Get in [the lab] and discover the world'
             ],
             [
                 'title'=>'WHAT OUR CLIENTS SAY'
             ],
             [
-                'title'=>'GET IN THE LAB AND SEE THE SERVICES'
+                'title'=>'GET IN [THE LAB] AND SEE THE SERVICES'
             ],
             [
-                'title'=>'GET IN THE LAB AND MEET THE TEAM'
+                'title'=>'GET IN [THE LAB] AND MEET THE TEAM'
             ],
             [
-                'title'=>'GET IN THE LAB AND SEE THE SERVICES'
+                'title'=>'GET IN [THE LAB] AND SEE THE SERVICES'
             ],
             [
-                'title'=>'Get in the lab and discover the world'
+                'title'=>'Get in [the lab] and discover the world'
             ],
         ]);
     }

@@ -43,6 +43,7 @@ use App\Models\User;
 use App\Models\Video;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +55,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 // main site pages (Home, Services, Blog, Blog-post, Contact)
 Route::get('/', function () {
@@ -80,6 +80,14 @@ Route::get('/', function () {
         return $value->id == $boss->id;
     });
 
+    // split titles
+    $newTitles = [];
+    foreach (Title::all()->skip(1) as $title) {
+        $str =  Str::of($title->title)->replace('[', '<span>');
+        
+        $newTitle =  Str::of($str)->replace(']', '</span>'); 
+        array_push($newTitles, $newTitle);
+    };
 
     return view('home',[
         'abouts'=>About::all(),
@@ -101,14 +109,23 @@ Route::get('/', function () {
         'subjects'=>Subject::all(),
         'tags'=>Tag::all(),
         'testimonials'=>Testimonial::all(),
-        'titles'=>Title::all(),
+        'title_carousel'=>Title::first(),
+        'titles'=>$newTitles,
         'users'=>User::all(),
         'ceo'=>$ceo,
-        'members'=>$noCeos->shuffle()->take(2),
+        'members'=>$noCeos->random(2),
         'videos'=>Video::first(),
     ]);
 });
 Route::get('/services', function () {
+    // split titles
+    $newTitles = [];
+    foreach (Title::all()->skip(1) as $title) {
+        $str =  Str::of($title->title)->replace('[', '<span>');
+        
+        $newTitle =  Str::of($str)->replace(']', '</span>'); 
+        array_push($newTitles, $newTitle);
+    };
     return view('services',[
         'abouts'=>About::all(),
         'carousels'=>Carousel::all(),
@@ -129,7 +146,7 @@ Route::get('/services', function () {
         'subjects'=>Subject::all(),
         'tags'=>Tag::all(),
         'testimonials'=>Testimonial::all(),
-        'titles'=>Title::all(),
+        'titles'=>$newTitles,
         'users'=>User::all(),
         'videos'=>Video::first(),
         'header_current'=>Navlink::find(2)->link,
@@ -163,7 +180,6 @@ Route::get('/blog', function () {
         'subjects'=>Subject::all(),
         'tags'=>Tag::all(),
         'testimonials'=>Testimonial::all(),
-        'titles'=>Title::all(),
         'users'=>User::all(),
         'videos'=>Video::first(),
         'header_current'=>Navlink::find(3)->link,
@@ -200,7 +216,6 @@ Route::get('/blog-post', function () {
         'subjects'=>Subject::all(),
         'tags'=>Tag::all(),
         'testimonials'=>Testimonial::all(),
-        'titles'=>Title::all(),
         'users'=>User::all(),
         'videos'=>Video::first(),
         'header_current'=>Navlink::find(3)->link,
@@ -227,7 +242,6 @@ Route::get('/contact', function () {
         'subjects'=>Subject::all(),
         'tags'=>Tag::all(),
         'testimonials'=>Testimonial::all(),
-        'titles'=>Title::all(),
         'users'=>User::all(),
         'videos'=>Video::first(),
         'header_current'=>Navlink::find(4)->link,

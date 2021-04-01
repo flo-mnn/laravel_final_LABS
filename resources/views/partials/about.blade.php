@@ -27,7 +27,7 @@
     <div class="about-contant">
         <div class="container">
             <div class="section-title">
-                <h2>Get in <span>the Lab</span> and discover the world</h2>
+                <h2>{!!$titles[0]!!}</h2>
             </div>
             <div class="row">
                 @foreach ($abouts as $about)
