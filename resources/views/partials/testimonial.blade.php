@@ -14,8 +14,7 @@
                         <span>‘​‌‘​‌</span>
                         <p>{{$testimonial->text}}</p>
                         <div class="client-info">
-                            <div class="avatar">
-                                <img src="/storage/img/testimonial/{{$testimonial->src}}" alt="">
+                            <div class="avatar" style="background-image: url('/storage/img/testimonial/{{$testimonial->src}}');">
                             </div>
                             <div class="client-name">
                                 <h2>{{$testimonial->name}}</h2>

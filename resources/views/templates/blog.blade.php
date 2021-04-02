@@ -53,12 +53,6 @@
 				<div class="col-md-8 col-sm-7 blog-posts">
                     @yield('blog-content')
 
-					<!-- Pagination -->
-					<div class="page-pagination">
-						<a class="active" href="">01.</a>
-						<a href="">02.</a>
-						<a href="">03.</a>
-					</div>
 				</div>
 				<!-- Sidebar area -->
 				<div class="col-md-4 col-sm-5 sidebar">

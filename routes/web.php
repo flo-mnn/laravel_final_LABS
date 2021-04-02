@@ -42,6 +42,7 @@ use App\Models\Title;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -159,6 +160,10 @@ Route::get('/blog', function () {
         array_push($posts_ps, $post_ps);
     };
 
+    $posts = Post::orderBy('created_at','DESC')
+                    ->paginate(2);
+
+    // dd($posts);
     return view('blog',[
         'abouts'=>About::all(),
         'carousels'=>Carousel::all(),
@@ -173,7 +178,7 @@ Route::get('/blog', function () {
         'navlinks'=>Navlink::all(),
         // 'newsletters'=>Newsletter::all(),
         'offices'=>Office::first(),
-        'posts'=>Post::all(),
+        'posts'=>$posts,
         'posts_ps'=>$posts_ps,
         // 'roles'=>Role::all(),
         'services'=>Service::all(),

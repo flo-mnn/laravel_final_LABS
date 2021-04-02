@@ -558,6 +558,9 @@ ul {
 	overflow: hidden;
 	float: left;
 	margin-right: 20px;
+	/* added : */
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .testimonial .client-info {
@@ -955,7 +958,12 @@ ul {
 	position: relative;
 	display: block;
 	overflow: hidden;
-	max-height: 260px;
+	/* modified: */
+	height: 260px;
+	width: 347px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 }
 
 .sv-card .card-img img {
@@ -1069,6 +1077,12 @@ ul {
 	position: relative;
 	overflow: hidden;
 	margin-bottom: 60px;
+	/* added */
+	width: 755px;
+	height: 270px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 }
 
 .post-thumbnail .post-date {
@@ -1153,17 +1167,17 @@ ul {
 }
 
 .page-pagination a {
-	display: inline-block;
-	font-family: "Oswald", sans-serif;
-	font-size: 16px;
-	color: #0b1033;
-	padding: 6px 10px;
-	margin-right: 5px;
+	display: inline-block !important;
+	font-family: "Oswald", sans-serif !important;
+	font-size: 16px !important;
+	color: #0b1033 !important;
+	padding: 6px 10px !important;
+	margin-right: 5px !important;
 }
 
 .page-pagination a.active {
-	background: #2be6ab;
-}
+	background: #2be6ab !important;
+} 
 
 /* Sidebar */
 .widget-item {
@@ -1286,6 +1300,14 @@ ul {
 
 .single-post .author .avatar {
 	margin-right: 40px;
+	min-width: 117px;
+	max-width: 117px;
+	height: 117px;
+	overflow: hidden;
+	/* background-repeat: no-repeat;
+	background-position-y: top;
+	background-position-x: center;
+	background-size: 100%; */
 }
 
 .single-post .author .avatar img {
@@ -1318,9 +1340,15 @@ ul {
 }
 
 .comment-list li .avatar {
-	width: calc(100% - (100% - 80px));
+	/* width: calc(100% - (100% - 80px)); */
+	height: 80px;
+	width: 80px;
 	float: left;
 	margin-right: 40px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position-x: center;
+	background-position-y: top;
 }
 
 .comment-list li .commetn-text h3 {

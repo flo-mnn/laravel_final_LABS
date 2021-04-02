@@ -1,7 +1,8 @@
 @extends('templates.blog')
 @section('blog-content')
 {{-- for now, after pagination to doooo --}}
-@foreach ($posts->sortByDesc('created_at')->take(3) as $post)
+@foreach ($posts as $post)
 @include('partials.post_item')
 @endforeach
+{{$posts->links()}}
 @endsection

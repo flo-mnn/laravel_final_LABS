@@ -2,8 +2,7 @@
 @section('blog-content')    
 <!-- Single Post -->
 <div class="single-post">
-    <div class="post-thumbnail">
-        <img src="{{asset('/storage/img/blog/blog-1.jpg')}}" alt="">
+    <div class="post-thumbnail" style="background-image: url('/storage/img/blog/{{$post->src}}')">
         <div class="post-date">
             <h2>{{$post->created_at->format('d')}}</h2>
             <h3>{{$post->created_at->format('M')}} {{$post->created_at->format('Y')}}</h3>
@@ -25,8 +24,7 @@
     <!-- Post Author -->
     <div class="author">
         <div class="avatar">
-            {{-- to modify --}}
-            <img src="{{asset('/storage/img/avatar/03.jpg')}}" alt="">
+            <img src="/storage/img/team/{{$post->users->src}}" alt="">
         </div>
         <div class="author-info">
             <h2>{{$post->users->name}}, <span>Author</span></h2>
@@ -39,9 +37,15 @@
         <ul class="comment-list">
             @foreach ($post->comments->sortByDesc('created_at') as $comment)
             <li>
-                <div class="avatar">
-                    <img src="{{asset('/storage/img/avatar/01.jpg')}}" alt="">
+                @if ($comment->user_id)
+                <div class="avatar" style="background-image: url('/storage/img/team/{{$comment->users->src}}')">
+                    {{-- <img src="{{asset('/storage/img/avatar/01.jpg')}}" alt=""> --}}
                 </div>
+                @else
+                <div class="avatar" style="background-image: url('/storage/img/team/avatar.png')">
+                </div>
+
+                @endif
                 <div class="commetn-text">
                     <h3>{{$comment->users->name}} | {{$comment->created_at->format('d M Y')}}</h3>
                     <p>{{$comment->comment}} </p>
@@ -63,7 +67,6 @@
                         <input type="text" name="email" placeholder="Your email">
                     </div>
                     <div class="col-sm-12">
-                        <input type="text" name="subject" placeholder="Subject">
                         <textarea name="message" placeholder="Message"></textarea>
                         <button class="site-btn">send</button>
                     </div>

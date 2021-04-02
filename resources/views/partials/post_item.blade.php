@@ -1,7 +1,6 @@
 <!-- Post item -->
 <div class="post-item">
-    <div class="post-thumbnail">
-        <img src="{{asset('/storage/img/blog/blog-2.jpg')}}" alt="">
+    <div class="post-thumbnail" style="background-image: url('/storage/img/blog/{{$post->src}}')">
         <div class="post-date">
             <h2>{{$post->created_at->format('d')}}</h2>
             <h3>{{$post->created_at->format('M')}} {{$post->created_at->format('Y')}}</h3>
