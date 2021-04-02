@@ -161,7 +161,7 @@ Route::get('/blog', function () {
     };
 
     $posts = Post::orderBy('created_at','DESC')
-                    ->paginate(2);
+                    ->paginate(3);
 
     // dd($posts);
     return view('blog',[

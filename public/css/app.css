@@ -16134,7 +16134,7 @@ readers do not read off random characters that represent icons */
 html {
   scroll-behavior: smooth;
 }
-html body .sidebar {
+html body .back-office-main .sidebar {
   height: 100vh;
   width: 20%;
   margin-top: 91px;
@@ -16142,38 +16142,38 @@ html body .sidebar {
   z-index: 40;
   position: fixed;
 }
-html body .sidebar button, html body .sidebar a {
+html body .back-office-main .sidebar button, html body .back-office-main .sidebar a {
   font-family: "Oswald", sans-serif;
 }
-html body .sidebar .sidebar-inner {
+html body .back-office-main .sidebar .sidebar-inner {
   overflow-y: scroll;
 }
-html body .sidebar .sidebar-inner .card-body {
+html body .back-office-main .sidebar .sidebar-inner .card-body {
   background-color: #A0E6C2;
 }
-html body .sidebar .sidebar-inner .card-body .side-link {
+html body .back-office-main .sidebar .sidebar-inner .card-body .side-link {
   color: #343a40;
 }
-html body .sidebar .sidebar-inner .card-body .side-link:hover {
+html body .back-office-main .sidebar .sidebar-inner .card-body .side-link:hover {
   color: #8B64C4;
 }
-html body .sidebar .sidebar-inner .card-body .side-separator {
+html body .back-office-main .sidebar .sidebar-inner .card-body .side-separator {
   height: 2px;
   border-radius: 15px;
   background-color: #8B64C4;
 }
-html body .main {
+html body .back-office-main .main {
   width: 80%;
   margin-left: 20%;
 }
-html body .main h1, html body .main h2, html body .main h3, html body .main h4, html body .main h5, html body .main h6, html body .main button, html body .main a, html body .main thead {
+html body .back-office-main .main h1, html body .back-office-main .main h2, html body .back-office-main .main h3, html body .back-office-main .main h4, html body .back-office-main .main h5, html body .back-office-main .main h6, html body .back-office-main .main button, html body .back-office-main .main a, html body .back-office-main .main thead {
   font-family: "Oswald", sans-serif;
 }
-html body .main .bo-nav {
+html body .back-office-main .main .bo-nav {
   z-index: 50;
   height: 91px;
 }
-html body .main .bo-nav .avatar {
+html body .back-office-main .main .bo-nav .avatar {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -16182,9 +16182,9 @@ html body .main .bo-nav .avatar {
   background-position-y: top;
   background-size: cover;
 }
-html body .main .bo-nav li.nav-item.dropdown {
+html body .back-office-main .main .bo-nav li.nav-item.dropdown {
   list-style-type: none;
 }
-html body .main tbody tr:hover {
+html body .back-office-main .main tbody tr:hover {
   color: #8B64C4;
 }
