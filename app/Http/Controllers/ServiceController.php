@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Flaticon;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,10 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('admin.service',[
+        return view('admin.services',[
             'services'=>Service::all(),
+            'currentPage' => 'dashboard',
+            'middlePage'=> null,
         ]);
     }
 
@@ -31,7 +34,10 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create.services',[
+            'services'=>Service::all(),
+            'flaticons'=>Flaticon::all(),
+        ]);
     }
 
     /**
@@ -54,7 +60,7 @@ class ServiceController extends Controller
         $service->text = $request->text;
         $service->save();
 
-        return redirect()->back();
+        return redirect()->route('services.index');
     }
 
     /**
@@ -76,7 +82,9 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        return view('admin.edit.services', compact('service'));
+        $flaticons =Flaticon::all();
+
+        return view('admin.edit.services', compact('service','flaticons'));
     }
 
     /**
@@ -111,5 +119,7 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         $service->delete();
+
+        return redirect()->back();
     }
 }

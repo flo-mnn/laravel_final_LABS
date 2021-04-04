@@ -20,6 +20,8 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TitleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
 use App\Models\About;
 use App\Models\Carousel;
 use App\Models\Category;
@@ -127,6 +129,8 @@ Route::get('/services', function () {
         $newTitle =  Str::of($str)->replace(']', '</span>'); 
         array_push($newTitles, $newTitle);
     };
+    $services = Service::orderBy('created_at','DESC')
+                    ->paginate(9);
     return view('services',[
         'abouts'=>About::all(),
         'carousels'=>Carousel::all(),
@@ -143,7 +147,7 @@ Route::get('/services', function () {
         'offices'=>Office::first(),
         'posts'=>Post::all(),
         // 'roles'=>Role::all(),
-        'services'=>Service::all(),
+        'services'=>$services,
         'subjects'=>Subject::all(),
         'tags'=>Tag::all(),
         'testimonials'=>Testimonial::all(),
@@ -257,6 +261,18 @@ Route::get('/contact', function () {
 Auth::routes();
 
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
+
+// additionnal routes
+Route::get('/admin/blog',function(){
+    return view('admin.blog',[
+        'categories'=>Category::all(),
+        'tags'=>Tag::all(),
+        'post_auto_validate'=>PostAutoValidate::first(),
+        'posts'=>Post::all(),
+        'currentPage'=>'Blog Options',
+        'middlePage'=>null,
+    ]);
+})->name('admin.blog');
 
 // customized routes from controllers
 

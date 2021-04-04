@@ -16,9 +16,9 @@ class CreateJobTitleUserTable extends Migration
         Schema::create('job_title_user', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('job_title_id');
-            $table->foreign('job_title_id')->references('id')->on('job_titles');
+            $table->foreign('job_title_id')->references('id')->on('job_titles')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Flaticon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
             JobTitleUserSeeder::class,
             TagPostSeeder::class,
             AboutSeeder::class,
+            FlaticonSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }

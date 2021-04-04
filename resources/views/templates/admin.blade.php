@@ -54,19 +54,19 @@
                     <div class="card bg-dark">
                       <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                          <button class="btn btn-link btn-block text-left text-uppercase" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Team
+                          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            TEAM
                           </button>
                         </h2>
                       </div>
                   
-                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#linksAccordion">
+                      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#linksAccordion">
                         <div class="card-body py-4 pl-4 pr-2">
-                            <a href="" class="side-link py-3">My profile</a>
+                            <a href="/admin/users/{{Auth::id()}}" class="side-link py-3">My profile</a>
                             <div class="side-separator my-3"></div>
-                            <a href="" class="side-link py-3">Our Team</a>
+                            <a href="/admin/users/" class="side-link py-3">Our Team</a>
                             <div class="side-separator my-3"></div>
-                            <a href="" class="side-link py-3">Add a Team Member</a>
+                            <a href="/admin/users/create" class="side-link py-3">Add a Team Member</a>
                         </div>
                       </div>
                     </div>
@@ -74,13 +74,17 @@
                       <div class="card-header" id="headingTwo">
                         <h2 class="mb-0">
                           <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            HOME
+                            BLOG
                           </button>
                         </h2>
                       </div>
                       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#linksAccordion">
-                        <div class="card-body">
-                          links
+                        <div class="card-body py-4 pl-4 pr-2 py-4 pl-4 pr-2">
+                          <a href="/admin/posts/create/" class="side-link">Write a Blog Post</a>
+                          <div class="side-separator my-3"></div>
+                          <a href="/admin/posts/" class="side-link">Manage Blog Posts</a>
+                          <div class="side-separator my-3"></div>
+                          <a href="/admin/blog" class="side-link">Manage Blog Options</a>
                         </div>
                       </div>
                     </div>
@@ -93,8 +97,10 @@
                         </h2>
                       </div>
                       <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#linksAccordion">
-                        <div class="card-body">
-                          links
+                        <div class="card-body py-4 pl-4 pr-2 d-flex flex-column">
+                          <a href="/admin/services/create" class="side-link ">Add a service</a>
+                          <div class="side-separator my-3"></div>
+                          <a href="/admin/services" class="side-link ">Manage Services</a>
                         </div>
                       </div>
                     </div>
@@ -102,13 +108,15 @@
                       <div class="card-header" id="headingFour">
                         <h2 class="mb-0">
                           <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            BLOG
+                            TESTIMONIALS
                           </button>
                         </h2>
                       </div>
                       <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#linksAccordion">
-                        <div class="card-body">
-                          links
+                        <div class="card-body py-4 pl-4 pr-2">
+                          <a href="/admin/testimonials/create/" class="side-link">Add a testimonial</a>
+                          <div class="side-separator my-3"></div>
+                          <a href="/admin/testimonials/" class="side-link">Manage Testimonials</a>
                         </div>
                       </div>
                     </div>
@@ -122,11 +130,36 @@
                         </div>
                     
                         <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#linksAccordion">
-                          <div class="card-body">
-                            links
+                          <div class="card-body py-4 pl-4 pr-2">
+                            <a href="/admin/offices/" class="side-link">Our Contact Info</a>
+                          <div class="side-separator my-3"></div>
+                          <a href="/admin/newsletters/" class="side-link">Newsletter</a>
+                          <div class="side-separator my-3"></div>
+                          <a href="/admin/emails/" class="side-link">Contact Form</a>
                           </div>
                         </div>
-                      </div>
+                    </div>
+                    <div class="card bg-dark">
+                        <div class="card-header" id="headingSix">
+                          <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                              MANAGE CONTENT
+                            </button>
+                          </h2>
+                        </div>
+                    
+                        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#linksAccordion">
+                          <div class="card-body py-4 pl-4 pr-2">
+                            <a href="/admin/posts/create/" class="side-link">Slider Images</a>
+                          <div class="side-separator my-3"></div>
+                          <a href="/admin/posts/" class="side-link">About Us</a>
+                          <div class="side-separator my-3"></div>
+                          <a href="/admin/blog" class="side-link">Navigation & Titles</a>
+                          <div class="side-separator my-3"></div>
+                          <a href="/admin/blog" class="side-link">Copyright</a>
+                          </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -170,20 +203,31 @@
                 @endguest
                 </ul>
         </nav>
+        @if (!Str::contains(Route::getCurrentRoute()->uri(),'create') && !Str::contains(Route::getCurrentRoute()->uri(),'edit'))
             <!-- Page header -->
         <div class="page-top-section bg-success">
             <div class="overlay"></div>
             <div class="container text-right">
                 <div class="page-info mr-5">
-                    <h2 class="text-capitalize text-dark">Page</h2>
+                    <h2 class="text-capitalize text-dark">{{$currentPage}}</h2>
                     <div class="page-links">
-                        <a href="/" class="text-capitalize text-dark">Main</a>
-                        <span class="text-capitalize text-primary">Page</span>
+                        <a href="/admin" class="text-capitalize text-dark">Admin</a>
+                        @if ($middlePage)
+                        <a href="/" class="text-capitalize text-dark">{{$middlePage}}</a>
+                        @endif
+                        <span class="text-capitalize text-primary">{{$currentPage}}</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="pt-5 pb-2 px-5">
+        @else
+        <style>
+          #yield-admin{
+            margin-top: 91px;
+          }
+        </style>
+        @endif
+        <div class="pt-5 pb-2 px-5" id="yield-admin">
             @yield('admin-content')
         </div>
         

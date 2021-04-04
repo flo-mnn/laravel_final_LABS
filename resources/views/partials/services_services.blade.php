@@ -21,7 +21,7 @@
             @endforeach
         </div>
         <div class="text-center">
-            <span>PAGINATION</span>
+            <span>{{$services->links()}}</span>
             {{-- PAGINATION  --}}
             {{-- <a href="" class="site-btn">Browse</a> --}}
         </div>

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Footer;
+use App\Models\Image;
+use App\Models\Navlink;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -11,7 +15,7 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('isWebmaster');
+        $this->middleware('isWebmaster')->except('show');
     }
     /**
      * Display a listing of the resource.
@@ -62,7 +66,21 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $posts_ps = [];
+        foreach ($category->posts->sortByDesc('created_at') as $post) {
+            $post_ps = preg_split('/\r\n|\r|\n/', $post->content);
+            array_push($posts_ps, $post_ps);
+        };
+        $posts = $category->posts()
+                    ->orderBy('created_at','DESC')
+                    ->paginate(3);
+        $images = Image::all();
+        $navlinks = Navlink::all();
+        $header_current = 'Blog';
+        $categories = Category::all();
+        $tags = Tag::all();
+        $footers = Footer::first();
+        return view('blog_per_category',compact('posts','posts_ps','images','navlinks','header_current','categories','tags','footers'));
     }
 
     /**
@@ -73,7 +91,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.edit.categories',compact('category'));
     }
 
     /**
@@ -92,7 +110,7 @@ class CategoryController extends Controller
         $category->category = $request->category;
         $category->save();
 
-        return redirect()->back();
+        return redirect()->route('admin.blog');
     }
 
     /**
@@ -106,7 +124,10 @@ class CategoryController extends Controller
         // associated posts ? Null?
         foreach (Post::where('category_id',$category->id)->get() as $post) {
             $post->category_id = null;
-        }
+            $post->save();
+        };
         $category->delete();
+
+        return redirect()->route('admin.blog');
     }
 }

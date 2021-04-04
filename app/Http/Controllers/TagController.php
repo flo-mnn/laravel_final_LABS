@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Footer;
+use App\Models\Image;
+use App\Models\Navlink;
+use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -10,7 +15,7 @@ class TagController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('isWebmaster');
+        $this->middleware('isWebmaster')->except('show');
     }
     /**
      * Display a listing of the resource.
@@ -61,7 +66,21 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $posts_ps = [];
+        foreach ($tag->posts->sortByDesc('created_at') as $post) {
+            $post_ps = preg_split('/\r\n|\r|\n/', $post->content);
+            array_push($posts_ps, $post_ps);
+        };
+        $posts = $tag->posts()
+                    ->orderBy('created_at','DESC')
+                    ->paginate(3);
+        $images = Image::all();
+        $navlinks = Navlink::all();
+        $header_current = 'Blog';
+        $categories = Category::all();
+        $tags = Tag::all();
+        $footers = Footer::first();
+        return view('blog_per_category',compact('posts','posts_ps','images','navlinks','header_current','categories','tags','footers'));
     }
 
     /**
@@ -72,7 +91,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('admin.edit.tags',compact('tag'));
     }
 
     /**
@@ -91,7 +110,7 @@ class TagController extends Controller
         $tag->tag = $request->tag;
         $tag->save();
 
-        return redirect()->back();
+        return redirect()->route('admin.blog');
     }
 
     /**
@@ -103,6 +122,6 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        // careful with many to many, check with cascade ou autre!
+        return redirect()->route('admin.blog');
     }
 }

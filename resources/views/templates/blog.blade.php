@@ -68,7 +68,7 @@
 						<h2 class="widget-title">Categories</h2>
 						<ul>
 							@foreach ($categories as $category)
-							<li><a href="#">{{$category->category}}</a></li>
+							<li><a href="/admin/categories/{{$category->id}}">{{$category->category}}</a></li>
 							@endforeach
 						</ul>
 					</div>
@@ -78,7 +78,7 @@
 						<h2 class="widget-title">Tags</h2>
 						<ul class="tag">
 							@foreach ($tags as $tag)
-							<li><a href="">{{$tag->tag}}</a></li>
+							<li><a href="/admin/tags/{{$tag->id}}">{{$tag->tag}}</a></li>
 							@endforeach
 						</ul>
 					</div>
