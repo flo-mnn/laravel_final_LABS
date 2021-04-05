@@ -103,13 +103,14 @@ class TestimonialController extends Controller
 
         $testimonial->name = $request->name;
         $testimonial->job_title = $request->job_title;
-        Storage::delete('public/img/testimonial/'.$testimonial->src);
+        //for dev purposes
+        // Storage::delete('public/img/testimonial/'.$testimonial->src);
         Storage::put('public/img/testimonial/', $request->file('src'));
         $testimonial->src = $request->file('src')->hashName();
         $testimonial->text = $request->text;
         $testimonial->save();
 
-        return redirect()->back();
+        return redirect()->route('testimonials.index');
     }
 
     /**

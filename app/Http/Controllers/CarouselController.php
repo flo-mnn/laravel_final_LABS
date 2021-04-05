@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carousel;
+use App\Models\Title;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,6 +23,9 @@ class CarouselController extends Controller
     {
         return view('admin.carousels',[
             'carousels'=>Carousel::all(),
+            'currentPage'=>"Slider Images",
+            'middlePage'=>null,
+            'titles'=>Title::first(),
         ]);
     }
 
@@ -87,10 +91,11 @@ class CarouselController extends Controller
     public function update(Request $request, Carousel $carousel)
     {
         $validate = $request->validate([
+            'title'=>'required|max:500',
             'src'=> 'required|image'
         ]);
 
-        Storage::delete('public/img/carousel/'.$carousel->src);
+        // Storage::delete('public/img/carousel/'.$carousel->src);
         Storage::put('public/img/carousel/',$request->file('src'));
         $carousel->src = $request->file('src')->hashName();
         $carousel->save();
@@ -106,7 +111,9 @@ class CarouselController extends Controller
      */
     public function destroy(Carousel $carousel)
     {
-        Storage::delete('public/img/carousel/'.$carousel->src);
+        // Storage::delete('public/img/carousel/'.$carousel->src);
         $carousel->delete();
+
+        return redirect()->route('carousels.index');
     }
 }

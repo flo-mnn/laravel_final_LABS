@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\Map;
 use App\Models\Office;
 use Illuminate\Http\Request;
 
@@ -20,7 +22,10 @@ class OfficeController extends Controller
     public function index()
     {
         return view('admin.offices',[
+            'contacts'=>Contact::first(),
             'offices'=>Office::first(),
+            'currentPage'=>'Contact Info',
+            'middlePage'=>null,
         ]);
     }
 
@@ -77,6 +82,7 @@ class OfficeController extends Controller
     public function update(Request $request, Office $office)
     {
         $validate = $request->validate([
+            'text'=> 'required|max:1000',
             'street'=>'required|max:500',
             'number'=>'required|max:20',
             'postcode'=>'required|max:20',
@@ -86,6 +92,11 @@ class OfficeController extends Controller
             'email'=>'required|email|max:255',
         ]);
         // no need to change title here
+        // contacts text table
+        $contact = Contact::first();
+        $contact->text = $request->text;
+        $contact->save();
+        // offices table
         $office->street = $request->street;
         $office->number = $request->number;
         $office->postcode = $request->postcode;
@@ -98,6 +109,10 @@ class OfficeController extends Controller
         }
         $office->email = $request->email;
         $office->save();
+
+        $map = Map::first();
+        $map->address = ($office->street.', '.$office->number." ".$office->postcode." ".$office->city." ".$office->country);
+        $map->save();
 
         return redirect()->back();
 

@@ -9,9 +9,9 @@
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col">Picture</th>
         <th scope="col" >Name</th>
         <th scope="col">Job Title</th>
-        <th scope="col">Picture</th>
         <th scope="col">Text</th>
         <th scope="col" colspan="2"></th>
       </tr>
@@ -20,10 +20,10 @@
         @foreach ($testimonials->sortByDesc('created_at') as $testimonial)
            <tr>
             <th scope="row">{{count($testimonials) - ($loop->iteration -1)}}</th>
+            <td><div style="overflow: hidden; height: 60px; width: 60px;" class="rounded-circle"><img src="/storage/img/testimonial/{{$testimonial->src}}" alt="testimonial-avatar"></div></td>
             <td>{{$testimonial->name}}</td>
             <td>{{$testimonial->job_title}}</td>
             <td>{{$testimonial->text}}</td>
-            <td><div style="overflow: hidden; height: 60px; width: 60px;" class="rounded-circle"><img src="/storage/img/testimonial/{{$testimonial->src}}" alt="testimonial-avatar"></div></td>
             <td><a href="/admin/testimonials/{{$testimonial->id}}/edit" class="btn btn-dark text-success font-weight-bold rounded-0 px-4"><i class="fas fa-edit"></i></a></td>
             <td><form action="/admin/testimonials/{{$testimonial->id}}" method="POST">
                 @csrf

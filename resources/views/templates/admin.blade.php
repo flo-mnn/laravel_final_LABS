@@ -152,13 +152,13 @@
                     
                         <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#linksAccordion">
                           <div class="card-body py-4 pl-4 pr-2">
-                            <a href="/admin/posts/create/" class="side-link">Slider Images</a>
+                            <a href="/admin/carousels/" class="side-link">Slider Images</a>
                           <div class="side-separator my-3"></div>
-                          <a href="/admin/posts/" class="side-link">About Us</a>
+                          <a href="/admin/abouts/" class="side-link">About Us</a>
                           <div class="side-separator my-3"></div>
-                          <a href="/admin/blog" class="side-link">Navigation & Titles</a>
+                          <a href="/admin/titles" class="side-link">Navigation & Titles</a>
                           <div class="side-separator my-3"></div>
-                          <a href="/admin/blog" class="side-link">Copyright</a>
+                          <a href="/admin/footers" class="side-link">Copyright</a>
                           </div>
                         </div>
                     </div>
