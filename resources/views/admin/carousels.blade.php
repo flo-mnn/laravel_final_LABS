@@ -3,8 +3,16 @@
 @section('admin-content')
 <div class="d-flex justify-content-between">
     <h1>MANAGE YOUR SLIDER IMAGES</h1>
-    {{-- <a href="/admin/carousels/create" class="btn btn-primary rounded-0 px-4"><i class="fas fa-plus"></i></a> --}}
 </div>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <table class="table table-primary table-hover mt-3">
     <thead>
       <tr>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Navlink;
 use App\Models\Title;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,11 @@ class TitleController extends Controller
      */
     public function index()
     {
-        return view('admin.title',[
+        return view('admin.titles',[
             'titles'=>Title::all(),
+            'currentPage'=>"Navigation & Titles",
+            'middlePage'=>null,
+            'navlinks'=>Navlink::all(),
         ]);
     }
 

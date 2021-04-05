@@ -21,6 +21,8 @@ class FooterController extends Controller
     {
         return view('admin.footers',[
             'footers'=>Footer::first(),
+            'currentPage'=>'Copyright',
+            'middlePage'=>null,
         ]);
     }
 

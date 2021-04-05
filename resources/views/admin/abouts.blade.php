@@ -73,7 +73,7 @@
         </form>
         <tr>
             <td scope="row" colspan="3">
-                <input type="submit" id="submitVideo" form="videoForm" class="d-none"><label for="submitVideo" class="site-btn btn-1"><i class="fas fa-check"></i></label>
+                <input type="submit" id="submitVideo" form="videoForm" class="d-none"><label for="submitVideo" class="site-btn btn-1" style="cursor: pointer"><i class="fas fa-check"></i></label>
             </td>
         </tr>
     </tbody>
