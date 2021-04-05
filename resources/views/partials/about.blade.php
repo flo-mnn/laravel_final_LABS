@@ -42,8 +42,8 @@
             <!-- popup video -->
             <div class="intro-video">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <img src="{{asset('/storage/img/video.jpg')}}" alt="">
+                    <div class="col-md-8 col-md-offset-2" style="overflow: hidden; height: 400px;">
+                        <img src="/storage/img/{{$videos->src}}" alt="video-cover" class="w-100">
                         <a href="{{$videos->href}}" class="video-popup">
                             <i class="fa fa-play"></i>
                         </a>

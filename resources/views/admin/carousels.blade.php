@@ -3,7 +3,7 @@
 @section('admin-content')
 <div class="d-flex justify-content-between">
     <h1>MANAGE YOUR SLIDER IMAGES</h1>
-    <a href="/admin/carousels/create" class="btn btn-primary rounded-0 px-4"><i class="fas fa-plus"></i></a>
+    {{-- <a href="/admin/carousels/create" class="btn btn-primary rounded-0 px-4"><i class="fas fa-plus"></i></a> --}}
 </div>
 <table class="table table-primary table-hover mt-3">
     <thead>
@@ -66,6 +66,7 @@
         <tr>
             <th scope="row"><i class="fas fa-plus-square"></i></th>
             <td colspan="4">
+                <h4 class="text-primary mb-2">Add an image</h4>
                 <form action="/admin/carousels" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

@@ -16,7 +16,8 @@ class VideoSeeder extends Seeder
     {
         DB::table('videos')->insert([
             [
-                'href'=>"https://www.youtube.com/watch?v=JgHfx2v9zOU"
+                'href'=>"https://www.youtube.com/watch?v=JgHfx2v9zOU",
+                'src'=>"video.jpg",
             ],
         ]);
     }

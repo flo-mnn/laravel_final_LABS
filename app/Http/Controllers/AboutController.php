@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -20,7 +21,10 @@ class AboutController extends Controller
     public function index()
     {
         return view('admin.abouts',[
+            'videos'=>Video::first(),
             'abouts'=>About::all(),
+            'currentPage'=>"About Us",
+            'middlePage'=>null,
         ]);
     }
 

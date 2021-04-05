@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
@@ -77,13 +78,16 @@ class VideoController extends Controller
     public function update(Request $request, Video $video)
     {
         $validate = $request->validate([
-            'href'=>'required|URL|max:6000'
+            'href'=>'required|URL|max:6000',
+            'src'=>'required|image|max:6000'
         ]);
-        //maybe add picture update, later if time
         $video->href = $request->href;
+        // Storage::delete('public/img/'.$video->src);
+        Storage::put('public/img/',$request->file('src'));
+        $video->src = $request->file('src')->hashName();
         $video->save();
 
-        
+        return redirect()->back();
     }
 
     /**

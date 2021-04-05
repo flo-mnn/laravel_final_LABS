@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\CategoryController;
@@ -278,6 +279,7 @@ Route::get('/admin/blog',function(){
 
 
 //resources
+Route::resource('/admin/abouts',AboutController::class);
 Route::resource('/admin/carousels',CarouselController::class);
 Route::resource('/admin/categories', CategoryController::class);
 Route::resource('/admin/comments', CommentController::class);
