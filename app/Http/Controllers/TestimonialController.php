@@ -20,8 +20,10 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        return view('admin.testimonial',[
+        return view('admin.testimonials',[
             'testimonials'=>Testimonial::all(),
+            'currentPage'=> 'Testimonials',
+            'middlePage'=>null,
         ]);
     }
 
@@ -32,7 +34,7 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create.testimonials');
     }
 
     /**
@@ -118,7 +120,10 @@ class TestimonialController extends Controller
      */
     public function destroy(Testimonial $testimonial)
     {
-        Storage::delete('public/img/testimonial/'.$testimonial->src);
+        // for dev purpose
+        // Storage::delete('public/img/testimonial/'.$testimonial->src);
         $testimonial->delete();
+
+        return redirect()->route('testimonials.index');
     }
 }

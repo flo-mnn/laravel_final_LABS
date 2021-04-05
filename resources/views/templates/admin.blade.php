@@ -84,6 +84,8 @@
                           <div class="side-separator my-3"></div>
                           <a href="/admin/posts/" class="side-link">Manage Blog Posts</a>
                           <div class="side-separator my-3"></div>
+                          <a href="/admin/comments/" class="side-link">Manage Blog Comments</a>
+                          <div class="side-separator my-3"></div>
                           <a href="/admin/blog" class="side-link">Manage Blog Options</a>
                         </div>
                       </div>
