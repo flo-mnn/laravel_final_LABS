@@ -55,8 +55,8 @@ class CommentController extends Controller
         if (Auth::check()) {
             $comment->user_id = Auth::id();
         } else {
-            $alreadyCommented = CommentUser::where('email',$request->email)->get();
-            if ($alreadyCommented) {
+            $alreadyCommented = CommentUser::all()->where('email',$request->email);
+            if ($alreadyCommented->isNotEmpty()) {
                 $comment_user_id = CommentUser::find($alreadyCommented[0]->id);
                 $comment->comment_user_id = $comment_user_id->id;
             } else {

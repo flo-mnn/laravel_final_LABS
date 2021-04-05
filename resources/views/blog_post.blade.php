@@ -17,9 +17,7 @@
             @endforeach</a>
             <a href="">{{count($post->comments)}} {{count($post->comments) >=2 ? 'Commments' : 'Comment'}}</a>
         </div>
-        @foreach ($post_ps as $p)
-            <p>{{$p}}</p>
-        @endforeach
+        {!!$post->content!!}
     </div>
     <!-- Post Author -->
     <div class="author">
@@ -41,15 +39,19 @@
                 <div class="avatar" style="background-image: url('/storage/img/team/{{$comment->users->src}}')">
                     {{-- <img src="{{asset('/storage/img/avatar/01.jpg')}}" alt=""> --}}
                 </div>
-                @else
-                <div class="avatar" style="background-image: url('/storage/img/team/avatar.png')">
-                </div>
-
-                @endif
                 <div class="commetn-text">
                     <h3>{{$comment->users->name}} | {{$comment->created_at->format('d M Y')}}</h3>
                     <p>{{$comment->comment}} </p>
                 </div>
+                @else
+                <div class="avatar" style="background-image: url('/storage/img/team/avatar.png')">
+                </div>
+                <div class="commetn-text">
+                    <h3>{{$comment->comment_users->name}} | {{$comment->created_at->format('d M Y')}}</h3>
+                    <p>{{$comment->comment}} </p>
+                </div>
+                @endif
+                
             </li>
             @endforeach
         </ul>
@@ -58,7 +60,21 @@
     <div class="row">
         <div class="col-md-9 comment-from">
             <h2>Leave a comment</h2>
-            <form class="form-class">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form class="form-class" action="/admin/comments/" method="POST">
+                @csrf
+                <input type="number" class="d-none" value="{{$post->id}}" name="post_id">
+                @if (Auth::check())
+                <div class="row">
+                    @else
                 <div class="row">
                     <div class="col-sm-6">
                         <input type="text" name="name" placeholder="Your name">
@@ -66,9 +82,10 @@
                     <div class="col-sm-6">
                         <input type="text" name="email" placeholder="Your email">
                     </div>
+                @endif
                     <div class="col-sm-12">
-                        <textarea name="message" placeholder="Message"></textarea>
-                        <button class="site-btn">send</button>
+                        <textarea name="comment" placeholder="Message"></textarea>
+                        <button class="site-btn" type="submit">send</button>
                     </div>
                 </div>
             </form>

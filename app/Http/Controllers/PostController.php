@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Footer;
+use App\Models\Image;
+use App\Models\Navlink;
 use App\Models\Post;
 use App\Models\PostAutoValidate;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -54,14 +60,17 @@ class PostController extends Controller
         ]);
         $post = new Post();
         $post->title = $request->title;
-        $post->content = $request->content;
+        $paragContent =  Str::of($request->content)->replace('/n', '</p><p>');
+        $post->content = '<p>'.$paragContent.'</p>';
         $post->validated = PostAutoValidate::first()->post_auto_validate;
         Storage::put('public/img/blog/',$request->file('src'));
         $post->src = $request->file('src')->hashName();
         $post->category_id = $request->category_id;
         $post->user_id = Auth::id();
-        // many to many with tags
-            // to do when checked the one with user working
+        // many to many with tags //to test :
+        foreach($request->tag_id as $item) {
+            $post->tags()->attach($item); 
+        };
         $post->save();
 
         return redirect()->route('posts.index');
@@ -75,8 +84,16 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //to add view;
         // for both ? et guest et auth ? Avec gate pour le edit et autres ?
+        return view('blog_post',[
+            'navlinks'=>Navlink::all(),
+            'images'=>Image::all(),
+            'post'=>$post,
+            'categories'=>Category::all(),
+            'tags'=>Tag::all(),
+            'footers'=>Footer::first(),
+            'header_current'=>Navlink::find(3)->link,
+        ]);
     }
 
     /**
@@ -106,14 +123,15 @@ class PostController extends Controller
             'category_id'=>'required',
         ]);
         $post->title = $request->title;
-        $post->content = $request->content;
+        $paragContent =  Str::of($request->content)->replace('/n', '</p><p>');
+        $post->content = '<p>'.$paragContent.'</p>';
         $post->validated = PostAutoValidate::first()->post_auto_validate;
         Storage::delete('public/img/blog/'.$post->src);
         Storage::put('public/img/blog/',$request->file('src'));
         $post->src = $request->file('src')->hashName();
         $post->category_id = $request->category_id;
-        // many to many with tags
-            // to do when checked the one with user working
+        // many to many with tags //to test :
+        $post->tags()->sync($request->tag_id); 
         $post->save();
 
         return redirect()->route('posts.index');
@@ -131,5 +149,29 @@ class PostController extends Controller
         $post->delete();
         // check if deleting in pivot table (onDelete('cascade')??) check
         // soft delete required by client ??? !!! check it out
+    }
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+    
+        // Search in the title and body columns from the posts table
+        $posts = Post::query()
+            ->where('title', 'LIKE', "%{$search}%")
+            // ->orWhere('body', 'LIKE', "%{$search}%")
+            // ->get()
+            ->orderBy('created_at','DESC')
+            ->paginate(10);
+    
+        // Return the search view with the resluts compacted
+        return view('blog_search_results', [
+            'navlinks'=>Navlink::all(),
+            'images'=>Image::all(),
+            'posts'=>$posts,
+            'categories'=>Category::all(),
+            'tags'=>Tag::all(),
+            'footers'=>Footer::first(),
+            'header_current'=>Navlink::find(3)->link,
+        ]);
     }
 }

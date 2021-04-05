@@ -17,7 +17,7 @@
             </a>
             <a href="">{{count($post->comments)}} {{count($post->comments) >=2 ? 'Commments' : 'Comment'}}</a>
         </div>
-        <p>{{$posts_ps[$loop->iteration -1][0]}}</p>
-        <a href="/blog-post/" class="read-more">Read More</a>
+            {!!Str::before($post->content,'</p>')!!}</p>
+        <a href="/blog/{{$post->id}}" class="read-more">Read More</a>
     </div>
 </div>

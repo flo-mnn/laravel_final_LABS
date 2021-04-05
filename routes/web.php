@@ -159,16 +159,20 @@ Route::get('/services', function () {
     ]);
 });
 Route::get('/blog', function () {
-    $posts_ps = [];
-    foreach (Post::all()->sortByDesc('created_at') as $post) {
-        $post_ps = preg_split('/\r\n|\r|\n/', $post->content);
-        array_push($posts_ps, $post_ps);
-    };
+    // $posts_ps = [];
+    // foreach (Post::all()->sortByDesc('created_at') as $post) {
+    //     dd($post->content);
+        
+        
+    //     $newTitle =  Str::of($str)->replace(']', '</span>'); 
+    //     array_push($newTitles, $newTitle);
+    //     $post_ps = preg_split('/\r\n|\r|\n/', $post->content);
+    //     array_push($posts_ps, $post_ps);
+    // };
 
     $posts = Post::orderBy('created_at','DESC')
                     ->paginate(3);
 
-    // dd($posts);
     return view('blog',[
         'abouts'=>About::all(),
         'carousels'=>Carousel::all(),
@@ -184,7 +188,7 @@ Route::get('/blog', function () {
         // 'newsletters'=>Newsletter::all(),
         'offices'=>Office::first(),
         'posts'=>$posts,
-        'posts_ps'=>$posts_ps,
+        // 'posts_ps'=>$posts_ps,
         // 'roles'=>Role::all(),
         'services'=>Service::all(),
         'subjects'=>Subject::all(),
@@ -196,11 +200,11 @@ Route::get('/blog', function () {
     ]);
 });
 Route::get('/blog-post', function () {
-    $posts_ps = [];
-    foreach (Post::all()->sortByDesc('created_at') as $post) {
-        $post_ps = preg_split('/\r\n|\r|\n/', $post->content);
-        array_push($posts_ps, $post_ps);
-    };
+    // $posts_ps = [];
+    // foreach (Post::all()->sortByDesc('created_at') as $post) {
+    //     $post_ps = preg_split('/\r\n|\r|\n/', $post->content);
+    //     array_push($posts_ps, $post_ps);
+    // };
     return view('blog_post',[
         'abouts'=>About::all(),
         'carousels'=>Carousel::all(),
@@ -217,9 +221,9 @@ Route::get('/blog-post', function () {
         'offices'=>Office::first(),
         // test before show:
         'post'=>Post::first(),
-        'post_ps'=>$posts_ps[0],
+        // 'post_ps'=>$posts_ps[0],
         'posts'=>Post::all(),
-        'posts_ps'=>$posts_ps,
+        // 'posts_ps'=>$posts_ps,
 
         // 'roles'=>Role::all(),
         'services'=>Service::all(),
@@ -277,6 +281,8 @@ Route::get('/admin/blog',function(){
 
 // customized routes from controllers
 
+Route::get('/blog/{post}',[PostController::class, 'show']);
+Route::get('/search/', [PostController::class, 'search'])->name('search');
 
 //resources
 Route::resource('/admin/abouts',AboutController::class);

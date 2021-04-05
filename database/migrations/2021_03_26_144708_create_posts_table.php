@@ -13,6 +13,7 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
+
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title',500);
@@ -25,6 +26,14 @@ class CreatePostsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
+
+        Schema::table('posts', function (Blueprint $table) {
+            $table->softDeletes();
+        });
+
+        // Schema::table('posts', function (Blueprint $table) {
+        //     $table->dropSoftDeletes();
+        // });
     }
 
     /**
@@ -35,5 +44,6 @@ class CreatePostsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('posts');
+
     }
 }
