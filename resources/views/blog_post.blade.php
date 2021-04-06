@@ -8,6 +8,19 @@
             <h3>{{$post->created_at->format('M')}} {{$post->created_at->format('Y')}}</h3>
         </div>
     </div>
+    @can('post-edit',$post)
+    <div class="bg-dark p-3 mb-5 w-75">
+        <h3 class="text-primary">Manage this blog post</h3>
+        <div class="my-3 py-3 px-5 d-flex justify-content-around">
+            <a href="/admin/posts/{{$post->id}}/edit" class="btn btn-transparent text-success"><i class="fas fa-edit"></i></a>
+            <form action="/admin/posts/{{$post->id}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-transparent text-danger"><i class="fas fa-trash"></i></button>
+            </form>
+        </div>
+    </div>
+    @endcan
     <div class="post-content">
         <h2 class="post-title">{{$post->title}}</h2>
         <div class="post-meta">

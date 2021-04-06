@@ -12,7 +12,7 @@
             </ul>
         </div>
     @endif
-    <form action="/admin/testimonials" class="p-5 my-3 bg-success" method="POST">
+    <form action="/admin/testimonials" class="p-5 my-3 bg-success" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <input type="file" class="form-control" name="src">

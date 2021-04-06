@@ -25,6 +25,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('post-edit',function($user,$post)
+        {
+            if ($user->role_id == 1 || $user->role_id == 2 || $user->id == $post->user_id) {
+                return true;
+            }
+        });
     }
 }

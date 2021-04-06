@@ -29,8 +29,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.post',[
+        return view('admin.posts',[
+            'categories'=>Category::all(),
+            'tags'=>Tag::all(),
             'posts'=>Post::all(),
+            'currentPage'=>'Blog Posts',
+            'middlePage'=>null,
         ]);
     }
 
@@ -41,7 +45,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        //add view
+        return view('admin.create.posts',[
+            'categories'=>Category::all(),
+            'tags'=>Tag::all(),
+            'posts'=>Post::all(),
+        ]);
     }
 
     /**
@@ -60,7 +68,7 @@ class PostController extends Controller
         ]);
         $post = new Post();
         $post->title = $request->title;
-        $paragContent =  Str::of($request->content)->replace('/n', '</p><p>');
+        $paragContent =  Str::of($request->content)->replace("\r\n", "</p><p>");
         $post->content = '<p>'.$paragContent.'</p>';
         $post->validated = PostAutoValidate::first()->post_auto_validate;
         Storage::put('public/img/blog/',$request->file('src'));
@@ -68,10 +76,11 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->user_id = Auth::id();
         // many to many with tags //to test :
+        $post->save();
+        $post->save();
         foreach($request->tag_id as $item) {
             $post->tags()->attach($item); 
         };
-        $post->save();
 
         return redirect()->route('posts.index');
     }
@@ -123,7 +132,7 @@ class PostController extends Controller
             'category_id'=>'required',
         ]);
         $post->title = $request->title;
-        $paragContent =  Str::of($request->content)->replace('/n', '</p><p>');
+        $paragContent =  Str::of($request->content)->replace("\r\n", "</p><p>");
         $post->content = '<p>'.$paragContent.'</p>';
         $post->validated = PostAutoValidate::first()->post_auto_validate;
         Storage::delete('public/img/blog/'.$post->src);
