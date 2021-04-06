@@ -43,7 +43,7 @@
         </div>
     </div>
     <!-- Post Comments -->
-    <div class="comments">
+    <div class="comments" id="comments">
         <h2>Comments ({{count($post->comments)}})</h2>
         <ul class="comment-list">
             @foreach ($post->comments->sortByDesc('created_at') as $comment)
@@ -53,14 +53,32 @@
                     {{-- <img src="{{asset('/storage/img/avatar/01.jpg')}}" alt=""> --}}
                 </div>
                 <div class="commetn-text">
-                    <h3>{{$comment->users->name}} | {{$comment->created_at->format('d M Y')}}</h3>
+                    <div class="d-flex">
+                        <h3>{{$comment->users->name}} | {{$comment->created_at->format('d M Y')}}</h3>
+                        @can('comment-destroy')
+                        <form action="{{URL::route('comments.destroy',$comment->id)}}#comments" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-transparent text-danger"><i class="fas fa-trash"></i></button>
+                        </form>
+                        @endcan
+                    </div>
                     <p>{{$comment->comment}} </p>
                 </div>
                 @else
                 <div class="avatar" style="background-image: url('/storage/img/team/avatar.png')">
                 </div>
                 <div class="commetn-text">
-                    <h3>{{$comment->comment_users->name}} | {{$comment->created_at->format('d M Y')}}</h3>
+                    <div class="d-flex">
+                        <h3>{{$comment->comment_users->name}} | {{$comment->created_at->format('d M Y')}}</h3>
+                        @can('comment-destroy')
+                        <form action="{{URL::route('comments.destroy',$comment->id)}}#comments" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-transparent text-danger"><i class="fas fa-trash"></i></button>
+                        </form>
+                        @endcan
+                    </div>
                     <p>{{$comment->comment}} </p>
                 </div>
                 @endif
@@ -82,7 +100,7 @@
                     </ul>
                 </div>
             @endif
-            <form class="form-class" action="/admin/comments/" method="POST">
+            <form class="form-class" action="{{ URL::route('comments.store') }}#comments" method="POST">
                 @csrf
                 <input type="number" class="d-none" value="{{$post->id}}" name="post_id">
                 @if (Auth::check())

@@ -12,7 +12,7 @@ class CommentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('isAdmin')->only('destroy');
+        $this->middleware('isWebmaster')->only('destroy');
     }
     /**
      * Display a listing of the resource.
@@ -115,5 +115,7 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         $comment->delete();
+
+        return redirect()->back();
     }
 }

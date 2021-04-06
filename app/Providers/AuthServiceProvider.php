@@ -31,5 +31,11 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
+        Gate::define('comment-destroy',function($user)
+        {
+            if ($user->role_id == 1 || $user->role_id == 2) {
+                return true ;
+            }
+        });
     }
 }
