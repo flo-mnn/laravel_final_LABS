@@ -68,7 +68,7 @@
 						<h2 class="widget-title">Categories</h2>
 						<ul>
 							@foreach ($categories as $category)
-							<li><a href="/admin/categories/{{$category->id}}">{{$category->category}}</a></li>
+							<li><a class="{{Str::contains(url()->current(),'categories') ? ($category_active->id == $category->id ? 'text-success' : null) : null}}" href="/admin/categories/{{$category->id}}">{{$category->category}}</a></li>
 							@endforeach
 						</ul>
 					</div>
@@ -78,7 +78,7 @@
 						<h2 class="widget-title">Tags</h2>
 						<ul class="tag">
 							@foreach ($tags as $tag)
-							<li><a href="/admin/tags/{{$tag->id}}">{{$tag->tag}}</a></li>
+							<li class="{{Str::contains(url()->current(),'tags') ? ($tag_active->id == $tag->id ? 'bg-primary text-success' : null) : null}}"><a href="/admin/tags/{{$tag->id}}" class="{{Str::contains(url()->current(),'tags') ? ($tag_active->id == $tag->id ? 'text-success' : null) : null}}">{{$tag->tag}}</a></li>
 							@endforeach
 						</ul>
 					</div>

@@ -66,11 +66,6 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        $posts_ps = [];
-        foreach ($tag->posts->sortByDesc('created_at') as $post) {
-            $post_ps = preg_split('/\r\n|\r|\n/', $post->content);
-            array_push($posts_ps, $post_ps);
-        };
         $posts = $tag->posts()
                     ->orderBy('created_at','DESC')
                     ->paginate(3);
@@ -80,7 +75,8 @@ class TagController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         $footers = Footer::first();
-        return view('blog_per_category',compact('posts','posts_ps','images','navlinks','header_current','categories','tags','footers'));
+        $tag_active = $tag;
+        return view('blog_per_category',compact('posts','tag_active','images','navlinks','header_current','categories','tags','footers'));
     }
 
     /**

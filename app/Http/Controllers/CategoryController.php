@@ -9,6 +9,7 @@ use App\Models\Navlink;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class CategoryController extends Controller
 {
@@ -66,11 +67,6 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $posts_ps = [];
-        foreach ($category->posts->sortByDesc('created_at') as $post) {
-            $post_ps = preg_split('/\r\n|\r|\n/', $post->content);
-            array_push($posts_ps, $post_ps);
-        };
         $posts = $category->posts()
                     ->orderBy('created_at','DESC')
                     ->paginate(3);
@@ -78,9 +74,10 @@ class CategoryController extends Controller
         $navlinks = Navlink::all();
         $header_current = 'Blog';
         $categories = Category::all();
+        $category_active = $category;
         $tags = Tag::all();
         $footers = Footer::first();
-        return view('blog_per_category',compact('posts','posts_ps','images','navlinks','header_current','categories','tags','footers'));
+        return view('blog_per_category',compact('posts','images','navlinks','header_current','categories','tags','footers','category_active'));
     }
 
     /**

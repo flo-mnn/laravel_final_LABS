@@ -9,13 +9,13 @@
     <div class="post-content">
         <h2 class="post-title">{{$post->title}}</h2>
         <div class="post-meta">
-            <a href="">{{$post->users->name}}</a>
-            <a href="">
+            <a class="link mr-2">{{$post->users->name}}</a>
+            <span>
                 @foreach ($post->tags->shuffle()->take(2) as $tag)
-                    <span class="text-capitalize">{{$tag->tag}}{{$loop->iteration == 2 ? null : ', '}}</span>
+                    <a href="/admin/tags/{{$tag->id}}" class="text-capitalize {{$loop->iteration == 1 ? 'link' : null}}">{{$tag->tag}}{{$loop->iteration == 2 ? null : ', '}}</a>
                 @endforeach
-            </a>
-            <a href="">{{count($post->comments)}} {{count($post->comments) >=2 ? 'Commments' : 'Comment'}}</a>
+            </span>
+            <a href="/blog/{{$post->id}}/#comments" class="link">{{count($post->comments)}} {{count($post->comments) >=2 ? 'Commments' : 'Comment'}}</a>
         </div>
             {!!Str::before($post->content,'</p>')!!}</p>
         <a href="/blog/{{$post->id}}" class="read-more">Read More</a>

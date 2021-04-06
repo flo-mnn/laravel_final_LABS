@@ -1124,12 +1124,19 @@ ul {
 .post-meta a {
 	color: #0b1033;
 	font-size: 12px;
+	/* padding-left: 20px; */
+	position: relative;
+	/* margin-left: 10px; */
+}
+.post-meta a.link {
+	color: #0b1033;
+	font-size: 12px;
 	padding-left: 20px;
 	position: relative;
 	margin-left: 10px;
 }
 
-.post-meta a:after {
+.post-meta a.link:after {
 	position: absolute;
 	content: "";
 	width: 7px;

@@ -24,11 +24,13 @@
     <div class="post-content">
         <h2 class="post-title">{{$post->title}}</h2>
         <div class="post-meta">
-            <a href="">{{$post->users->name}}</a>
-            <a href=""> @foreach ($post->tags as $tag)
-                <span class="text-capitalize">{{$tag->tag}}{{$loop->iteration == count($post->tags) ? null : ', '}}</span>
-            @endforeach</a>
-            <a href="">{{count($post->comments)}} {{count($post->comments) >=2 ? 'Commments' : 'Comment'}}</a>
+            <a class="link mr-2">{{$post->users->name}}</a>
+            <span>
+                @foreach ($post->tags as $tag)
+                    <a href="/admin/tags/{{$tag->id}}" class="text-capitalize {{$loop->iteration == 1 ? 'link' : null}}">{{$tag->tag}}{{$loop->iteration == count($post->tags) ? null : ', '}}</a>
+                @endforeach
+            </span>
+            <a href="#comments" class="link">{{count($post->comments)}} {{count($post->comments) >=2 ? 'Commments' : 'Comment'}}</a>
         </div>
         {!!$post->content!!}
     </div>
