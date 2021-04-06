@@ -60,7 +60,7 @@
                         </h2>
                       </div>
                   
-                      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#linksAccordion">
+                      <div id="collapseOne" class="collapse {{Str::contains(Route::getCurrentRoute()->uri(),"users") ? 'show' : null}}" aria-labelledby="headingOne" data-parent="#linksAccordion">
                         <div class="card-body py-4 pl-4 pr-2">
                             <a href="/admin/users/{{Auth::id()}}" class="side-link py-3">My profile</a>
                             <div class="side-separator my-3"></div>
@@ -78,7 +78,7 @@
                           </button>
                         </h2>
                       </div>
-                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#linksAccordion">
+                      <div id="collapseTwo" class="collapse {{Str::contains(Route::getCurrentRoute()->uri(),"posts") ? 'show' : (Str::contains(Route::getCurrentRoute()->uri(),"comments") ? 'show' : (Str::contains(Route::getCurrentRoute()->uri(),"blog")? 'show': null ) )}}" aria-labelledby="headingTwo" data-parent="#linksAccordion">
                         <div class="card-body py-4 pl-4 pr-2 py-4 pl-4 pr-2">
                           <a href="/admin/posts/create/" class="side-link">Write a Blog Post</a>
                           <div class="side-separator my-3"></div>
@@ -98,7 +98,7 @@
                           </button>
                         </h2>
                       </div>
-                      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#linksAccordion">
+                      <div id="collapseThree" class="collapse {{Str::contains(Route::getCurrentRoute()->uri(),"services") ? 'show' : null}}" aria-labelledby="headingThree" data-parent="#linksAccordion">
                         <div class="card-body py-4 pl-4 pr-2 d-flex flex-column">
                           <a href="/admin/services/create" class="side-link ">Add a service</a>
                           <div class="side-separator my-3"></div>
@@ -114,7 +114,7 @@
                           </button>
                         </h2>
                       </div>
-                      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#linksAccordion">
+                      <div id="collapseFour" class="collapse {{Str::contains(Route::getCurrentRoute()->uri(),"testimonials") ? 'show' : null}}" aria-labelledby="headingFour" data-parent="#linksAccordion">
                         <div class="card-body py-4 pl-4 pr-2">
                           <a href="/admin/testimonials/create/" class="side-link">Add a testimonial</a>
                           <div class="side-separator my-3"></div>
@@ -131,7 +131,7 @@
                           </h2>
                         </div>
                     
-                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#linksAccordion">
+                        <div id="collapseFive" class="collapse {{Str::contains(Route::getCurrentRoute()->uri(),"offices") ? 'show' : (Str::contains(Route::getCurrentRoute()->uri(),"newsletters") ? 'show' : (Str::contains(Route::getCurrentRoute()->uri(),"emails")? 'show': null ) )}}" aria-labelledby="headingFive" data-parent="#linksAccordion">
                           <div class="card-body py-4 pl-4 pr-2">
                             <a href="/admin/offices/" class="side-link">Our Contact Info</a>
                           <div class="side-separator my-3"></div>
@@ -150,7 +150,7 @@
                           </h2>
                         </div>
                     
-                        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#linksAccordion">
+                        <div id="collapseSix" class="collapse {{Str::contains(Route::getCurrentRoute()->uri(),"carousels") ? 'show' : (Str::contains(Route::getCurrentRoute()->uri(),"abouts") ? 'show' : (Str::contains(Route::getCurrentRoute()->uri(),"titles")? 'show': (Str::contains(Route::getCurrentRoute()->uri(),"footers")? 'show': null) ) )}}" aria-labelledby="headingSix" data-parent="#linksAccordion">
                           <div class="card-body py-4 pl-4 pr-2">
                             <a href="/admin/carousels/" class="side-link">Slider Images</a>
                           <div class="side-separator my-3"></div>

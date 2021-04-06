@@ -12,7 +12,7 @@ class CommentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('isWebmaster')->only('destroy');
+        $this->middleware('isWebmaster')->only('destroy','index');
     }
     /**
      * Display a listing of the resource.
@@ -23,6 +23,8 @@ class CommentController extends Controller
     {
         return view('admin.comments',[
             'comments'=>Comment::all(),
+            'currentPage'=>'Comments',
+            'middlePage'=>null,
         ]);
     }
 

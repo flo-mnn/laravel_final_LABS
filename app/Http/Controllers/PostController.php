@@ -65,6 +65,7 @@ class PostController extends Controller
             'content'=>'required',
             'src'=>'required|image',
             'category_id'=>'required',
+            'tag_id'=>'required',
         ]);
         $post = new Post();
         $post->title = $request->title;
@@ -113,7 +114,13 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.edit.posts', compact('post'));
+        $replace =  Str::of($post->content)->replace("</p>","\r\n");
+        $cleaned = Str::remove('<p>', $replace);
+        $content = Str::of($cleaned)->rtrim("\r\n");
+        $categories = Category::all();
+        $tags = Tag::all();
+        $post_tags = $post->tags()->get();
+        return view('admin.edit.posts', compact('post','content','categories','tags','post_tags'));
     }
 
     /**
@@ -128,16 +135,19 @@ class PostController extends Controller
         $validate = $request->validate([
             'title'=>'required|unique:posts|max:500',
             'content'=>'required',
-            'src'=>'required|image',
+            'src'=>'image',
             'category_id'=>'required',
+            'tag_id'=>'required',
         ]);
         $post->title = $request->title;
         $paragContent =  Str::of($request->content)->replace("\r\n", "</p><p>");
         $post->content = '<p>'.$paragContent.'</p>';
         $post->validated = PostAutoValidate::first()->post_auto_validate;
-        Storage::delete('public/img/blog/'.$post->src);
-        Storage::put('public/img/blog/',$request->file('src'));
-        $post->src = $request->file('src')->hashName();
+        if($request->file('src')){
+            // Storage::delete('public/img/blog/'.$post->src);
+            Storage::put('public/img/blog/',$request->file('src'));
+            $post->src = $request->file('src')->hashName();
+        }
         $post->category_id = $request->category_id;
         // many to many with tags //to test :
         $post->tags()->sync($request->tag_id); 
