@@ -17,7 +17,7 @@ class isWriter
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::id() == 1 || Auth::id() == 2 || Auth::id() == 3) {
+        if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3) {
             return $next($request);
         } else {
             return redirect()->back();

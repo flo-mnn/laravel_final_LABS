@@ -17,7 +17,22 @@
             </div>
             <!-- contact form -->
             <div class="col-md-6 col-pull">
-                <form class="form-class" id="con_form">
+                @if ($errors->contact->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->contact->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                <form class="form-class" id="con_form" action="{{route('emails.store')}}#con_form" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-sm-6">
                             <input type="text" name="name" placeholder="Your name">
@@ -26,13 +41,13 @@
                             <input type="text" name="email" placeholder="Your email">
                         </div>
                         <div class="col-sm-12">
-                            <select name="subject">
+                            <select name="subject_id">
                                 @foreach ($subjects as $subject)
                                 <option value="{{$subject->id}}">{{$subject->subject}}</option>
                                 @endforeach
                             </select>
                             <textarea name="message" placeholder="Message"></textarea>
-                            <button class="site-btn">send</button>
+                            <button class="site-btn" type="submit">send</button>
                         </div>
                     </div>
                 </form>

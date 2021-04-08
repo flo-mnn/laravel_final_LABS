@@ -10,7 +10,7 @@
                     </div>
                     <div class="card-text">
                         <h2>{{$post->title}}</h2>
-                        <p>{{Str::limit($post->content,120)}}</p>
+                        <p>{!!Str::limit($post->content,120)!!}</p>
                     </div>
                 </div>
             </div>

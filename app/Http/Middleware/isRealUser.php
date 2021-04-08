@@ -17,10 +17,27 @@ class isRealUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && ($request->route()->parameters()['user']->user_id == Auth::id() || Auth::id() == 1)) {
-            return $next($request);
+        if ($request->route()->action['as'] == "users.password") {
+            if (Auth::id() == $request->route()->parameters()['user']->id) {
+                return $next($request);
+            } else {
+                return redirect()->back();
+            }
         } else {
-            return redirect()->back();
-        }
+            if ($request->route()->action['as'] == "users.show") {
+                if ($request->route()->parameters()['user']->id == Auth::id() || Auth::user()->role_id == 1 || Auth::user()->role_id == 2) {
+                    return $next($request);
+                } else {
+                    return redirect()->back();
+                }
+            } else {
+               if ($request->route()->parameters()['user']->id == Auth::id() || Auth::user()->role_id == 1) {
+                    return $next($request);
+               } else {
+                    return redirect()->back();
+               }
+               
+            }
+        };
     }
 }

@@ -91,7 +91,6 @@ class CarouselController extends Controller
     public function update(Request $request, Carousel $carousel)
     {
         $validate = $request->validate([
-            'title'=>'required|max:500',
             'src'=> 'required|image'
         ]);
 

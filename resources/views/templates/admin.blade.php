@@ -51,6 +51,7 @@
                     <a href="/" class="btn btn-success text-primary font-weight-bold"> > TO the website</a>
                 </div>
                 <div class="accordion" id="linksAccordion">
+                    @can('webmaster')
                     <div class="card bg-dark">
                       <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
@@ -65,11 +66,27 @@
                             <a href="/admin/users/{{Auth::id()}}" class="side-link py-3">My profile</a>
                             <div class="side-separator my-3"></div>
                             <a href="/admin/users/" class="side-link py-3">Our Team</a>
+                            @can('admin')
+                            <div class="side-separator my-3"></div>
+                            <a href="/admin/job_titles" class="side-link py-3">Job Titles</a>
                             <div class="side-separator my-3"></div>
                             <a href="/admin/users/create" class="side-link py-3">Add a Team Member</a>
+                            @endcan
                         </div>
                       </div>
                     </div>
+                    @else
+                    <div class="card bg-dark">
+                      <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                          <a class="btn btn-link btn-block text-left" href="/admin/users/{{Auth::id()}}" class="side-link py-3">
+                            MY PROFILE
+                          </a>
+                        </h2>
+                      </div>
+                    </div>
+                    @endcan
+                    @can('writer')
                     <div class="card bg-dark">
                       <div class="card-header" id="headingTwo">
                         <h2 class="mb-0">
@@ -83,13 +100,17 @@
                           <a href="/admin/posts/create/" class="side-link">Write a Blog Post</a>
                           <div class="side-separator my-3"></div>
                           <a href="/admin/posts/" class="side-link">Manage Blog Posts</a>
+                          @can('webmaster')
                           <div class="side-separator my-3"></div>
                           <a href="/admin/comments/" class="side-link">Manage Blog Comments</a>
                           <div class="side-separator my-3"></div>
                           <a href="/admin/blog" class="side-link">Manage Blog Options</a>
+                          @endcan
                         </div>
                       </div>
                     </div>
+                    @endcan
+                    @can('webmaster')
                     <div class="card bg-dark">
                       <div class="card-header" id="headingThree">
                         <h2 class="mb-0">
@@ -162,6 +183,7 @@
                           </div>
                         </div>
                     </div>
+                    @endcan
                 </div>
             </div>
         </div>

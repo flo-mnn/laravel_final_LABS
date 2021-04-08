@@ -49,7 +49,7 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Navigation Link</th>
+        <th scope="col">Title</th>
         <th scope="col"></th>
       </tr>
     </thead>

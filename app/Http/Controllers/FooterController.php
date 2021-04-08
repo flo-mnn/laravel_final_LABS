@@ -82,11 +82,15 @@ class FooterController extends Controller
             'copyright'=>'required|max:255',
             'designed_by'=>'max:255',
             'designer'=>'max:255',
-            'href'=>'max:3000',
         ]);
         $footer->copyright = $request->copyright;
         $footer->designed_by = $request->designed_by;
         $footer->designer = $request->designer;
+        if ($request->href) {
+            $validate = $request->validate([
+                'href'=>'URL|max:3000',
+            ]);
+        }
         $footer->href = $request->href;
         $footer->save();
 

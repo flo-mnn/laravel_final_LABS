@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
+use App\Models\ContactEmail;
 use App\Models\Email;
+use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
@@ -16,6 +20,9 @@ class EmailController extends Controller
     {
         return view('admin.emails',[
             'emails'=>Email::all(),
+            'currentPage'=>'Contact Form',
+            'middlePage'=>null,
+            'subjects'=>Subject::all(),
         ]);
     }
 
@@ -37,13 +44,22 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
+        $validate = $request->validateWithBag('contact',[
             'name'=>'required|max:255',
             'email'=>'required|email|max:255',
             'message'=>'required|max:2000'
         ]);
-        // send email here ?
-        // subject foreign key
+
+        $email = new Email();
+        $email->name = $request->name;
+        $email->email = $request->email;
+        $email->message = $request->message;
+        $email->subject_id = $request->subject_id;
+        $email->save();
+
+        Mail::to(ContactEmail::first()->email)->send(new ContactMail($email));
+        return redirect()->back()->with('status', 'Mail Sent!');
+
     }
 
     /**

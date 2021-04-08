@@ -35,7 +35,7 @@
         <td>{{$post->title}}</td>
         <td>{{$post->users->name}}</td>
         <td>{{$post->created_at->format('d M Y')}}</td>
-        <td><a href="" class="btn btn-dark text-success font-weight-bold rounded-0 px-4"><i class="fab fa-readme"></i></a></td>
+        <td><a href="/blog/{{$post->id}}" class="btn btn-dark text-success font-weight-bold rounded-0 px-4"><i class="fab fa-readme"></i></a></td>
       </tr>
       @endforeach
       @endif

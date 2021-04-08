@@ -16,6 +16,8 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             return route('login');
+        } else if(! $request->route()->parameters()['user']->validated) {
+            return route('login');
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -35,6 +36,42 @@ class AuthServiceProvider extends ServiceProvider
         {
             if ($user->role_id == 1 || $user->role_id == 2) {
                 return true ;
+            }
+        });
+        Gate::define('user-edit',function($utilisateur,$user)
+        {
+            if ($utilisateur->role_id == 1 || $utilisateur->id == $user->id) {
+                return true ;
+            }
+        });
+        Gate::define('user-edit-admin',function($user)
+        {
+            if ($user->role_id == 1) {
+                return true ;
+            }
+        });
+        Gate::define('mdp-edit',function($utilisateur, $user)
+        {
+            if ($utilisateur->id == $user->id) {
+                return true ;
+            }
+        });
+        Gate::define('admin',function($user)
+        {
+            if($user->role_id == 1){
+                return true;
+            }
+        });
+        Gate::define('webmaster',function($user)
+        {
+            if($user->role_id == 1 || $user->role_id == 2){
+                return true;
+            }
+        });
+        Gate::define('writer',function($user)
+        {
+            if($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 3){
+                return true;
             }
         });
     }

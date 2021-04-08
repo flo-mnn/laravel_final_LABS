@@ -12,7 +12,7 @@
 				<li class="{{Route::getCurrentRoute()->uri() == 'blog' ? 'active' : null}}"><a href="/blog" class="text-capitalize">{{$navlinks[2]->link}}</a></li>
 				<li class="{{Route::getCurrentRoute()->uri() == 'contact' ? 'active' : null}}"><a href="/contact" class="text-capitalize">{{$navlinks[3]->link}}</a></li>
 				@if (Auth::check())
-				<li class=''><a href="/admin" class="bg-primary text-success">admin</a></li>
+				<li class=''><a href="/admin" class="bg-primary text-success">ADMIN</a></li>
 				@endif
 			</ul>
 		</nav>

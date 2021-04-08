@@ -25,7 +25,7 @@
                 @endif
                 <td>{{$comment->comment}}</td>
                 <td><a href="/blog/{{$comment->posts->id}}" target="_blank">post</a></td>
-                <td><form action="{{URL::route('comments.destroy',$comment->id)}}#comments" method="POST">
+                <td><form action="{{URL::route('comments.destroy',$comment->id)}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-transparent text-danger"><i class="fas fa-trash"></i></button>

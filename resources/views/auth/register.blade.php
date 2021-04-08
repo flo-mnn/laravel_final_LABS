@@ -45,8 +45,8 @@ $job_titles=JobTitle::all();
                             <label for="job_title_id" class="col-md-4 col-form-label text-md-right">{{ __('Your function/job title') }}</label>
 
                             <div class="col-md-6">
-                                <select multiple class="form-control @error('job_title_id') is-invalid @enderror" name="job_title_id[]"  required autocomplete="job_title_id">
-                                    @foreach ($job_titles as $job_title)
+                                <select class="form-control @error('job_title_id') is-invalid @enderror" name="job_title_id[]"  required autocomplete="job_title_id">
+                                    @foreach ($job_titles->skip(1) as $job_title)
                                     <option value="{{$job_title->id}}">{{$job_title->job_title}}</option>
                                     @endforeach
                                 </select>

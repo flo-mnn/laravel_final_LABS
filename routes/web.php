@@ -281,6 +281,9 @@ Route::get('/admin/blog',function(){
 
 // customized routes from controllers
 
+Route::post('/admin/users/{user}/validate',[UserController::class,'validation']);
+Route::get('/admin/password/{user}',[UserController::class,'editPassword'])->name('users.password.edit');
+Route::post('/admin/password/{user}',[UserController::class,'password'])->name('users.password');
 Route::get('/blog/{post}',[PostController::class, 'show']);
 Route::get('/search/', [PostController::class, 'search'])->name('search');
 

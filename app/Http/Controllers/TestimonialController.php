@@ -60,7 +60,7 @@ class TestimonialController extends Controller
         $testimonial->text = $request->text;
         $testimonial->save();
 
-        return redirect()->back();
+        return redirect()->route('testimonials.index');
     }
 
     /**
@@ -97,16 +97,18 @@ class TestimonialController extends Controller
         $validate = $request->validate([
             'name'=>'required|max:255',
             'job_title'=>'required|max:255',
-            'src'=>'required|image|max:6000',
+            'src'=>'image|max:6000',
             'text'=>'required|max:1000',
         ]);
 
         $testimonial->name = $request->name;
         $testimonial->job_title = $request->job_title;
         //for dev purposes
-        // Storage::delete('public/img/testimonial/'.$testimonial->src);
-        Storage::put('public/img/testimonial/', $request->file('src'));
-        $testimonial->src = $request->file('src')->hashName();
+        if ($request->file('src')) {
+            // Storage::delete('public/img/testimonial/'.$testimonial->src);
+            Storage::put('public/img/testimonial/', $request->file('src'));
+            $testimonial->src = $request->file('src')->hashName();
+        }
         $testimonial->text = $request->text;
         $testimonial->save();
 

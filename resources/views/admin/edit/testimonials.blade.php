@@ -12,10 +12,11 @@
             </ul>
         </div>
     @endif
-    <form action="/admin/testimonials/{{$testimonial->id}}" class="p-5 my-3 bg-primary" method="POST">
+    <form action="/admin/testimonials/{{$testimonial->id}}" class="p-5 my-3 bg-primary" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form-group">
+            <label for=""> <span class="text-success">Add a picture ONLY if you want to change the current one</span></label>
             <input type="file" class="form-control" name="src">
         </div>
         <div class="form-group">

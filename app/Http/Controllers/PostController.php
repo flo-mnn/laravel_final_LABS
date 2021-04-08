@@ -18,8 +18,8 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
-        $this->middleware('isWriter')->except('show','edit','update');
+        $this->middleware('auth')->except('show','search');
+        $this->middleware('isWriter')->except('show','edit','update','search');
         $this->middleware('isRealWriter')->only('edit','update');
     }
     /**
@@ -168,6 +168,7 @@ class PostController extends Controller
         $post->delete();
         // check if deleting in pivot table (onDelete('cascade')??) check
         // soft delete required by client ??? !!! check it out
+        return redirect()->route('posts.index');
     }
 
     public function search(Request $request){

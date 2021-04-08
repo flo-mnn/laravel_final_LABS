@@ -20,8 +20,10 @@ class JobTitleController extends Controller
      */
     public function index()
     {
-        return view('admin.job_title',[
+        return view('admin.job_titles',[
             'job_titles'=>JobTitle::all(),
+            'currentPage'=>'Job Titles',
+            'middlePage'=>null,
         ]);
     }
 
@@ -89,7 +91,7 @@ class JobTitleController extends Controller
             'job_title'=>'required|max:255'
         ]);
 
-        $jobTitle = $request->job_title;
+        $jobTitle->job_title = $request->job_title;
         $jobTitle->save();
 
         return redirect()->back();
@@ -103,11 +105,13 @@ class JobTitleController extends Controller
      */
     public function destroy(JobTitle $jobTitle)
     {
-        $usersImpacted = $jobTitle->users(); 
-        foreach ($usersImpacted as $user) {
-            $user->job_titles()->detach($jobTitle->id);
-        }
+        // $usersImpacted = $jobTitle->users(); 
+        // foreach ($usersImpacted as $user) {
+        //     $user->job_titles()->detach($jobTitle->id);
+        // }
         $jobTitle->delete();
+
+        return redirect()->back();
 
     }
 }

@@ -107,5 +107,7 @@ class SubjectController extends Controller
             $email->save();
         }
         $subject->delete();
+
+        return redirect()->back();
     }
 }

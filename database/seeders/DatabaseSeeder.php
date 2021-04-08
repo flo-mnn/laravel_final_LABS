@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             TagPostSeeder::class,
             AboutSeeder::class,
             FlaticonSeeder::class,
+            ContactEmailSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }
