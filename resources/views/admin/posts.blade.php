@@ -38,8 +38,7 @@
       @else
       @foreach ($posts->where('user_id',Auth::id())->sortByDesc('created_at') as $post)
       <tr class="{{!$post->validated ? 'bg-secondary' : null}}">
-        <th scope="row"></th>
-        <td>{{count($posts)-($loop->iteration -1)}}</td>
+        <th scope="row">{{count($posts)-($loop->iteration -1)}}</th>
         <td>{{$post->title}}</td>
         <td>{{$post->users->name}}</td>
         <td>{{$post->created_at->format('d M Y')}}</td>

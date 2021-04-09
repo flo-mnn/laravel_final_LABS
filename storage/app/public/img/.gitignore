@@ -6,8 +6,9 @@
 
 !.gitignore
 
-!*avatar/
+!*testimonial/
 !*blog/
 !*team/
+!*carousel/
 
 

@@ -55,7 +55,13 @@ class EmailController extends Controller
         $email->name = $request->name;
         $email->email = $request->email;
         $email->message = $request->message;
-        $email->subject_id = $request->subject_id;
+        if($request->subject_id){
+            $email->subject_id = $request->subject_id;
+        } else {
+            if (Subject::all()->isNotEmpty()) {
+                $email->subject_id = Subject::first();
+            }
+        }
         $email->save();
 
         Mail::to(ContactEmail::first()->email)->send(new ContactMail($email));

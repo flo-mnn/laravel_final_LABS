@@ -41,12 +41,19 @@
                             <input type="text" name="email" placeholder="Your email">
                         </div>
                         <div class="col-sm-12">
+                            @if (count($subjects) > 1)
                             <select name="subject_id">
                                 @foreach ($subjects as $subject)
                                 <option value="{{$subject->id}}">{{$subject->subject}}</option>
                                 @endforeach
                             </select>
-                            <textarea name="message" placeholder="Message"></textarea>
+                            @else
+                            @if ($subjects->isNotEmpty())
+                            <span class="w-100" style="padding: 17px 20px; background-color: #f6edfb;">{{$subjects[0]->subject}}</span>
+                            @endif
+                            @endif
+
+                            <textarea name="message" placeholder="Message" class="{{count($subjects) == 1? 'mt-5' : null}}"></textarea>
                             <button class="site-btn" type="submit">send</button>
                         </div>
                     </div>

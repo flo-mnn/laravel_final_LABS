@@ -15,7 +15,7 @@ class PostAutoValidateSeeder extends Seeder
     public function run()
     {
         DB::table('post_auto_validates')->insert([
-            'post_auto_validate'=>true,
+            'post_auto_validate'=>false,
         ]);
     }
 }
