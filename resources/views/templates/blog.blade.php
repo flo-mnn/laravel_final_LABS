@@ -47,7 +47,7 @@
 	@include('partials.header')
 	@include('partials.page_header')
     <!-- page section -->
-	<div class="page-section spad">
+	<div class="page-section spad position-relative">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-sm-7 blog-posts">
@@ -55,7 +55,7 @@
 
 				</div>
 				<!-- Sidebar area -->
-				<div class="col-md-4 col-sm-5 sidebar">
+				<div class="col-md-4 col-sm-5 sidebar" style="position: sticky !important; top: 0; height: fit-content;">
 					<!-- Single widget -->
 					<div class="widget-item">
 						<form action="{{ route('search') }}" class="search-form" method="GET">

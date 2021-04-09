@@ -15,8 +15,8 @@
     <form action="/admin/services" class="p-5 my-3 bg-success" method="POST">
         @csrf
         <div class="form-group">
-            <label for="icon"></label>
-            <select name="icon" id="icon" class="form-control">
+            <label for="icon"><i class="{{$flaticons[0]->icon}}" id="icon_preview" style="font-size: 30px;"></i></label>
+            <select name="icon" id="icon" class="form-control" onchange="changeFunction()">
                 @foreach ($flaticons as $flaticon)
                 <option value="{{$flaticon->icon}}">{{$flaticon->icon}}</option>
                 @endforeach
@@ -31,4 +31,14 @@
         <button type="submit" class="site-btn btn-2" ><i class="fas fa-check"></i></button>
     </form>
 </section>
+<script>
+    function changeFunction(){
+        let select = document.querySelector('select');
+        let i = document.querySelector('#icon_preview');
+        let oldClass = i.getAttribute('class');
+        console.log(i);
+        console.log(select.value);
+        i.classList.replace(oldClass,select.value);
+    }
+</script>
 @endsection
