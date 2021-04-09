@@ -12,7 +12,7 @@
             <a class="link mr-2">{{$post->users->name}}</a>
             <span>
                 @foreach ($post->tags->shuffle()->take(2) as $tag)
-                    <a href="/admin/tags/{{$tag->id}}" class="text-capitalize {{$loop->iteration == 1 ? 'link' : null}}">{{$tag->tag}}{{$loop->iteration == 2 ? null : ', '}}</a>
+                    <a href="/blog/tags/{{$tag->id}}" class="text-capitalize {{$loop->iteration == 1 ? 'link' : null}}">{{$tag->tag}}{{$loop->iteration == 2 ? null : ', '}}</a>
                 @endforeach
             </span>
             <a href="/blog/{{$post->id}}/#comments" class="link">{{count($post->comments)}} {{count($post->comments) >=2 ? 'Commments' : 'Comment'}}</a>

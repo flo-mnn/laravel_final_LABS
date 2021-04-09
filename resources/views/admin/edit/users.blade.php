@@ -81,6 +81,7 @@
             <textarea name="description" class="form-control" rows="3" placeholder="The new member's description">{{old('description')? old('description') : $user->description}}</textarea>
         </div>
         @can('user-edit-admin')
+        @if ($user->role_id != 1 || count($user->roles->users) > 1)
         <div class="form-group">
             <label>Role <span class="text-success">*</span></label>
             <select name="role_id" class="form-control">
@@ -103,6 +104,7 @@
             @endif
             </select>
         </div>
+        @endif
         @endcan
         <button type="submit" class="site-btn btn-1" ><i class="fas fa-check"></i></button>
     </form>

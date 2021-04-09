@@ -16141,6 +16141,18 @@ html body .back-office-main .sidebar {
   z-index: 40;
   position: fixed;
   overflow-y: auto;
+  /* width */
+  /* Track */
+  /* Handle */
+}
+html body .back-office-main .sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+html body .back-office-main .sidebar::-webkit-scrollbar-track {
+  background: #6c757d;
+}
+html body .back-office-main .sidebar::-webkit-scrollbar-thumb {
+  background: #8B64C4;
 }
 html body .back-office-main .sidebar button, html body .back-office-main .sidebar a {
   font-family: "Oswald", sans-serif;

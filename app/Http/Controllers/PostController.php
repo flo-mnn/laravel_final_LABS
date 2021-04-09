@@ -19,7 +19,8 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('show','search');
-        $this->middleware('isWriter')->except('show','edit','update','search');
+        $this->middleware('isWebmaster')->only('validation');
+        $this->middleware('isWriter')->except('show','edit','update','search','validation');
         $this->middleware('isRealWriter')->only('edit','update');
     }
     /**
@@ -77,7 +78,6 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->user_id = Auth::id();
         // many to many with tags //to test :
-        $post->save();
         $post->save();
         foreach($request->tag_id as $item) {
             $post->tags()->attach($item); 
@@ -164,10 +164,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        Storage::delete('public/img/blog/'.$post->src);
+        $post->comments()->delete();
+        // Storage::delete('public/img/blog/'.$post->src);
         $post->delete();
-        // check if deleting in pivot table (onDelete('cascade')??) check
-        // soft delete required by client ??? !!! check it out
         return redirect()->route('posts.index');
     }
 
@@ -193,5 +192,13 @@ class PostController extends Controller
             'footers'=>Footer::first(),
             'header_current'=>Navlink::find(3)->link,
         ]);
+    }
+
+    public function validation(Post $post) {
+
+        $post->validated = true;
+        $post->save();
+
+        return redirect()->back();
     }
 }

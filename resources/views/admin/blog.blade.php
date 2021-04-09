@@ -1,7 +1,29 @@
 @extends('templates.admin')
 
 @section('admin-content')
-<h1>BLOG OPTIONS</h1>
+<div class="row">
+
+    <div class="col-md-7">
+        <h1>BLOG OPTIONS</h1>
+    </div>
+    <div class="col-md-5 d-flex flex-column align-items-end">
+        <form action="/admin/post_auto_validates/{{$post_auto_validates->id}}" method="POST" id="switchForm">
+            @csrf
+            @method('PATCH')
+        <div class="custom-control custom-switch">
+                @if ($post_auto_validates->post_auto_validate)
+                <input onchange="switchOnOff()" checked type="checkbox" class="custom-control-input" id="validatePosts"   name="validate">
+                <label  class="custom-control-label" for="validatePosts">Switch off auto-validate for entering posts</label>
+                @else
+                <input onchange="switchOnOff()" type="checkbox" class="custom-control-input" id="validatePosts"   name="validate">
+                <label  class="custom-control-label" for="validatePosts">Automatically validate entering posts</label>
+                @endif
+                <button type="submit" id="validateSubmit" class="d-none">submit</button>
+        </div>
+        </form>
+    </div>
+</div>
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -106,4 +128,10 @@
         </tr>
     </tbody>
 </table>
+<script>
+    function switchOnOff(e) {
+        let btn = document.querySelector('#switchForm').querySelector('#validateSubmit');
+        btn.click();
+    }
+</script>
 @endsection

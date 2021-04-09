@@ -10,9 +10,27 @@
             @endforeach
         </ul>
     </div>
-@endif
-{{-- if time add post auto validate option --}}
-{{-- categories --}}
+    @endif
+    <div class="d-flex justify-content-between mt-5 mb-3">
+        <h3>Receiver Email</h3>
+    </div>
+    <div>
+
+        <form action="/admin/contact_emails/{{$contact_emails->id}}" method="POST">
+            @csrf
+            @method('PATCH')
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <input type="text" class="form-control" value="{{old('email')? old('email') : $contact_emails->email}}" name="email">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="site-btn btn-1"><i class="fas fa-check"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
 <div class="d-flex justify-content-between mt-5">
     <h3>Subjects</h3>
     <a href="#subjectCreate" class="btn btn-primary rounded-0 px-4"><i class="fas fa-plus"></i></a>

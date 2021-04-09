@@ -191,8 +191,10 @@
         <nav class="bo-nav navbar bg-dark px-5 fixed-top">
                 @if (Auth::check())
                 <div class="d-flex align-items-center">
+                  <a href="/admin/users/{{Auth::id()}}">
                     <div class="avatar" style="background-image: url('/storage/img/team/{{Auth::user()->src}}')"></div>
-                    <a href="" class="nav-link mx-3">{{ Auth::user()->name }}</a>
+                  </a>
+                    <a href="/admin/users/{{Auth::id()}}" class="nav-link mx-3">{{ Auth::user()->name }}</a>
                 </div>
                 @else
                 <img src="/storage/img/big-logo.png" alt="" width="111">

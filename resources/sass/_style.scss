@@ -10,6 +10,21 @@ html {
                 z-index: 40;
                 position: fixed;
                 overflow-y: auto;
+                /* width */
+                &::-webkit-scrollbar {
+                    width: 5px;
+                }
+                
+                /* Track */
+                &::-webkit-scrollbar-track {
+                    background: $secondary;
+                }
+                
+                /* Handle */
+                &::-webkit-scrollbar-thumb {
+                    background: $blue;
+                }
+                
                 button, a {
                     font-family: "Oswald", sans-serif;
                 };
@@ -60,6 +75,7 @@ html {
                 tbody tr:hover{
                     color: $blue;
                 }
+
             };
         }
     };

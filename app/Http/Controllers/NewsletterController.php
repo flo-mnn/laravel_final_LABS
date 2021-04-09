@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NewsletterMail;
+use App\Mail\NewsletterToAllMail;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class NewsletterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('send','index');
+        $this->middleware('isWebmaster')->only('send','index');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +24,8 @@ class NewsletterController extends Controller
     {
         return view('admin.newsletters',[
             'newsletters'=>Newsletter::all(),
+            'currentPage'=>'Send a Newsletter',
+            'middlePage'=>null,
         ]);
     }
 
@@ -93,6 +101,35 @@ class NewsletterController extends Controller
      */
     public function destroy(Newsletter $newsletter)
     {
-        $newsletter->delete();
+        // $newsletter->delete();
+
+    }
+
+    public function send(Request $request)
+    {
+        $content = [
+            'title'=>$request->title,
+            'content'=>$request->content,
+        ];
+        foreach (Newsletter::all() as $newsletter) {
+            Mail::to($newsletter->email)->send(new NewsletterToAllMail($content));
+        }
+
+        return redirect()->back();
+
+    }
+    public function unsubscribe(Request $request)
+    {
+        $todelete = Newsletter::where('email',$request->email)->get();
+
+        if ($todelete->isNotEmpty()) {
+            $todelete[0]->delete();
+            return ('You have unsubscribed from our newsletter');
+        } else {
+            return ('No record of this email address');
+        }
+        
+
+
     }
 }

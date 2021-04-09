@@ -41,6 +41,7 @@
              </div>
          </td>
          <td>
+             @if ($loop->iteration != 1)
              <div class="d-flex justify-content-end">
                  <form action="/admin/job_titles/{{$job_title->id}}" method="POST">
                     @csrf
@@ -48,6 +49,7 @@
                     <button type="submit" class="btn btn-dark text-danger rounded-0 px-4"><i class="fas fa-trash"></i></button>
                 </form>
              </div>
+             @endif
          </td>
        </tr>
         @endforeach

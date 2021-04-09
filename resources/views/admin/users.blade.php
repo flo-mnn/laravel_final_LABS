@@ -3,7 +3,9 @@
 @section('admin-content')
 <div class="d-flex justify-content-between">
     <h1>MANAGE USERS</h1>
+    @can('admin')
     <a href="/admin/users/create" class="btn btn-primary rounded-0 px-4"><i class="fas fa-plus"></i></a>
+    @endcan
 </div>
 <table class="table table-primary table-hover my-3">
     <thead>

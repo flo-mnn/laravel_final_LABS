@@ -69,6 +69,7 @@ class CategoryController extends Controller
     {
         $posts = $category->posts()
                     ->orderBy('created_at','DESC')
+                    ->where('validated',1)
                     ->paginate(3);
         $images = Image::all();
         $navlinks = Navlink::all();

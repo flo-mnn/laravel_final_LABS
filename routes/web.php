@@ -14,6 +14,7 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\NavlinkController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\PostAutoValidateController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
@@ -96,26 +97,16 @@ Route::get('/', function () {
     return view('home',[
         'abouts'=>About::all(),
         'carousels'=>Carousel::all(),
-        'categories'=>Category::all(),
-        'comments'=>Comment::all(),
         'contacts'=>Contact::first(),
-        // 'emails'=>Email::all(),
         'footers'=>Footer::first(),
         'images'=>Image::all(),
-        'job_titles'=>JobTitle::all(),
-        'maps'=>Map::first(),
         'navlinks'=>Navlink::all(),
-        // 'newsletters'=>Newsletter::all(),
         'offices'=>Office::first(),
-        'posts'=>Post::all(),
-        // 'roles'=>Role::all(),
         'services'=>Service::all(),
         'subjects'=>Subject::all(),
-        'tags'=>Tag::all(),
         'testimonials'=>Testimonial::all(),
         'title_carousel'=>Title::first(),
         'titles'=>$newTitles,
-        'users'=>User::all(),
         'ceo'=>$ceo,
         'members'=>$noCeos->random(2),
         'videos'=>Video::first(),
@@ -133,131 +124,44 @@ Route::get('/services', function () {
     $services = Service::orderBy('created_at','DESC')
                     ->paginate(9);
     return view('services',[
-        'abouts'=>About::all(),
-        'carousels'=>Carousel::all(),
-        'categories'=>Category::all(),
-        'comments'=>Comment::all(),
         'contacts'=>Contact::first(),
-        // 'emails'=>Email::all(),
         'footers'=>Footer::first(),
         'images'=>Image::all(),
-        'job_titles'=>JobTitle::all(),
-        'maps'=>Map::first(),
         'navlinks'=>Navlink::all(),
-        // 'newsletters'=>Newsletter::all(),
         'offices'=>Office::first(),
-        'posts'=>Post::all(),
-        // 'roles'=>Role::all(),
+        'posts'=>Post::where('validated',1)->get(),
         'services'=>$services,
         'subjects'=>Subject::all(),
-        'tags'=>Tag::all(),
-        'testimonials'=>Testimonial::all(),
         'titles'=>$newTitles,
-        'users'=>User::all(),
-        'videos'=>Video::first(),
         'header_current'=>Navlink::find(2)->link,
     ]);
 });
 Route::get('/blog', function () {
-    // $posts_ps = [];
-    // foreach (Post::all()->sortByDesc('created_at') as $post) {
-    //     dd($post->content);
-        
-        
-    //     $newTitle =  Str::of($str)->replace(']', '</span>'); 
-    //     array_push($newTitles, $newTitle);
-    //     $post_ps = preg_split('/\r\n|\r|\n/', $post->content);
-    //     array_push($posts_ps, $post_ps);
-    // };
-
     $posts = Post::orderBy('created_at','DESC')
+                    ->where('validated',1)
                     ->paginate(3);
 
     return view('blog',[
-        'abouts'=>About::all(),
-        'carousels'=>Carousel::all(),
         'categories'=>Category::all(),
         'comments'=>Comment::all(),
-        'contacts'=>Contact::first(),
-        // 'emails'=>Email::all(),
+        // 'contacts'=>Contact::first(),
         'footers'=>Footer::first(),
         'images'=>Image::all(),
-        'job_titles'=>JobTitle::all(),
-        'maps'=>Map::first(),
         'navlinks'=>Navlink::all(),
-        // 'newsletters'=>Newsletter::all(),
-        'offices'=>Office::first(),
         'posts'=>$posts,
-        // 'posts_ps'=>$posts_ps,
-        // 'roles'=>Role::all(),
-        'services'=>Service::all(),
-        'subjects'=>Subject::all(),
         'tags'=>Tag::all(),
-        'testimonials'=>Testimonial::all(),
-        'users'=>User::all(),
-        'videos'=>Video::first(),
-        'header_current'=>Navlink::find(3)->link,
-    ]);
-});
-Route::get('/blog-post', function () {
-    // $posts_ps = [];
-    // foreach (Post::all()->sortByDesc('created_at') as $post) {
-    //     $post_ps = preg_split('/\r\n|\r|\n/', $post->content);
-    //     array_push($posts_ps, $post_ps);
-    // };
-    return view('blog_post',[
-        'abouts'=>About::all(),
-        'carousels'=>Carousel::all(),
-        'categories'=>Category::all(),
-        'comments'=>Comment::all(),
-        'contacts'=>Contact::first(),
-        // 'emails'=>Email::all(),
-        'footers'=>Footer::first(),
-        'images'=>Image::all(),
-        'job_titles'=>JobTitle::all(),
-        'maps'=>Map::first(),
-        'navlinks'=>Navlink::all(),
-        // 'newsletters'=>Newsletter::all(),
-        'offices'=>Office::first(),
-        // test before show:
-        'post'=>Post::first(),
-        // 'post_ps'=>$posts_ps[0],
-        'posts'=>Post::all(),
-        // 'posts_ps'=>$posts_ps,
-
-        // 'roles'=>Role::all(),
-        'services'=>Service::all(),
-        'subjects'=>Subject::all(),
-        'tags'=>Tag::all(),
-        'testimonials'=>Testimonial::all(),
-        'users'=>User::all(),
-        'videos'=>Video::first(),
         'header_current'=>Navlink::find(3)->link,
     ]);
 });
 Route::get('/contact', function () {
     return view('contact',[
-        'abouts'=>About::all(),
-        'carousels'=>Carousel::all(),
-        'categories'=>Category::all(),
-        'comments'=>Comment::all(),
         'contacts'=>Contact::first(),
-        // 'emails'=>Email::all(),
         'footers'=>Footer::first(),
         'images'=>Image::all(),
-        'job_titles'=>JobTitle::all(),
         'maps'=>Map::first(),
         'navlinks'=>Navlink::all(),
-        // 'newsletters'=>Newsletter::all(),
         'offices'=>Office::first(),
-        'posts'=>Post::all(),
-        // 'roles'=>Role::all(),
-        'services'=>Service::all(),
         'subjects'=>Subject::all(),
-        'tags'=>Tag::all(),
-        'testimonials'=>Testimonial::all(),
-        'users'=>User::all(),
-        'videos'=>Video::first(),
         'header_current'=>Navlink::find(4)->link,
     ]);
 });
@@ -272,20 +176,35 @@ Route::get('/admin/blog',function(){
     return view('admin.blog',[
         'categories'=>Category::all(),
         'tags'=>Tag::all(),
-        'post_auto_validate'=>PostAutoValidate::first(),
+        'post_auto_validates'=>PostAutoValidate::find(1),
         'posts'=>Post::all(),
         'currentPage'=>'Blog Options',
         'middlePage'=>null,
     ]);
 })->name('admin.blog');
 
+Route::get('/unsubscribe',function(){
+    return view('unsubscribe',[
+        'contacts'=>Contact::first(),
+        'footers'=>Footer::first(),
+        'images'=>Image::all(),
+        'navlinks'=>Navlink::all(),
+        'offices'=>Office::first(),
+        'subjects'=>Subject::all(),
+    ]);
+});
 // customized routes from controllers
 
 Route::post('/admin/users/{user}/validate',[UserController::class,'validation']);
 Route::get('/admin/password/{user}',[UserController::class,'editPassword'])->name('users.password.edit');
 Route::post('/admin/password/{user}',[UserController::class,'password'])->name('users.password');
 Route::get('/blog/{post}',[PostController::class, 'show']);
+Route::get('/blog/categories/{category}',[CategoryController::class, 'show']);
+Route::get('/blog/tags/{tag}',[TagController::class, 'show']);
 Route::get('/search/', [PostController::class, 'search'])->name('search');
+Route::post('/admin/posts/{post}/validate',[PostController::class,'validation']);
+Route::post('/unsubscribe/complete',[NewsletterController::class, 'unsubscribe']);
+Route::post('/newsletters/send',[NewsletterController::class, 'send']);
 
 //resources
 Route::resource('/admin/abouts',AboutController::class);
@@ -301,7 +220,7 @@ Route::resource('/admin/maps',MapController::class);
 Route::resource('/admin/navlinks',NavlinkController::class);
 Route::resource('/admin/newsletters',NewsletterController::class);
 Route::resource('/admin/offices',OfficeController::class);
-Route::resource('/admin/post_auto_validates',PostAutoValidate::class);
+Route::resource('/admin/post_auto_validates',PostAutoValidateController::class);
 Route::resource('/admin/posts',PostController::class);
 Route::resource('/admin/roles',RoleController::class);
 Route::resource('/admin/services',ServiceController::class);

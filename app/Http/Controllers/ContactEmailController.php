@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PostAutoValidate;
+use App\Models\ContactEmail;
 use Illuminate\Http\Request;
 
-class PostAutoValidateController extends Controller
+class ContactEmailController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('isWebmaster');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -46,10 +41,10 @@ class PostAutoValidateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PostAutoValidate  $postAutoValidate
+     * @param  \App\Models\ContactEmail  $contactEmail
      * @return \Illuminate\Http\Response
      */
-    public function show(PostAutoValidate $postAutoValidate)
+    public function show(ContactEmail $contactEmail)
     {
         //
     }
@@ -57,10 +52,10 @@ class PostAutoValidateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PostAutoValidate  $postAutoValidate
+     * @param  \App\Models\ContactEmail  $contactEmail
      * @return \Illuminate\Http\Response
      */
-    public function edit(PostAutoValidate $postAutoValidate)
+    public function edit(ContactEmail $contactEmail)
     {
         //
     }
@@ -69,19 +64,13 @@ class PostAutoValidateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PostAutoValidate  $postAutoValidate
+     * @param  \App\Models\ContactEmail  $contactEmail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PostAutoValidate $postAutoValidate)
+    public function update(Request $request, ContactEmail $contactEmail)
     {
-        // dd($request->validate);
-        $postAutoValidate = PostAutoValidate::find(1);
-        if ($request->validate) {
-            $postAutoValidate->post_auto_validate = true;
-        } else {
-            $postAutoValidate->post_auto_validate = false;
-        }
-        $postAutoValidate->save();
+        $contactEmail->email = $request->email;
+        $contactEmail->save();
 
         return redirect()->back();
     }
@@ -89,10 +78,10 @@ class PostAutoValidateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PostAutoValidate  $postAutoValidate
+     * @param  \App\Models\ContactEmail  $contactEmail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostAutoValidate $postAutoValidate)
+    public function destroy(ContactEmail $contactEmail)
     {
         //
     }

@@ -68,7 +68,9 @@
 						<h2 class="widget-title">Categories</h2>
 						<ul>
 							@foreach ($categories as $category)
-							<li><a class="{{Str::contains(url()->current(),'categories') ? ($category_active->id == $category->id ? 'text-success' : null) : null}}" href="/admin/categories/{{$category->id}}">{{$category->category}}</a></li>
+							@if ($category->posts->where('validated',1)->isNotEmpty())
+							<li><a class="{{Str::contains(url()->current(),'categories') ? ($category_active->id == $category->id ? 'text-success' : null) : null}}" href="/blog/categories/{{$category->id}}">{{$category->category}}</a></li>
+							@endif
 							@endforeach
 						</ul>
 					</div>
@@ -78,7 +80,9 @@
 						<h2 class="widget-title">Tags</h2>
 						<ul class="tag">
 							@foreach ($tags as $tag)
-							<li class="{{Str::contains(url()->current(),'tags') ? ($tag_active->id == $tag->id ? 'bg-primary text-success' : null) : null}}"><a href="/admin/tags/{{$tag->id}}" class="{{Str::contains(url()->current(),'tags') ? ($tag_active->id == $tag->id ? 'text-success' : null) : null}}">{{$tag->tag}}</a></li>
+							@if ($tag->posts->where('validated',1)->isNotEmpty())
+							<li class="{{Str::contains(url()->current(),'tags') ? ($tag_active->id == $tag->id ? 'bg-primary text-success' : null) : null}}"><a href="/blog/tags/{{$tag->id}}" class="{{Str::contains(url()->current(),'tags') ? ($tag_active->id == $tag->id ? 'text-success' : null) : null}}">{{$tag->tag}}</a></li>
+							@endif
 							@endforeach
 						</ul>
 					</div>

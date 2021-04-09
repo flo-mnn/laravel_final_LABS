@@ -23,6 +23,7 @@ class EmailController extends Controller
             'currentPage'=>'Contact Form',
             'middlePage'=>null,
             'subjects'=>Subject::all(),
+            'contact_emails'=>ContactEmail::first(),
         ]);
     }
 

@@ -19,22 +19,35 @@
     <tbody>
       @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
       @foreach ($posts->sortByDesc('created_at') as $post)
-      <tr>
+      <tr class="{{!$post->validated ? 'bg-secondary' : null}}">
         <th scope="row">{{count($posts)-($loop->iteration -1)}}</th>
         <td>{{$post->title}}</td>
         <td>{{$post->users->name}}</td>
         <td>{{$post->created_at->format('d M Y')}}</td>
+        <td>
+          @if (!$post->validated)
+          <form action="/admin/posts/{{$post->id}}/validate" method="POST">
+              @csrf
+              <button type="submit" class="btn btn-light text-primary font-weight-bold rounded-0 px-4"><i class="fas fa-book-reader"></i></button>
+              </form>
+          @endif
+        </td>
         <td><a href="/blog/{{$post->id}}" class="btn btn-dark text-success font-weight-bold rounded-0 px-4"><i class="fab fa-readme"></i></a></td>
       </tr>
       @endforeach
       @else
       @foreach ($posts->where('user_id',Auth::id())->sortByDesc('created_at') as $post)
-      <tr>
+      <tr class="{{!$post->validated ? 'bg-secondary' : null}}">
         <th scope="row"></th>
         <td>{{count($posts)-($loop->iteration -1)}}</td>
         <td>{{$post->title}}</td>
         <td>{{$post->users->name}}</td>
         <td>{{$post->created_at->format('d M Y')}}</td>
+        <td>
+          @if (!$post->validated)
+          under validation
+          @endif
+        </td>
         <td><a href="/blog/{{$post->id}}" class="btn btn-dark text-success font-weight-bold rounded-0 px-4"><i class="fab fa-readme"></i></a></td>
       </tr>
       @endforeach
