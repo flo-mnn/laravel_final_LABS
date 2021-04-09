@@ -231,7 +231,7 @@
                 @endguest
                 </ul>
         </nav>
-        @if (!Str::contains(Route::getCurrentRoute()->uri(),'create') && !Str::contains(Route::getCurrentRoute()->uri(),'edit'))
+        @if (!Str::contains(Route::getCurrentRoute()->uri(),'create') && !Str::contains(Route::getCurrentRoute()->uri(),'edit') && Route::getCurrentRoute()->uri() != "admin");
             <!-- Page header -->
         <div class="page-top-section bg-success">
             <div class="overlay"></div>
@@ -239,7 +239,7 @@
                 <div class="page-info mr-5">
                     <h2 class="text-capitalize text-dark">{{$currentPage}}</h2>
                     <div class="page-links">
-                        <a href="/admin" class="text-capitalize text-dark">Admin</a>
+                        <a href="/admin" class="text-capitalize text-dark">Dashboard</a>
                         @if ($middlePage)
                         <a href="/" class="text-capitalize text-dark">{{$middlePage}}</a>
                         @endif

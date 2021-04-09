@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
             <label>Job Title <span class="text-primary">*</span></label>
-            <select name="job_title_id[]" class="form-control">
+            <select {{$polyvalent ? 'multiple' : null}} name="job_title_id[]" class="form-control">
                 @if (old('job_title_id'))
                 @foreach ($job_titles as $job_title)
                 @if (in_array($job_title->id, old('job_title_id')))

@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
                 'description'=>"Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique.",
                 'role_id'=>1,
                 'validated'=>true,
+                'created_at'=>now(),
             ],
             [
                 'name'=>"Johanna Smith",
@@ -33,6 +34,7 @@ class UserSeeder extends Seeder
                 'description'=>"Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique.",
                 'role_id'=>2,
                 'validated'=>true,
+                'created_at'=>now(),
             ],
             [
                 'name'=>"Johan Smith",
@@ -42,6 +44,7 @@ class UserSeeder extends Seeder
                 'description'=>"Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique.",
                 'role_id'=>3,
                 'validated'=>true,
+                'created_at'=>now(),
             ],
             [
                 'name'=>"Member",
@@ -51,6 +54,7 @@ class UserSeeder extends Seeder
                 'description'=>"Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique.",
                 'role_id'=>4,
                 'validated'=>true,
+                'created_at'=>now(),
             ],
         ]);
     }

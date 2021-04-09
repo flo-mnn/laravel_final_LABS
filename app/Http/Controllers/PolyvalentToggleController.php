@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PostAutoValidate;
+use App\Models\PolyvalentToggle;
 use Illuminate\Http\Request;
 
-class PostAutoValidateController extends Controller
+class PolyvalentToggleController extends Controller
 {
     public function __construct()
     {
@@ -46,10 +46,10 @@ class PostAutoValidateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PostAutoValidate  $postAutoValidate
+     * @param  \App\Models\PolyvalentToggle  $polyvalentToggle
      * @return \Illuminate\Http\Response
      */
-    public function show(PostAutoValidate $postAutoValidate)
+    public function show(PolyvalentToggle $polyvalentToggle)
     {
         //
     }
@@ -57,10 +57,10 @@ class PostAutoValidateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PostAutoValidate  $postAutoValidate
+     * @param  \App\Models\PolyvalentToggle  $polyvalentToggle
      * @return \Illuminate\Http\Response
      */
-    public function edit(PostAutoValidate $postAutoValidate)
+    public function edit(PolyvalentToggle $polyvalentToggle)
     {
         //
     }
@@ -69,18 +69,18 @@ class PostAutoValidateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PostAutoValidate  $postAutoValidate
+     * @param  \App\Models\PolyvalentToggle  $polyvalentToggle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PostAutoValidate $postAutoValidate)
+    public function update(Request $request, PolyvalentToggle $polyvalentToggle)
     {
-        $postAutoValidate = PostAutoValidate::find(1);
-        if ($request->validate) {
-            $postAutoValidate->post_auto_validate = true;
+        $polyvalentToggle = PolyvalentToggle::find(1);
+        if ($request->toggle) {
+            $polyvalentToggle->toggle = true;
         } else {
-            $postAutoValidate->post_auto_validate = false;
+            $polyvalentToggle->toggle = false;
         }
-        $postAutoValidate->save();
+        $polyvalentToggle->save();
 
         return redirect()->back();
     }
@@ -88,10 +88,10 @@ class PostAutoValidateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PostAutoValidate  $postAutoValidate
+     * @param  \App\Models\PolyvalentToggle  $polyvalentToggle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostAutoValidate $postAutoValidate)
+    public function destroy(PolyvalentToggle $polyvalentToggle)
     {
         //
     }

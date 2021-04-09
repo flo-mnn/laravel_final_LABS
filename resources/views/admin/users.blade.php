@@ -7,6 +7,24 @@
     <a href="/admin/users/create" class="btn btn-primary rounded-0 px-4"><i class="fas fa-plus"></i></a>
     @endcan
 </div>
+@can('webmaster')
+<div class="row justify-content-end my-3">
+  <form action="/admin/polyvalent_toggles/{{$polyvalent->id}}" method="POST" id="switchForm">
+      @csrf
+      @method('PATCH')
+  <div class="custom-control custom-switch">
+          @if ($polyvalent->toggle)
+          <input onchange="switchOnOff()" checked type="checkbox" class="custom-control-input" id="togglePolyvalent"   name="toggle">
+          <label  class="custom-control-label" for="togglePolyvalent">I want my team members to have only 1 job title</label>
+          @else
+          <input onchange="switchOnOff()" type="checkbox" class="custom-control-input" id="togglePolyvalent"   name="toggle">
+          <label  class="custom-control-label" for="togglePolyvalent">I want my team members to be polyvalent and have multiple job titles</label>
+          @endif
+          <button type="submit" id="validateSubmit" class="d-none">submit</button>
+  </div>
+  </form>
+</div>
+@endcan
 <table class="table table-primary table-hover my-3">
     <thead>
       <tr>
@@ -60,4 +78,10 @@
       @endforeach
     </tbody>
 </table>
+<script>
+  function switchOnOff(e) {
+      let btn = document.querySelector('#switchForm').querySelector('#validateSubmit');
+      btn.click();
+  }
+</script>
 @endsection

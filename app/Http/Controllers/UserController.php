@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\MembershipMail;
 use App\Mail\RegisteredMail;
 use App\Models\JobTitle;
+use App\Models\PolyvalentToggle;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,6 +35,7 @@ class UserController extends Controller
             'currentPage'=>'Our Team',
             'middlePage'=>null,
             'job_titles'=>JobTitle::all(),
+            'polyvalent'=>PolyvalentToggle::first(),
         ]);
     }
 
@@ -47,6 +49,7 @@ class UserController extends Controller
         return view('admin.create.users',[
             'roles'=>Role::all(),
             'job_titles'=>JobTitle::all(),
+            'polyvalent'=>PolyvalentToggle::first()->toggle,
         ]);
     }
 
@@ -121,6 +124,7 @@ class UserController extends Controller
             'roles'=>Role::all(),
             'job_titles'=>JobTitle::all(),
             'user'=>$user,
+            'polyvalent'=>PolyvalentToggle::first()->toggle,
         ]);
     }
 

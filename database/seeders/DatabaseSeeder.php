@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             AboutSeeder::class,
             FlaticonSeeder::class,
             ContactEmailSeeder::class,
+            PolyvalentToggleSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }

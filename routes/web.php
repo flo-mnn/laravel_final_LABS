@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactEmailController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\ImageController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\NavlinkController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\PolyvalentToggleController;
 use App\Http\Controllers\PostAutoValidateController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
@@ -170,6 +173,7 @@ Route::get('/contact', function () {
 Auth::routes();
 
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
+Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
 
 // additionnal routes
 Route::get('/admin/blog',function(){
@@ -236,3 +240,5 @@ Route::resource('/admin/testimonials',TestimonialController::class);
 Route::resource('/admin/titles',TitleController::class);
 Route::resource('/admin/users',UserController::class);
 Route::resource('/admin/videos',VideoController::class);
+Route::resource('/admin/contact_emails',ContactEmailController::class);
+Route::resource('/admin/polyvalent_toggles',PolyvalentToggleController::class);
