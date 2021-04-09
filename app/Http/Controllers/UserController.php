@@ -149,7 +149,7 @@ class UserController extends Controller
             $user->email = $request->email;
             }
         if($request->file('src')){
-            // Storage::delete('public/img/team'.$user->src);
+            Storage::delete('public/img/team'.$user->src);
             Storage::put('public/img/team',$request->file('src'));
             $user->src = $request->file('src')->hashName();
         };

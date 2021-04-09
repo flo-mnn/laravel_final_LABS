@@ -82,7 +82,7 @@ class VideoController extends Controller
             'src'=>'required|image|max:6000'
         ]);
         $video->href = $request->href;
-        // Storage::delete('public/img/'.$video->src);
+        Storage::delete('public/img/'.$video->src);
         Storage::put('public/img/',$request->file('src'));
         $video->src = $request->file('src')->hashName();
         $video->save();

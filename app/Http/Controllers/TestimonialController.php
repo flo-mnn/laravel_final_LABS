@@ -105,7 +105,7 @@ class TestimonialController extends Controller
         $testimonial->job_title = $request->job_title;
         //for dev purposes
         if ($request->file('src')) {
-            // Storage::delete('public/img/testimonial/'.$testimonial->src);
+            Storage::delete('public/img/testimonial/'.$testimonial->src);
             Storage::put('public/img/testimonial/', $request->file('src'));
             $testimonial->src = $request->file('src')->hashName();
         }
@@ -124,7 +124,7 @@ class TestimonialController extends Controller
     public function destroy(Testimonial $testimonial)
     {
         // for dev purpose
-        // Storage::delete('public/img/testimonial/'.$testimonial->src);
+        Storage::delete('public/img/testimonial/'.$testimonial->src);
         $testimonial->delete();
 
         return redirect()->route('testimonials.index');

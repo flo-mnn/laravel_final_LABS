@@ -144,7 +144,7 @@ class PostController extends Controller
         $post->content = '<p>'.$paragContent.'</p>';
         $post->validated = PostAutoValidate::first()->post_auto_validate;
         if($request->file('src')){
-            // Storage::delete('public/img/blog/'.$post->src);
+            Storage::delete('public/img/blog/'.$post->src);
             Storage::put('public/img/blog/',$request->file('src'));
             $post->src = $request->file('src')->hashName();
         }
@@ -165,7 +165,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->comments()->delete();
-        // Storage::delete('public/img/blog/'.$post->src);
         $post->delete();
         return redirect()->route('posts.index');
     }
@@ -220,6 +219,9 @@ class PostController extends Controller
 
     public function empty()
     {
+        foreach (Post::onlyTrashed()->get() as $post) {
+            Storage::delete('public/img/blog/'.$post->src);
+        };
         Post::onlyTrashed()
             ->forceDelete();
         

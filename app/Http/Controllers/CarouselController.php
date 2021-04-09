@@ -94,7 +94,7 @@ class CarouselController extends Controller
             'src'=> 'required|image'
         ]);
 
-        // Storage::delete('public/img/carousel/'.$carousel->src);
+        Storage::delete('public/img/carousel/'.$carousel->src);
         Storage::put('public/img/carousel/',$request->file('src'));
         $carousel->src = $request->file('src')->hashName();
         $carousel->save();
@@ -110,7 +110,7 @@ class CarouselController extends Controller
      */
     public function destroy(Carousel $carousel)
     {
-        // Storage::delete('public/img/carousel/'.$carousel->src);
+        Storage::delete('public/img/carousel/'.$carousel->src);
         $carousel->delete();
 
         return redirect()->route('carousels.index');
