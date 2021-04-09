@@ -20,12 +20,15 @@
             <input type="file" class="form-control" name="src">
         </div>
         <div class="form-group">
+            <label for=""><span class="text-success">*</span></label>
             <input type="text" class="form-control" value="{{old('name') ? old('name') : $testimonial->name}}" placeholder="Their name" name="name">
         </div>
         <div class="form-group">
+            <label for=""><span class="text-success">*</span></label>
             <input type="text" class="form-control" value="{{old('job_title') ? old('job_title') : $testimonial->job_title}}" placeholder="Their Job Title" name="job_title">
         </div>
         <div class="form-group">
+            <label for=""><span class="text-success">*</span></label>
             <textarea type="text" class="form-control" rows="5" placeholder="Their review" name="text">{{old('text') ? old('text') : $testimonial->text}}</textarea>
         </div>
         <button type="submit" class="site-btn btn-1" ><i class="fas fa-check"></i></button>

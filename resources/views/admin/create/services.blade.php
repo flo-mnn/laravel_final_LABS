@@ -12,10 +12,10 @@
             </ul>
         </div>
     @endif
-    <form action="/admin/services" class="p-5 my-3 bg-success" method="POST">
+    <form action="/admin/services" class="p-5 my-3 bg-success text-primary" method="POST">
         @csrf
         <div class="form-group">
-            <label for="icon"><i class="{{$flaticons[0]->icon}}" id="icon_preview" style="font-size: 30px;"></i></label>
+            <label for="icon"><i class="{{$flaticons[0]->icon}}" id="icon_preview" style="font-size: 30px;"></i>*</label>
             <select name="icon" id="icon" class="form-control" onchange="changeFunction()">
                 @foreach ($flaticons as $flaticon)
                 <option value="{{$flaticon->icon}}">{{$flaticon->icon}}</option>
@@ -23,9 +23,11 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="">*</label>
             <input type="text" class="form-control" value="{{old('title')}}" placeholder="Your Service Title" name="title">
         </div>
         <div class="form-group">
+            <label for="">*</label>
             <textarea type="text" class="form-control" rows="5" placeholder="Your Service Description" name="text">{{old('text')}}</textarea>
         </div>
         <button type="submit" class="site-btn btn-2" ><i class="fas fa-check"></i></button>

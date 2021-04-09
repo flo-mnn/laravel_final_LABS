@@ -16,7 +16,7 @@
         @csrf
         @method('PATCH')
         <div class="form-group">
-            <label for="icon"><i class="{{$service->icon}}" id="icon_preview" style="font-size: 30px;"></i></label>
+            <label for="icon"><i class="{{$service->icon}}" id="icon_preview" style="font-size: 30px;"></i><span class="text-success">*</span></label>
             <select name="icon" id="icon" class="form-control" onchange="changeFunction()">
                 @foreach ($flaticons as $flaticon)
                 @if ($flaticon->icon == $service->icon)
@@ -28,9 +28,11 @@
             </select>
         </div>
         <div class="form-group">
+            <label for=""><span class="text-success">*</span></label>
             <input type="text" class="form-control" value="{{old('title')? old('title') : $service->title}}" placeholder="Your Service Title" name="title">
         </div>
         <div class="form-group">
+            <label for=""><span class="text-success">*</span></label>
             <textarea type="text" class="form-control" rows="5" placeholder="Your Service Description" name="text">{{old('text')? old('text') : $service->text}}</textarea>
         </div>
         <button type="submit" class="site-btn btn-1" ><i class="fas fa-check"></i></button>

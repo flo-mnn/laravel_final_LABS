@@ -16,9 +16,11 @@
         @csrf
         @method('PATCH')
         <div class="form-group">
+            <label for=""><span class="text-success">*</span></label>
             <input type="text" class="form-control" value="{{old('title') ? old('title') : $post->title}}" placeholder="Your Blog Post Title" name="title">
         </div>
         <div class="form-group">
+            <label for=""><span class="text-success">*</span></label>
             <textarea type="text" class="form-control" rows="20" placeholder="Write your blog post here" name="content">{{old('content') ? old('content') : $content}}</textarea>
         </div>
         <div class="form-group">
