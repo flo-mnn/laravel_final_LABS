@@ -3,6 +3,7 @@
 @section('admin-content')
 <section>
     <h1 class="text-primary text-uppercase">Write a newsletter</h1>
+    <span class="text-dark">{{count($newsletters)}} subscribers</span>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

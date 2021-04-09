@@ -201,4 +201,28 @@ class PostController extends Controller
 
         return redirect()->back();
     }
+
+    public function archives() 
+    {
+        return view('admin.blog_archives',[
+            'archives'=>Post::onlyTrashed()->get(),
+            'currentPage'=>'Posts Archives',
+            'middlePage'=>null,
+        ]);
+    }
+
+    public function restorePost($id)
+    {
+        $post =Post::withTrashed()->find($id); 
+        $post->restore();
+        return redirect()->back();
+    }
+
+    public function empty()
+    {
+        Post::onlyTrashed()
+            ->forceDelete();
+        
+        return redirect()->back();
+    }
 }

@@ -105,6 +105,8 @@
                           <a href="/admin/comments/" class="side-link">Manage Blog Comments</a>
                           <div class="side-separator my-3"></div>
                           <a href="/admin/blog" class="side-link">Manage Blog Options</a>
+                          <div class="side-separator my-3"></div>
+                          <a href="/admin/posts/archives" class="side-link">Manage Blog Archives</a>
                           @endcan
                         </div>
                       </div>

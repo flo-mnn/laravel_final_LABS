@@ -205,6 +205,12 @@ Route::get('/search/', [PostController::class, 'search'])->name('search');
 Route::post('/admin/posts/{post}/validate',[PostController::class,'validation']);
 Route::post('/unsubscribe/complete',[NewsletterController::class, 'unsubscribe']);
 Route::post('/newsletters/send',[NewsletterController::class, 'send']);
+Route::get('/admin/posts/archives',[PostController::class, 'archives']);
+Route::post('/admin/posts/archives/{id}/restore',[PostController::class, 'restorePost']);
+Route::post('/admin/posts/archives/empty',[PostController::class, 'empty']);
+
+
+
 
 //resources
 Route::resource('/admin/abouts',AboutController::class);

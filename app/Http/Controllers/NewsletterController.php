@@ -115,7 +115,7 @@ class NewsletterController extends Controller
             Mail::to($newsletter->email)->send(new NewsletterToAllMail($content));
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('status','Newsletter sent to all');
 
     }
     public function unsubscribe(Request $request)
