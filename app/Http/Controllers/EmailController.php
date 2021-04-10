@@ -56,7 +56,12 @@ class EmailController extends Controller
         $email->email = $request->email;
         $email->message = $request->message;
         if($request->subject_id){
-            $email->subject_id = $request->subject_id;
+            if (Subject::all()->contains($request->subject_id)) {
+                $email->subject_id = $request->subject_id;
+            } else {
+                return redirect()->back();
+            };
+            
         } else {
             if (Subject::all()->isNotEmpty()) {
                 $email->subject_id = Subject::first();

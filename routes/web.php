@@ -64,6 +64,10 @@ use Illuminate\Support\Str;
 |
 */
 
+// *
+Route::fallback(function () {
+    return  redirect()->back();
+    });
 // main site pages (Home, Services, Blog, Blog-post, Contact)
 Route::get('/', function () {
     // find ceo among users
@@ -110,6 +114,7 @@ Route::get('/', function () {
         'testimonials'=>Testimonial::all(),
         'title_carousel'=>Title::first(),
         'titles'=>$newTitles,
+        'title'=>Title::all(),
         'ceo'=>$ceo,
         'members'=>$noCeos->random(2),
         'videos'=>Video::first(),
@@ -146,8 +151,6 @@ Route::get('/blog', function () {
 
     return view('blog',[
         'categories'=>Category::all(),
-        'comments'=>Comment::all(),
-        // 'contacts'=>Contact::first(),
         'footers'=>Footer::first(),
         'images'=>Image::all(),
         'navlinks'=>Navlink::all(),
@@ -207,11 +210,14 @@ Route::get('/blog/categories/{category}',[CategoryController::class, 'show']);
 Route::get('/blog/tags/{tag}',[TagController::class, 'show']);
 Route::get('/search/', [PostController::class, 'search'])->name('search');
 Route::post('/admin/posts/{post}/validate',[PostController::class,'validation']);
+Route::post('/admin/comments/{comment}/validate',[CommentController::class,'validation']);
+Route::post('/admin/comments/validate/all',[CommentController::class,'validationAll'])->name('comments.validate.all');
 Route::post('/unsubscribe/complete',[NewsletterController::class, 'unsubscribe']);
 Route::post('/newsletters/send',[NewsletterController::class, 'send']);
 Route::get('/admin/posts/archives',[PostController::class, 'archives']);
 Route::post('/admin/posts/archives/{id}/restore',[PostController::class, 'restorePost']);
 Route::post('/admin/posts/archives/empty',[PostController::class, 'empty']);
+Route::post('/admin/titles/newsletter',[TitleController::class,'newsletter']);
 
 
 

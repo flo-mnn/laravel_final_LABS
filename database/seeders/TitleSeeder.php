@@ -36,6 +36,12 @@ class TitleSeeder extends Seeder
             [
                 'title'=>'Get in [the lab] and discover the world'
             ],
+            [
+                'title'=>'Are you ready to stand out?'
+            ],
+            [
+                'title'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est.'
+            ],
         ]);
     }
 }

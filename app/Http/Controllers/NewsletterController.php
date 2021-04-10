@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\NewsletterMail;
 use App\Mail\NewsletterToAllMail;
 use App\Models\Newsletter;
+use App\Models\Title;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -26,6 +27,7 @@ class NewsletterController extends Controller
             'newsletters'=>Newsletter::all(),
             'currentPage'=>'Send a Newsletter',
             'middlePage'=>null,
+            'titles'=>Title::all(),
         ]);
     }
 
@@ -56,7 +58,7 @@ class NewsletterController extends Controller
         $newsletter->save();
 
         Mail::to($newsletter->email)->send(new NewsletterMail($newsletter));
-        return redirect()->back()->with('newsletter','You have subscribed to our newsletter');
+        return redirect()->back()->with('newsletter','Thank you for subscribing to our newsletter');
     }
 
     /**

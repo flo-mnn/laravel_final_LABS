@@ -2,7 +2,22 @@
 
 @section('admin-content')
 <section>
-    <h1 class="text-primary text-uppercase">Write a newsletter</h1>
+    <div class="p-5 bg-primary">
+        <h1 class="text-success text-uppercase mb-4">Home Page Newsletter Text</h1>
+        <div>
+            <form action="/admin/titles/newsletter" method="POST">
+            @csrf
+                <div class="form-group">
+                    <input type="text" class="form-control" name="title" value="{{old('title') ? old('title') : $titles[7]->title}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="subtitle" value="{{old('subtitle') ? old('subtitle') : $titles[8]->title}}">
+                </div>
+            <button type="submit" class="site-btn btn-1"><i class="fas fa-check"></i></button>
+            </form>
+        </div>
+    </div>
+    <h1 class="text-primary text-uppercase mt-5">Write a newsletter</h1>
     <span class="text-dark">{{count($newsletters)}} subscribers</span>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -18,6 +33,7 @@
         {{ session('status') }}
     </div>
     @endif
+
     <form action="/newsletters/send" class="p-5 my-3 bg-success" method="POST">
         @csrf
         <div class="form-group">

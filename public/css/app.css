@@ -16197,3 +16197,31 @@ html body .back-office-main .main .bo-nav li.nav-item.dropdown {
 html body .back-office-main .main tbody tr:hover {
   color: #8B64C4;
 }
+
+@media screen and (max-width: 767px) {
+  .nav-title {
+    display: none;
+  }
+
+  .side-span {
+    display: none;
+  }
+
+  .back-office-main .sidebar {
+    width: -webkit-fit-content !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+    height: 100vh !important;
+    position: sticky;
+    top: 0;
+  }
+  .back-office-main .sidebar .collapse .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .back-office-main .main {
+    width: auto !important;
+    margin-left: 30px;
+  }
+}

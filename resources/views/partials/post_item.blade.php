@@ -9,7 +9,7 @@
     <div class="post-content">
         <h2 class="post-title">{{$post->title}}</h2>
         <div class="post-meta">
-            <a class="link mr-2">{{$post->users->name}}</a>
+            <a class="link mr-2" href="/blog/categories/{{$post->categories->id}}">{{$post->categories->category}}</a>
             <span>
                 @foreach ($post->tags->shuffle()->take(2) as $tag)
                     <a href="/blog/tags/{{$tag->id}}" class="text-capitalize {{$loop->iteration == 1 ? 'link' : null}}">{{$tag->tag}}{{$loop->iteration == 2 ? null : ', '}}</a>

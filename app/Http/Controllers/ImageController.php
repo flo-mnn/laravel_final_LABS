@@ -90,7 +90,7 @@ class ImageController extends Controller
             'src'=> 'required|image'
         ]);
 
-        Storage::delete('public/img/carousel/'.$image->src);
+        // Storage::delete('public/img/carousel/'.$image->src);
         Storage::put('public/img/',$request->file('src'));
         $image->src = $request->file('src')->hashName();
         $image->save();

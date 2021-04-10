@@ -24,7 +24,7 @@
     <div class="post-content">
         <h2 class="post-title">{{$post->title}}</h2>
         <div class="post-meta">
-            <a class="link mr-2">{{$post->users->name}}</a>
+            <a class="link mr-2" href="/blog/categories/{{$post->categories->id}}">{{$post->categories->category}}</a>
             <span>
                 @foreach ($post->tags as $tag)
                     <a href="/blog/tags/{{$tag->id}}" class="text-capitalize {{$loop->iteration == 1 ? 'link' : null}}">{{$tag->tag}}{{$loop->iteration == count($post->tags) ? null : ', '}}</a>
@@ -48,7 +48,19 @@
     <div class="comments" id="comments">
         <h2>Comments ({{count($post->comments)}})</h2>
         <ul class="comment-list">
-            @foreach ($post->comments->sortByDesc('created_at') as $comment)
+            @if (session('status'))
+            <li class="bg-success p-4">
+                <div class="avatar">
+                </div>
+                <div class="commetn-text">
+                    <div class="d-flex">
+                        <h3>Thank You for your comment!</h3>
+                    </div>
+                    <p>Your comment is under approval and will soon be displayed here</p>
+                </div>
+            </li>
+            @endif
+            @foreach ($post->comments->where('validated',1)->sortByDesc('created_at') as $comment)
             <li>
                 @if ($comment->user_id)
                 <div class="avatar" style="background-image: url('/storage/img/team/{{$comment->users->src}}')">

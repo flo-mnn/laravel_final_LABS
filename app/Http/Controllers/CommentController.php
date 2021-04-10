@@ -12,7 +12,7 @@ class CommentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('isWebmaster')->only('destroy','index');
+        $this->middleware('isWebmaster')->only('destroy','index','validation','validateAll');
     }
     /**
      * Display a listing of the resource.
@@ -56,6 +56,7 @@ class CommentController extends Controller
         $comment->comment = $request->comment;
         if (Auth::check()) {
             $comment->user_id = Auth::id();
+            $comment->validated = true;
         } else {
             $alreadyCommented = CommentUser::all()->where('email',$request->email);
             if ($alreadyCommented->isNotEmpty()) {
@@ -71,7 +72,7 @@ class CommentController extends Controller
         }
         $comment->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('status','Comment sent');
     }
 
     /**
@@ -117,6 +118,24 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         $comment->delete();
+
+        return redirect()->back();
+    }
+
+    public function validation(Comment $comment)
+    {
+        $comment->validated = true;
+        $comment->save();
+        
+        return redirect()->back();
+    }
+    
+    public function validationAll()
+    {
+        foreach (Comment::where('validated',0)->get() as $comment) {
+            $comment->validated = true;
+            $comment->save();
+        }
 
         return redirect()->back();
     }

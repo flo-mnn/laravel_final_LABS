@@ -210,7 +210,8 @@ function accordions() {
 		if (!$this.hasClass('active')) {
 			$this.addClass('active');
 		}
-		e.preventDefault();
+		// commented for "readmore" a href in search accordions
+		// e.preventDefault();
 	});
 }
 

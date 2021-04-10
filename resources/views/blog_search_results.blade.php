@@ -6,12 +6,15 @@
         @foreach ($posts as $post)
         <div class="panel">
             <div class="panel-heading">
-                <h4 class="panel-title">"{{$post->title}}" - by <span class="text-muted">{{$post->users->name}}</span> ({{$post->created_at->format('d M Y')}})</h4>
-                <a data-toggle="collapse" data-parent="#accordion" href="#accordion{{$loop->iteration}}"></a>
+                <a href="/blog/{{$post->id}}" target="_blank"><h4 class="panel-title text-light">"{{$post->title}}" - by <span class="text-muted">{{$post->users->name}}</span> ({{$post->created_at->format('d M Y')}})</h4></a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#accordion{{$loop->iteration}}" class="accordion"></a>
             </div>
             <div id="accordion{{$loop->iteration}}" class="panel-collapse collapse">
                 <div class="panel-body">
                     {!!Str::before($post->content,'</p>')!!}</p>
+                    <div class="d-flex justify-content-end">
+                        <a href="/blog/{{$post->id}}" class="read-more mt-2">read more</a>
+                    </div>
                 </div>
             </div>
         </div>

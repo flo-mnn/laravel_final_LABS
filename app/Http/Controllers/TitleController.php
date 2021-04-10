@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Navlink;
 use App\Models\Title;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class TitleController extends Controller
             'currentPage'=>"Navigation & Titles",
             'middlePage'=>null,
             'navlinks'=>Navlink::all(),
+            'images'=>Image::all(),
         ]);
     }
 
@@ -99,4 +101,22 @@ class TitleController extends Controller
     {
         //
     }
+
+    public function newsletter(Request $request)
+    {
+        $validate = $request->validate([
+            'title'=>'required|max:500',
+            'subtitle'=>'required|max:500'
+        ]);
+        $title = Title::find(8);
+        $title->title = $request->title;
+        $title->save();
+
+        $subtitle = Title::find(9);
+        $subtitle->title = $request->subtitle;
+        $subtitle->save();
+
+        return redirect()->back();
+    }
+
 }

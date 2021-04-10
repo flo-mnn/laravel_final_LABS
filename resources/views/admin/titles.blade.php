@@ -13,6 +13,22 @@
         </ul>
     </div>
 @endif
+<h3 class="text-success mt-3">Logo</h3>
+<div class="row my-3 d-flex">
+    <div class="col-md-6">
+        <img src="/storage/img/{{$images[0]->src}}" alt="img-fluid" >
+    </div>
+    <form action="/admin/images/{{$images[0]->id}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PATCH')
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="file" class="mb-5" name="src">
+                <button type="submit" class="site-btn btn-1"><i class="fas fa-check"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
 <h3 class="text-success mt-3">Navigation Links</h3>
 <table class="table table-primary table-hover mt-3">
     <thead>
@@ -58,7 +74,7 @@
             <th scope="row"><i class="fas fa-exclamation-circle"></i></th>
             <td colspan="2" class="text-primary font-weight-bold"><em>To highlight words, please use square brackets as such : "Get in [the lab]"</em></td>
         </tr>
-        @foreach ($titles->skip(1) as $title)
+        @foreach ($titles->skip(1)->slice(2) as $title)
         <tr>
          <th scope="row">{{$loop->iteration}}</th>
          <td>

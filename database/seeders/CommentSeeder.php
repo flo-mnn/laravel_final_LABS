@@ -20,36 +20,42 @@ class CommentSeeder extends Seeder
                 'user_id'=>1,
                 'post_id'=>1,
                 'created_at'=>now(),
+                'validated'=>true,
             ],
             [
                 'comment'=>'Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique.',
                 'user_id'=>2,
                 'post_id'=>1,
                 'created_at'=>now(),
+                'validated'=>true,
             ],
             [
                 'comment'=>'Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique.',
                 'user_id'=>1,
                 'post_id'=>2,
                 'created_at'=>now(),
+                'validated'=>true,
             ],
             [
                 'comment'=>'Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique.',
                 'user_id'=>2,
                 'post_id'=>2,
                 'created_at'=>now(),
+                'validated'=>true,
             ],
             [
                 'comment'=>'Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique.',
                 'user_id'=>1,
                 'post_id'=>3,
                 'created_at'=>now(),
+                'validated'=>true,
             ],
             [
                 'comment'=>'Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique.',
                 'user_id'=>2,
                 'post_id'=>3,
                 'created_at'=>now(),
+                'validated'=>true,
             ],
         ]);
     }

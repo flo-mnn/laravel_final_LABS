@@ -5,5 +5,5 @@
 @include('partials.testimonial')
 @include('partials.services_home')
 @include('partials.team')
-@include('partials.newsletter')
+@include('partials.promotion')
 @endsection

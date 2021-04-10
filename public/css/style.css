@@ -1452,7 +1452,7 @@ ul {
 	transition: all 0.4s ease 0s;
 }
 
-.site-accordions .panel-heading a {
+.site-accordions .panel-heading a.accordion {
 	position: absolute;
 	display: block;
 	height: 100%;
