@@ -16207,6 +16207,10 @@ html body .back-office-main .main tbody tr:hover {
     display: none;
   }
 
+  .side-btn {
+    display: none;
+  }
+
   .back-office-main .sidebar {
     width: -webkit-fit-content !important;
     width: -moz-fit-content !important;
