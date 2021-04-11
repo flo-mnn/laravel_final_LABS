@@ -76,6 +76,9 @@ class PictureController extends Controller
             'src'=> 'required|image'
         ]);
 
+        // Storage::delete('public/img/'.$picture->src);
+        // Storage::delete('public/img/mini/'.$picture->src);
+
         $picture->src = $request->file('src')->hashName();
         $picture->save();
 

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-4">
                 <div class="section-title left">
-                <h2>{!!$titles[1]!!}</h2>
+                <h2>{!!emphasis($title[2]->title)!!}</h2>
                 </div>
                 <div class="owl-carousel" id="testimonial-slide">
                     @foreach ($testimonials->sortByDesc('created_at')->take(6) as $testimonial)

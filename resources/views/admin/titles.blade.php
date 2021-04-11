@@ -74,7 +74,7 @@
             <th scope="row"><i class="fas fa-exclamation-circle"></i></th>
             <td colspan="2" class="text-primary font-weight-bold"><em>To highlight words, please use square brackets as such : "Get in [the lab]"</em></td>
         </tr>
-        @foreach ($titles->skip(1)->slice(2) as $title)
+        @foreach ($titles->skip(1)->take(6) as $title)
         <tr>
          <th scope="row">{{$loop->iteration}}</th>
          <td>

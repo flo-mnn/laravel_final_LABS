@@ -2,7 +2,7 @@
 <div class="services-section spad">
     <div class="container">
         <div class="section-title dark">
-            <h2>{!!$titles[2]!!}</h2>
+            <h2>{!!emphasis($title[3]->title)!!}</h2>
         </div>
         <div class="row">
             @foreach ($services->shuffle()->take(9) as $service)

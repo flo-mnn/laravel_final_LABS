@@ -93,15 +93,6 @@ Route::get('/', function () {
         return $value->id == $boss->id;
     });
 
-    // split titles
-    $newTitles = [];
-    foreach (Title::all()->skip(1) as $title) {
-        $str =  Str::of($title->title)->replace('[', '<span>');
-        
-        $newTitle =  Str::of($str)->replace(']', '</span>'); 
-        array_push($newTitles, $newTitle);
-    };
-
     return view('home',[
         'abouts'=>About::all(),
         'carousels'=>Carousel::all(),
@@ -114,7 +105,7 @@ Route::get('/', function () {
         'subjects'=>Subject::all(),
         'testimonials'=>Testimonial::all(),
         'title_carousel'=>Title::first(),
-        'titles'=>$newTitles,
+        // 'titles'=>Title::all(),
         'title'=>Title::all(),
         'ceo'=>$ceo,
         'members'=>$noCeos->random(2),
@@ -123,13 +114,6 @@ Route::get('/', function () {
 });
 Route::get('/services', function () {
     // split titles
-    $newTitles = [];
-    foreach (Title::all()->skip(1) as $title) {
-        $str =  Str::of($title->title)->replace('[', '<span>');
-        
-        $newTitle =  Str::of($str)->replace(']', '</span>'); 
-        array_push($newTitles, $newTitle);
-    };
     $services = Service::orderBy('created_at','DESC')
                     ->paginate(9);
     return view('services',[
@@ -141,7 +125,7 @@ Route::get('/services', function () {
         'posts'=>Post::where('validated',1)->get(),
         'services'=>$services,
         'subjects'=>Subject::all(),
-        'titles'=>$newTitles,
+        'title'=>Title::all(),
         'header_current'=>Navlink::find(2)->link,
     ]);
 });

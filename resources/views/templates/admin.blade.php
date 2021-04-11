@@ -280,8 +280,9 @@
         let toggle = sidebar.classList.toggle('closed')
         if (toggle) {
           sidebar.style.width = "fit-content";
-          main.style.width = 'auto';
-          main.style.marginLeft = '90px';
+          main.style.width = '100%';
+          main.style.paddingLeft = '90px';
+          main.style.marginLeft = '0px';
           for (let i = 0; i < sideSpans.length; i++) {
             const el = sideSpans[i];
             el.classList.add('d-none');
@@ -303,6 +304,7 @@
           sidebar.style.width = "20%";
           main.style.width = '80%';
           main.style.marginLeft = '20%';
+          main.style.paddingLeft = '0px';
           ichevron.classList.replace('fa-chevron-right','fa-chevron-left');
 
         };

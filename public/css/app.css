@@ -16197,6 +16197,10 @@ html body .back-office-main .main .bo-nav li.nav-item.dropdown {
 html body .back-office-main .main tbody tr:hover {
   color: #8B64C4;
 }
+html body .back-office-main .main .page-top-section {
+  width: 100%;
+  overflow: hidden;
+}
 
 @media screen and (max-width: 767px) {
   .nav-title {

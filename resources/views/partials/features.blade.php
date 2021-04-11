@@ -3,7 +3,7 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="section-title">
-            <h2>{!!$titles[5]!!}</h2>
+            <h2>{!!emphasis($title[6]->title)!!}</h2>
         </div>
         <div class="row">
             <!-- feature item -->

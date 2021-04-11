@@ -74,7 +74,11 @@ html {
                 };
                 tbody tr:hover{
                     color: $blue;
-                }
+                };
+                .page-top-section {
+                    width: 100%;
+                    overflow: hidden;
+                };
 
             };
         }
