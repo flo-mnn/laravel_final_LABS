@@ -53,14 +53,14 @@
         <th scope="col" >Edit</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="fileParent">
         <form action="/admin/videos/{{$videos->id}}" id="videoForm" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
-            <tr>
+            <tr class="">
                 <th scope="row"></th>
                 <td><img src="/storage/img/{{$videos->src}}" width="300" alt="video-cover"></td>
-                <td><input type="file" name="src"></td>
+                <td><input type="file" name="src" onchange="previewFile(event)"></td>
             </tr>
             <tr>
                 <th scope="row"></th>

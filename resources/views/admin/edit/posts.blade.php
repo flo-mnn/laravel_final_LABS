@@ -23,9 +23,10 @@
             <label for=""><span class="text-success">*</span></label>
             <textarea type="text" class="form-control" rows="20" placeholder="Write your blog post here" name="content">{{old('content') ? old('content') : $content}}</textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group fileParent">
+            <img src="/storage/img/blog/{{old('src') ? old('src') : $post->src}}" alt="" width="300">
             <label for="file" class="text-success">Select a new cover, DO NOT if you don't want to edit your cover</label>
-            <input type="file" class="form-control" name="src" id="file">
+            <input type="file" class="form-control" name="src" id="file" onchange="previewFile(event)">
         </div>
         <div class="form-row">
             <div class="col-md-6">

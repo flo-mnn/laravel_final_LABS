@@ -49,14 +49,14 @@
     </thead>
     <tbody>
         @foreach ($carousels as $carousel)
-           <tr>
+           <tr class="fileParent">
             <th scope="row">{{$loop->iteration}}</th>
             <td><img src="/storage/img/carousel/{{$carousel->src}}" alt="carousel-img" width="300"></td>
             <td>
                 <form action="/admin/carousels/{{$carousel->id}}" method="POST" id="carousel{{$carousel->id}}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
-                    <input type="file" name="src">
+                    <input type="file" name="src" onchange="previewFile(event)">
                 </form>
             </td>
             <td><input type="submit" form="carousel{{$carousel->id}}" id="inputEdit{{$carousel->id}}" class="d-none"><label for="inputEdit{{$carousel->id}}" class="btn btn-dark text-success font-weight-bold rounded-0 px-4"><i class="fas fa-check"></label></i></td>
@@ -77,8 +77,9 @@
                 <h4 class="text-primary mb-2">Add an image</h4>
                 <form action="/admin/carousels" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group">
-                    <input type="file" name="src">
+                <div class="form-group fileParent">
+                    <img src="" alt="" class="d-none img-fluid">
+                    <input type="file" name="src" onchange="previewFile(event)">
                 </div>
                 <button class="site-btn btn-1"><i class="fas fa-plus"></i></button>
                 </form>

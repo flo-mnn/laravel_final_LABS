@@ -22,9 +22,10 @@
             <label for="">*</label>
             <textarea type="text" class="form-control" rows="20" placeholder="Write your blog post here" name="content">{{old('content')}}</textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group fileParent">
+            <img src="" alt="" class="img-fluid d-none">
             <label for="file" class="text-primary">Select a cover *</label>
-            <input type="file" class="form-control" name="src" id="file">
+            <input type="file" class="form-control" name="src" id="file" onchange="previewFile(event)">
         </div>
         <div class="form-row">
             <div class="col-md-6">

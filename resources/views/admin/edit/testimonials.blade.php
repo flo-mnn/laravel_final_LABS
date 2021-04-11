@@ -15,9 +15,10 @@
     <form action="/admin/testimonials/{{$testimonial->id}}" class="p-5 my-3 bg-primary" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
-        <div class="form-group">
+        <div class="form-group fileParent">
+            <img src="/storage/img/testimonial/{{old('src') ? old('src') : $testimonial->src}}" alt="" width="80">
             <label for=""> <span class="text-success">Add a picture ONLY if you want to change the current one</span></label>
-            <input type="file" class="form-control" name="src">
+            <input type="file" class="form-control" name="src" onchange="previewFile(event)">
         </div>
         <div class="form-group">
             <label for=""><span class="text-success">*</span></label>

@@ -14,9 +14,10 @@
     @endif
     <form action="/admin/testimonials" class="p-5 my-3 bg-success text-primary" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="form-group">
+        <div class="form-group fileParent">
+            <img src="" alt="" class="d-none" width="100">
             <label for="">*</label>
-            <input type="file" class="form-control" name="src">
+            <input type="file" class="form-control" name="src" onchange="previewFile(event)">
         </div>
         <div class="form-group">
             <label for="">*</label>

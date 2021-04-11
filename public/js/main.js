@@ -268,3 +268,27 @@ function progressCircle() {
 	progressCircle();
 
 })(jQuery);
+
+/*------------------
+	Preview File Inputs
+--------------------*/
+function previewFile(e) {
+	e = e || window.event;
+	var el = e.target;
+	var preview = el.closest('.fileParent').querySelector('img');
+	var btn = el.closest('.fileParent').querySelector('.submitBtn');
+	var file    = el.files[0];
+	var reader  = new FileReader();
+
+	 reader.onloadend = function () {
+		 preview.src = reader.result;
+	 }
+
+	if (file) {
+		preview.classList.remove('d-none');
+		reader.readAsDataURL(file);
+
+	} else {
+		preview.src = "";
+	}
+}

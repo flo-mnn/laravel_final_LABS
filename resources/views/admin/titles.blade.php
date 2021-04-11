@@ -14,7 +14,7 @@
     </div>
 @endif
 <h3 class="text-success mt-3">Logo</h3>
-<div class="row my-3 d-flex">
+<div class="row my-3 d-flex fileParent">
     <div class="col-md-6">
         <img src="/storage/img/{{$images[0]->src}}" alt="img-fluid" >
     </div>
@@ -23,7 +23,7 @@
         @method('PATCH')
         <div class="col-md-6">
             <div class="form-group">
-                <input type="file" class="mb-5" name="src">
+                <input type="file" class="mb-5" name="src" onchange="previewFile(event)">
                 <button type="submit" class="site-btn btn-1"><i class="fas fa-check"></i></button>
             </div>
         </div>

@@ -15,9 +15,10 @@
     <form action="/admin/users/{{$user->id}}" class="p-5 my-3 bg-primary" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
-        <div class="form-group">
+        <div class="form-group fileParent">
+            <img src="/storage/img/team/{{old('src') ? old('src') : $user->src}}" alt="" width="300">
             <label>Picture <span class="text-success">(add a picture ONLY if you want to change your current one)</span></label>
-            <input type="file" class="form-control" name="src">
+            <input type="file" class="form-control" name="src" onchange="previewFile(event)">
         </div>
         <div class="form-group">
             <label>Name <span class="text-success">*</span></label>
