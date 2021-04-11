@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ImagesSeeder extends Seeder
+class PictureSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class ImagesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('images')->insert([
+        DB::table('pictures')->insert([
             [
                 'src'=>'big-logo.png'
             ],

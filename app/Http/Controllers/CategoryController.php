@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Footer;
-use App\Models\Image;
 use App\Models\Navlink;
+use App\Models\Picture;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -71,7 +71,7 @@ class CategoryController extends Controller
                     ->orderBy('created_at','DESC')
                     ->where('validated',1)
                     ->paginate(3);
-        $images = Image::all();
+        $images = Picture::all();
         $navlinks = Navlink::all();
         $header_current = 'Blog';
         $categories = Category::all();

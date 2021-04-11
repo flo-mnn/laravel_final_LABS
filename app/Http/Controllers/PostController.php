@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Footer;
-use App\Models\Image;
 use App\Models\Navlink;
+use App\Models\Picture;
 use App\Models\Post;
 use App\Models\PostAutoValidate;
 use App\Models\Tag;
@@ -97,7 +97,7 @@ class PostController extends Controller
         // for both ? et guest et auth ? Avec gate pour le edit et autres ?
         return view('blog_post',[
             'navlinks'=>Navlink::all(),
-            'images'=>Image::all(),
+            'images'=>Picture::all(),
             'post'=>$post,
             'categories'=>Category::all(),
             'tags'=>Tag::all(),
@@ -184,7 +184,7 @@ class PostController extends Controller
         // Return the search view with the resluts compacted
         return view('blog_search_results', [
             'navlinks'=>Navlink::all(),
-            'images'=>Image::all(),
+            'images'=>Picture::all(),
             'posts'=>$posts,
             'categories'=>Category::all(),
             'tags'=>Tag::all(),

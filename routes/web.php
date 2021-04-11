@@ -16,6 +16,7 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\NavlinkController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\PictureController;
 use App\Http\Controllers\PolyvalentToggleController;
 use App\Http\Controllers\PostAutoValidateController;
 use App\Http\Controllers\PostController;
@@ -34,11 +35,11 @@ use App\Models\Comment;
 use App\Models\Contact;
 use App\Models\Email;
 use App\Models\Footer;
-use App\Models\Image;
 use App\Models\JobTitle;
 use App\Models\Map;
 use App\Models\Navlink;
 use App\Models\Office;
+use App\Models\Picture;
 use App\Models\Post;
 use App\Models\PostAutoValidate;
 use App\Models\Service;
@@ -106,7 +107,7 @@ Route::get('/', function () {
         'carousels'=>Carousel::all(),
         'contacts'=>Contact::first(),
         'footers'=>Footer::first(),
-        'images'=>Image::all(),
+        'images'=>Picture::all(),
         'navlinks'=>Navlink::all(),
         'offices'=>Office::first(),
         'services'=>Service::all(),
@@ -134,7 +135,7 @@ Route::get('/services', function () {
     return view('services',[
         'contacts'=>Contact::first(),
         'footers'=>Footer::first(),
-        'images'=>Image::all(),
+        'images'=>Picture::all(),
         'navlinks'=>Navlink::all(),
         'offices'=>Office::first(),
         'posts'=>Post::where('validated',1)->get(),
@@ -152,7 +153,7 @@ Route::get('/blog', function () {
     return view('blog',[
         'categories'=>Category::all(),
         'footers'=>Footer::first(),
-        'images'=>Image::all(),
+        'images'=>Picture::all(),
         'navlinks'=>Navlink::all(),
         'posts'=>$posts,
         'tags'=>Tag::all(),
@@ -163,7 +164,7 @@ Route::get('/contact', function () {
     return view('contact',[
         'contacts'=>Contact::first(),
         'footers'=>Footer::first(),
-        'images'=>Image::all(),
+        'images'=>Picture::all(),
         'maps'=>Map::first(),
         'navlinks'=>Navlink::all(),
         'offices'=>Office::first(),
@@ -194,7 +195,7 @@ Route::get('/unsubscribe',function(){
     return view('unsubscribe',[
         'contacts'=>Contact::first(),
         'footers'=>Footer::first(),
-        'images'=>Image::all(),
+        'images'=>Picture::all(),
         'navlinks'=>Navlink::all(),
         'offices'=>Office::first(),
         'subjects'=>Subject::all(),
@@ -230,7 +231,7 @@ Route::resource('/admin/comments', CommentController::class);
 Route::resource('/admin/contacts',ContactController::class);
 Route::resource('/admin/emails',EmailController::class);
 Route::resource('/admin/footers',FooterController::class);
-Route::resource('/admin/images',ImageController::class);
+Route::resource('/admin/pictures',PictureController::class);
 Route::resource('/admin/job_titles',JobTitleController::class);
 Route::resource('/admin/maps',MapController::class);
 Route::resource('/admin/navlinks',NavlinkController::class);

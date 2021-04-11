@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Flaticon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,7 +26,7 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             ContactSeeder::class,
             FooterSeeder::class,
-            ImagesSeeder::class,
+            PictureSeeder::class,
             MapSeeder::class,
             NavlinkSeeder::class,
             OfficeSeeder::class,

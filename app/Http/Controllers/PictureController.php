@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
+use App\Models\Picture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
-class ImageController extends Controller
+
+class PictureController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('isWebmaster');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +17,7 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return view('admin.images',[
-            'images'=>Image::all(),
-        ]);
+        //
     }
 
     /**
@@ -43,25 +38,16 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        // $validate = $request->validate([
-        //     'src'=> 'required|image'
-        // ]);
-
-        // $image = new Image();
-        // Storage::put('public/img/',$request->file('src'));
-        // $image->src = $request->file('src')->hashName();
-        // $image->save();
-
-        // return redirect()->back();
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Image  $image
+     * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function show(Image $image)
+    public function show(Picture $picture)
     {
         //
     }
@@ -69,10 +55,10 @@ class ImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Image  $image
+     * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function edit(Image $image)
+    public function edit(Picture $picture)
     {
         //
     }
@@ -81,19 +67,29 @@ class ImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Image  $image
+     * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Image $image)
+    public function update(Request $request, Picture $picture)
     {
         $validate = $request->validate([
             'src'=> 'required|image'
         ]);
 
-        // Storage::delete('public/img/carousel/'.$image->src);
-        Storage::put('public/img/',$request->file('src'));
-        $image->src = $request->file('src')->hashName();
-        $image->save();
+        $picture->src = $request->file('src')->hashName();
+        $picture->save();
+
+        $image = Image::make($request->file('src'));
+        $image->resize(500, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $image->save('storage/img/'.$picture->src);
+
+        $mini = Image::make($request->file('src'));
+        $mini->resize(110, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $mini->save('storage/img/mini/'.$picture->src);
 
         return redirect()->back();
     }
@@ -101,12 +97,11 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Image  $image
+     * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Image $image)
+    public function destroy(Picture $picture)
     {
-        // Storage::delete('public/img/'.$image->src);
-        // $image->delete();
+        //
     }
 }

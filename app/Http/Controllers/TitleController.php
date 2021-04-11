@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
 use App\Models\Navlink;
+use App\Models\Picture;
 use App\Models\Title;
 use Illuminate\Http\Request;
 
@@ -26,7 +26,7 @@ class TitleController extends Controller
             'currentPage'=>"Navigation & Titles",
             'middlePage'=>null,
             'navlinks'=>Navlink::all(),
-            'images'=>Image::all(),
+            'images'=>Picture::all(),
         ]);
     }
 

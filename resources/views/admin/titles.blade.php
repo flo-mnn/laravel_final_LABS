@@ -18,7 +18,7 @@
     <div class="col-md-6">
         <img src="/storage/img/{{$images[0]->src}}" alt="img-fluid" >
     </div>
-    <form action="/admin/images/{{$images[0]->id}}" method="POST" enctype="multipart/form-data">
+    <form action="/admin/pictures/{{$images[0]->id}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="col-md-6">
