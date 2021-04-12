@@ -17,7 +17,7 @@
             <div class="bg-dark p-3 h-100 d-flex flex-column justify-content-around">
                 <a href="/admin/posts"><h1 class="text-success mb-3"><i class="fas fa-comments"></i> Your last posts comments</h1></a>
                 @foreach ($posts->where('user_id',Auth::id())->sortByDesc('created_at')->take(3) as $post)
-                    <a href="/blog/{{$post->id}}" target="_blank"><h5 class="text-light">"{{$post->title}}" (<span class="text-success">{{count($post->comments)}}</span> comments)</h5></a>
+                    <a href="/blog/{{$post->id}}" target="_blank"><h5 class="text-light">"{{$post->title}}" (<span class="text-success">{{count($post->comments->where('validated',1))}}</span> comments)</h5></a>
                 @endforeach
             </div>
         </div>

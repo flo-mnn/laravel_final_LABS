@@ -5,6 +5,24 @@
     <h1>MANAGE BLOG POSTS</h1>
     <a href="/admin/posts/create" class="btn btn-primary rounded-0 px-4"><i class="fas fa-plus"></i></a>
 </div>
+<div class="row justify-content-end mt-4">
+  <div class="col-md-5 d-flex flex-column align-items-end">
+      <form action="/admin/post_auto_validates/{{$post_auto_validates->id}}" method="POST" id="switchForm">
+          @csrf
+          @method('PATCH')
+      <div class="custom-control custom-switch">
+              @if ($post_auto_validates->post_auto_validate)
+              <input onchange="switchOnOff()" checked type="checkbox" class="custom-control-input" id="validatePosts"   name="validate">
+              <label  class="custom-control-label" for="validatePosts">Switch off auto-validate for entering posts</label>
+              @else
+              <input onchange="switchOnOff()" type="checkbox" class="custom-control-input" id="validatePosts"   name="validate">
+              <label  class="custom-control-label" for="validatePosts">Automatically validate entering posts</label>
+              @endif
+              <button type="submit" id="validateSubmit" class="d-none">submit</button>
+      </div>
+      </form>
+  </div>
+</div>
 <table class="table table-primary table-hover my-3">
     <thead>
       <tr>

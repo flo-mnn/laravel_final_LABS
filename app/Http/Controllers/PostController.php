@@ -36,6 +36,7 @@ class PostController extends Controller
             'posts'=>Post::all(),
             'currentPage'=>'Blog Posts',
             'middlePage'=>null,
+            'post_auto_validates'=>PostAutoValidate::first(),
         ]);
     }
 

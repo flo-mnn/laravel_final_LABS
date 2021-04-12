@@ -37,7 +37,7 @@
                 </a>
                 @endif
                 @if ($comments->where('validated',0)->isNotEmpty())
-                <a href="/admin/posts">
+                <a href="/admin/comments">
                     <h1 class="text-dark"><i class="fas fa-comments"></i><span class="text-danger"> {{count($comments->where('validated',0))}}</span> comments from non-members to validated</h1>
                 </a>
                 @endif

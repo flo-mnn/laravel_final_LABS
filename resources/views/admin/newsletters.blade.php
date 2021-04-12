@@ -33,7 +33,7 @@
         {{ session('status') }}
     </div>
     @endif
-
+    @if ($newsletters->isNotEmpty())
     <form action="/newsletters/send" class="p-5 my-3 bg-success" method="POST">
         @csrf
         <div class="form-group">
@@ -44,5 +44,10 @@
         </div>
         <button type="submit" class="site-btn btn-2" ><i class="fas fa-envelope"></i></button>
     </form>
+    @else
+    <div class="bg-primary text-center w-100 p-5">
+        <h4 class="text-light">You do not have any subscriber yet. Come back later to write a newsletter</h4>
+    </div>
+    @endif
 </section>
 @endsection
